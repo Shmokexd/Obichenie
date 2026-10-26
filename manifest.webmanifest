@@ -1,12 +1,12 @@
 {
- "name": "Обучение ProКрепёж",
+ "name": "Обучение",
  "short_name": "Обучение",
  "lang": "ru",
  "start_url": "./",
  "scope": "./",
  "display": "standalone",
- "background_color": "#f4f2ee",
- "theme_color": "#e7ae08",
+ "background_color": "#0F1113",
+ "theme_color": "#0F1113",
  "icons": [
   {
    "src": "icons/icon-192.png",
