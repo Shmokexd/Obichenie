@@ -1164,6 +1164,45 @@ main.rgmain { min-height: 0; padding: 0; }
 .fold .cmp, .fold .cmp .ios-card, .cmp .cmpsw { background: transparent !important; box-shadow: none !important; }
 .lhero-img, .lc-img:not(.lc-noimg) { position: relative; display: block; }
 .lhero-img img, .lc-img:not(.lc-noimg) img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 4%; box-sizing: border-box; }
+/* схемы установки: ряд пиктограмм в рамке, как на стенде */
+.stps { margin-top: 18px; display: flex; flex-direction: column; gap: 10px; }
+.stps h4 { margin: 0; font-size: 19px; font-weight: 700; }
+.stp-row { display: flex; flex-direction: column; gap: 6px; }
+.stp-t { font-size: 13px; color: var(--muted); font-family: var(--f-mono); letter-spacing: .03em; text-transform: uppercase; }
+.stp-strip { display: flex; gap: 4px; padding: 6px; background: #fff; border-radius: 14px; overflow-x: auto; scrollbar-width: none; box-shadow: var(--lift); }
+.stp-strip::-webkit-scrollbar { display: none; }
+.stp-cell { position: relative; flex: 1 0 0; min-width: 78px; }
+.stp { margin: 0; border: 1.5px solid #c9cdd2; border-radius: 6px; overflow: hidden; background: #f5f6f7; }
+.stp svg { display: block; width: 100%; height: auto; }
+.stp figcaption { font-size: 11px; line-height: 1.2; color: #3f444a; text-align: center; padding: 4px 2px 5px; background: #fff; border-top: 1px solid #e2e4e7; }
+.stp-n { position: absolute; top: 4px; left: 4px; z-index: 1; width: 18px; height: 18px; border-radius: 6px; background: var(--zinc); color: var(--on-acc); font-size: 11px; font-weight: 700; display: grid; place-items: center; }
+/* урок: сводка «Что бывает» и нижняя шторка с подробностями */
+.lsum { display: flex; flex-direction: column; gap: 8px; }
+.lsum-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.lsum-t { display: flex; flex-direction: column; gap: 4px; text-align: left; padding: 8px 8px 12px; border-radius: 18px; border: 1px solid var(--line); cursor: pointer; font: inherit; color: var(--ink);
+  background-color: var(--surface); background-image: var(--lift-img); box-shadow: var(--lift); min-width: 0; }
+.lsum-t .lsum-img { aspect-ratio: 4 / 3; border-radius: 12px; background: #fff; overflow: hidden; display: grid; place-items: center; margin-bottom: 4px; width: 100%; max-width: 100%; }
+.lsum-t .lsum-img img { width: 100%; height: 100%; object-fit: contain; }
+.lsum-t b { font-size: 15px; line-height: 1.25; padding-inline: 4px; }
+.lsum-t span { font-size: 13px; line-height: 1.35; color: var(--muted); padding-inline: 4px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.sheet { position: fixed; inset: 0; z-index: 60; }
+.sheet-bg { position: absolute; inset: 0; background: rgba(0,0,0,.5); opacity: 0; transition: opacity .2s; }
+.sheet-card { position: absolute; left: 0; right: 0; bottom: 0; max-height: 88vh; overflow-y: auto; background: var(--bg); border-radius: 24px 24px 0 0; box-shadow: 0 -10px 30px rgba(0,0,0,.4);
+  transform: translateY(100%); transition: transform .28s cubic-bezier(.2,.9,.3,1); padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); max-width: 640px; margin: 0 auto; }
+.sheet.on .sheet-bg { opacity: 1; } .sheet.on .sheet-card { transform: none; }
+.sheet-x { position: absolute; top: 10px; right: 12px; z-index: 2; width: 36px; height: 36px; border-radius: 12px; border: 0; background: rgba(15,17,19,.6); color: #fff; font-size: 22px; cursor: pointer; }
+.sh-img { aspect-ratio: 16 / 10; background: #fff; display: grid; place-items: center; overflow: hidden; }
+.sh-img img { width: 100%; height: 100%; object-fit: contain; padding: 4%; box-sizing: border-box; }
+.sh-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+.sh-body h3 { margin: 0; font-size: 22px; line-height: 1.2; }
+.sh-body > p { margin: 0; font-size: 16px; line-height: 1.45; color: var(--muted); }
+.sh-body .stps { margin-top: 6px; }
+.sh-img { position: relative; display: block; }
+.sh-img img { position: absolute; inset: 0; }
+.lsum-noimg { background: linear-gradient(135deg, color-mix(in srgb, var(--zinc) 26%, var(--surface)), var(--surface)) !important; display: grid !important; place-items: center; }
+.lsum-noimg span { padding: 0 12px; font-size: 17px; font-weight: 700; line-height: 1.2; text-align: center; color: var(--ink) !important; -webkit-line-clamp: unset !important; }
+.sh-img.lsum-noimg span { font-size: 26px; }
+.sh-pad { height: 48px; }
 
 </style>
 <link rel="manifest" href="manifest.webmanifest">
@@ -27722,6 +27761,145 @@ Object.assign(window.PHOTOS, {
   window.Ring = { mount: mount, unmount: unmount };
 })();
 
+/* Схемы установки: ряд серых пиктограмм-шагов в рамке, как на стенде у крепежа.
+   Разрез стены справа (штриховка), инструмент и крепёж слева. Свои рисунки, SVG. */
+(function () {
+  "use strict";
+  var INK = "#3f444a", MID = "#8c9299", LIGHT = "#c9cdd2", WALL = "#e2e4e7", BG = "#f5f6f7", ACC = "#5d636a";
+  var uid = 0;
+
+  // стена: x0 — левая граница разреза
+  function wall(kind, x0) {
+    var id = "h" + (++uid), s = "";
+    s += '<defs><pattern id="' + id + '" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="7" stroke="' + LIGHT + '" stroke-width="2"/></pattern></defs>';
+    if (kind === "gkl") {
+      s += '<rect x="' + x0 + '" y="0" width="9" height="90" fill="' + WALL + '" stroke="' + MID + '" stroke-width="1.2"/>';
+      s += '<rect x="' + (x0 + 9) + '" y="0" width="' + (120 - x0 - 9) + '" height="90" fill="#fff"/>';
+      return s;
+    }
+    if (kind === "ins") { // утеплитель на стене
+      s += '<rect x="' + x0 + '" y="0" width="22" height="90" fill="#eef0e6"/>';
+      for (var i = 0; i < 9; i++) s += '<path d="M' + x0 + " " + (i * 10 + 5) + " q5.5 -5 11 0 t11 0" + '" fill="none" stroke="' + LIGHT + '" stroke-width="1.4"/>';
+      x0 += 22;
+    }
+    s += '<rect x="' + x0 + '" y="0" width="' + (120 - x0) + '" height="90" fill="' + WALL + '"/>';
+    s += '<rect x="' + x0 + '" y="0" width="' + (120 - x0) + '" height="90" fill="url(#' + id + ')"/>';
+    if (kind === "hollow") {
+      s += '<rect x="' + (x0 + 10) + '" y="18" width="12" height="54" rx="2" fill="#fff" stroke="' + MID + '"/>';
+      s += '<rect x="' + (x0 + 30) + '" y="18" width="12" height="54" rx="2" fill="#fff" stroke="' + MID + '"/>';
+    }
+    s += '<line x1="' + x0 + '" y1="0" x2="' + x0 + '" y2="90" stroke="' + MID + '" stroke-width="1.4"/>';
+    return s;
+  }
+  function hole(x0, depth, d) { d = d || 10; return '<rect x="' + x0 + '" y="' + (45 - d / 2) + '" width="' + depth + '" height="' + d + '" fill="#fff" stroke="' + MID + '" stroke-width="1"/>'; }
+  function arrow(x1, y1, x2, y2) {
+    var a = Math.atan2(y2 - y1, x2 - x1), h = 5;
+    return '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="' + INK + '" stroke-width="1.8"/>' +
+      '<path d="M' + x2 + " " + y2 + " L" + (x2 - h * Math.cos(a - 0.5)) + " " + (y2 - h * Math.sin(a - 0.5)) + " L" + (x2 - h * Math.cos(a + 0.5)) + " " + (y2 - h * Math.sin(a + 0.5)) + 'Z" fill="' + INK + '"/>';
+  }
+  function rot(cx, cy) { // стрелка вращения
+    return '<path d="M' + (cx - 7) + " " + (cy - 9) + " A11 11 0 1 1 " + (cx - 10) + " " + (cy + 5) + '" fill="none" stroke="' + INK + '" stroke-width="1.8"/>' +
+      '<path d="M' + (cx - 13) + " " + (cy + 1) + " l3 6 l4 -5z" + '" fill="' + INK + '"/>';
+  }
+  function drillBit(xTip, len) {
+    var s = '<rect x="' + (xTip - len) + '" y="42" width="' + len + '" height="6" fill="' + MID + '"/>';
+    for (var x = xTip - len + 3; x < xTip - 2; x += 5) s += '<line x1="' + x + '" y1="42" x2="' + (x + 4) + '" y2="48" stroke="' + INK + '" stroke-width="1"/>';
+    s += '<path d="M' + xTip + " 45 L" + (xTip - 4) + " 42 L" + (xTip - 4) + ' 48Z" fill="' + INK + '"/>';
+    s += '<rect x="' + (xTip - len - 16) + '" y="38" width="16" height="14" rx="3" fill="' + ACC + '"/>';
+    return s;
+  }
+  function dowel(x, len, open) {
+    var w = open ? 12 : 9, s = '<rect x="' + x + '" y="' + (45 - w / 2) + '" width="' + len + '" height="' + w + '" rx="2" fill="#d6d9dd" stroke="' + INK + '" stroke-width="1.2"/>';
+    s += '<rect x="' + (x - 3) + '" y="38" width="4" height="14" rx="1" fill="#d6d9dd" stroke="' + INK + '" stroke-width="1.2"/>';
+    for (var i = x + 6; i < x + len - 3; i += 6) s += '<line x1="' + i + '" y1="' + (45 - w / 2) + '" x2="' + i + '" y2="' + (45 + w / 2) + '" stroke="' + MID + '" stroke-width="1"/>';
+    return s;
+  }
+  function screw(x, len) {
+    var s = '<rect x="' + x + '" y="43" width="' + len + '" height="4" fill="' + INK + '"/>';
+    for (var i = x + 4; i < x + len; i += 4) s += '<line x1="' + i + '" y1="41" x2="' + (i + 2) + '" y2="49" stroke="' + INK + '" stroke-width="1"/>';
+    s += '<path d="M' + (x + len) + " 45 l4 0 l-4 -2z" + '" fill="' + INK + '"/>';
+    s += '<rect x="' + (x - 4) + '" y="37" width="4" height="16" rx="1" fill="' + INK + '"/>';
+    return s;
+  }
+  function bolt(x, len, nut) {
+    var s = '<rect x="' + x + '" y="42" width="' + len + '" height="6" fill="' + MID + '" stroke="' + INK + '" stroke-width="1"/>';
+    if (nut) s += '<rect x="' + (x + 6) + '" y="36" width="6" height="18" fill="' + ACC + '"/><rect x="' + (x + 12) + '" y="38" width="3" height="14" fill="' + LIGHT + '" stroke="' + INK + '" stroke-width=".8"/>';
+    return s;
+  }
+  function part(x0, w) { return '<rect x="' + (x0 - w) + '" y="10" width="' + w + '" height="70" fill="#f0e6d8" stroke="' + MID + '" stroke-width="1.2"/>'; }
+  function hammer(x, y) {
+    return '<rect x="' + (x - 6) + '" y="' + (y - 12) + '" width="12" height="24" rx="2" fill="' + ACC + '"/><rect x="' + (x - 26) + '" y="' + (y - 2) + '" width="22" height="4" fill="' + MID + '"/>' + arrow(x + 8, y, x + 16, y);
+  }
+  function airBlow(x0) {
+    return '<path d="M' + (x0 - 30) + ' 45 h20" stroke="' + MID + '" stroke-width="5" stroke-linecap="round"/>' +
+      '<circle cx="' + (x0 - 38) + '" cy="45" r="8" fill="' + ACC + '"/>' + arrow(x0 + 2, 45, x0 + 20, 45) + arrow(x0 + 20, 36, x0 + 6, 30) + arrow(x0 + 20, 54, x0 + 6, 60);
+  }
+  function clock(cx, cy) { return '<circle cx="' + cx + '" cy="' + cy + '" r="12" fill="#fff" stroke="' + INK + '" stroke-width="1.8"/><path d="M' + cx + " " + (cy - 7) + " V" + cy + " h6" + '" fill="none" stroke="' + INK + '" stroke-width="1.8"/>'; }
+  function wing(x) { return '<path d="M' + x + " 45 l14 -18 M" + x + ' 45 l14 18" stroke="' + INK + '" stroke-width="3" stroke-linecap="round"/>'; }
+
+  // один шаг: kind стены, что нарисовать
+  function frame(inner, label) {
+    return '<figure class="stp"><svg viewBox="0 0 120 90" aria-hidden="true"><rect width="120" height="90" fill="' + BG + '"/>' + inner + "</svg>" + (label ? "<figcaption>" + label + "</figcaption>" : "") + "</figure>";
+  }
+  var X = 64; // граница стены
+  var S = {
+    drill: function (w) { return frame(wall(w, X) + hole(X, 30) + drillBit(X + 28, 52), "Сверлить"); },
+    drillPart: function (w) { return frame(wall(w, X) + part(X, 10) + hole(X - 10, 40) + drillBit(X + 28, 50), "Сверлить сквозь деталь"); },
+    drillNoHammer: function (w) { return frame(wall(w, X) + hole(X, 40) + drillBit(X + 38, 52), "Без удара"); },
+    blow: function (w) { return frame(wall(w, X) + hole(X, 30) + airBlow(X), "Продуть"); },
+    brush: function (w) { return frame(wall(w, X) + hole(X, 30) + '<rect x="' + (X - 30) + '" y="43" width="56" height="4" fill="' + MID + '"/>' + (function () { var s = ""; for (var i = X + 4; i < X + 26; i += 3) s += '<line x1="' + i + '" y1="38" x2="' + i + '" y2="52" stroke="' + INK + '"/>'; return s; })() + arrow(X - 40, 30, X - 20, 30), "Очистить ёршиком"); },
+    insert: function (w) { return frame(wall(w, X) + hole(X, 30) + dowel(X - 18, 28) + arrow(X - 50, 45, X - 26, 45), "Вставить дюбель"); },
+    insertFlush: function (w) { return frame(wall(w, X) + hole(X, 30) + dowel(X + 1, 28), "Вставить дюбель"); },
+    insertPart: function (w) { return frame(wall(w, X) + part(X, 10) + hole(X - 10, 40) + dowel(X - 9, 36) + arrow(X - 50, 45, X - 20, 45), "Вставить через деталь"); },
+    screw: function (w) { return frame(wall(w, X) + part(X, 10) + hole(X, 30) + dowel(X + 1, 28, true) + screw(X - 22, 50) + rot(X - 34, 45), "Закрутить шуруп"); },
+    knot: function (w) { return frame(wall("hollow", X) + hole(X, 40) + '<path d="M' + (X + 2) + " 40 h12 q8 0 8 5 q0 5 -8 5 h-12z M" + (X + 22) + " 34 q10 11 0 22" + '" fill="#d6d9dd" stroke="' + INK + '" stroke-width="1.2"/>' + screw(X - 18, 42) + rot(X - 30, 45), "Скручивается в узел"); },
+    gklDrill: function () { return frame(wall("gkl", X) + '<rect x="' + X + '" y="39" width="9" height="12" fill="#fff"/>' + drillBit(X + 12, 50), "Сверлить лист"); },
+    gklInsert: function () { return frame(wall("gkl", X) + '<rect x="' + (X - 14) + '" y="40" width="40" height="10" rx="2" fill="#d6d9dd" stroke="' + INK + '" stroke-width="1.2"/>' + arrow(X - 46, 45, X - 20, 45), "Вставить"); },
+    gklOpen: function () { return frame(wall("gkl", X) + screw(X - 18, 44) + wing(X + 14) + rot(X - 30, 45), "Раскрывается за листом"); },
+    nailHammer: function (w) { return frame(wall(w, X) + part(X, 10) + hole(X - 10, 40) + dowel(X - 9, 36) + '<rect x="' + (X - 14) + '" y="43" width="44" height="4" fill="' + INK + '"/>' + hammer(X - 34, 45), "Забить гвоздь"); },
+    anchorIn: function (w) { return frame(wall(w, X) + hole(X, 36, 9) + bolt(X - 20, 54, true) + hammer(X - 34, 45), "Забить анкер"); },
+    tighten: function (w) { return frame(wall(w, X) + part(X, 8) + hole(X, 36, 9) + bolt(X - 18, 52, true) + rot(X - 26, 45), "Затянуть гайку"); },
+    setTool: function (w) { return frame(wall(w, X) + hole(X, 30, 10) + '<rect x="' + X + '" y="40" width="26" height="10" fill="' + MID + '" stroke="' + INK + '"/>' + '<rect x="' + (X - 28) + '" y="42" width="30" height="6" fill="' + ACC + '"/>' + hammer(X - 34, 45), "Расклинить забойником"); },
+    boltIn: function (w) { return frame(wall(w, X) + part(X, 8) + hole(X, 30, 10) + '<rect x="' + X + '" y="40" width="26" height="10" fill="' + MID + '" stroke="' + INK + '"/>' + bolt(X - 18, 40, false) + rot(X - 26, 45), "Вкрутить болт"); },
+    inject: function (w) { return frame(wall(w, X) + hole(X, 36, 11) + '<rect x="' + (X + 4) + '" y="41" width="30" height="8" fill="#b9c2b0"/>' + '<path d="M' + (X - 40) + " 38 h30 l8 5 h10 v4 h-10 l-8 5 h-30z" + '" fill="' + ACC + '"/>', "Заполнить с конца"); },
+    stud: function (w) { return frame(wall(w, X) + hole(X, 36, 11) + '<rect x="' + X + '" y="41" width="34" height="8" fill="#b9c2b0"/>' + bolt(X - 16, 50, false) + rot(X - 26, 45), "Вкрутить шпильку"); },
+    wait: function (w) { return frame(wall(w, X) + hole(X, 36, 11) + '<rect x="' + X + '" y="41" width="34" height="8" fill="#b9c2b0"/>' + bolt(X - 10, 44, false) + clock(X - 30, 24), "Выждать время"); },
+    concreteScrew: function (w) { return frame(wall(w, X) + part(X, 10) + hole(X - 10, 40, 6) + screw(X - 26, 60) + rot(X - 38, 45), "Вкрутить в стену"); },
+    plateNail: function () { return frame(wall("ins", X - 22) + hole(X - 22, 52, 8) + '<rect x="' + (X - 26) + '" y="22" width="5" height="46" rx="2" fill="#d6d9dd" stroke="' + INK + '"/>' + '<rect x="' + (X - 22) + '" y="42" width="48" height="6" fill="#d6d9dd" stroke="' + INK + '"/>' + hammer(X - 40, 45), "Забить тарелку"); }
+  };
+  // наборы шагов по товарам: [название ряда, [шаги], стена]
+  var SETS = [
+    [/дюбель.*(универсальн)/i, [["Полнотелая стена", ["drill", "blow", "insertFlush", "screw"], "solid"], ["Пустотелый кирпич и блок", ["drillNoHammer", "insertFlush", "knot"], "hollow"]]],
+    [/дюбель.*(распорн|нейлон)|дюбель с крюком|дюбель металлический \(mud\)/i, [["Бетон, полнотелый кирпич", ["drill", "blow", "insertFlush", "screw"], "solid"]]],
+    [/рамн(ый)? дюбель|дюбель рамн|дюбель фасадн/i, [["Через раму в стену", ["drillPart", "insertPart", "screw"], "solid"]]],
+    [/бабочк|molly|молли|дрива|для гипсокартона/i, [["Гипсокартон", ["gklDrill", "gklInsert", "gklOpen"], "gkl"]]],
+    [/дюбель-гвозд/i, [["Через деталь в стену", ["drillPart", "insertPart", "nailHammer"], "solid"]]],
+    [/тарельчат|термоизоляц|для утеплител|изоляционных/i, [["Утеплитель к стене", ["plateNail"], "solid"]]],
+    [/анкер(ы)? клинов/i, [["Бетон", ["drill", "blow", "anchorIn", "tighten"], "solid"]]],
+    [/анкерный болт|втулочн/i, [["Бетон, кирпич", ["drillPart", "blow", "insertPart", "tighten"], "solid"]]],
+    [/анкер.*(забив|внутренн)/i, [["Бетон", ["drill", "blow", "setTool", "boltIn"], "solid"]]],
+    [/анкер рамн/i, [["Через раму в стену", ["drillPart", "insertPart", "tighten"], "solid"]]],
+    [/химанкер|химическ/i, [["Бетон и камень", ["drill", "brush", "blow", "inject", "stud", "wait", "tighten"], "solid"]]],
+    [/шуруп по бетону|нагель.*бетон|саморез по бетону/i, [["Без дюбеля", ["drillPart", "blow", "concreteScrew"], "solid"]]],
+    [/анкер с (кольцом|крюком)|анкер(ы)? потолочн/i, [["Бетон", ["drill", "blow", "anchorIn", "tighten"], "solid"]]]
+  ];
+  function rowsFor(title) {
+    title = String(title || "");
+    if (/черенк|сверл|бур|коронк|ключ|набор|адаптер|лесов|стяж|пенобетон/i.test(title)) return null;
+    for (var i = 0; i < SETS.length; i++) if (SETS[i][0].test(title)) return SETS[i][1];
+    return null;
+  }
+  function html(title) {
+    var rows = rowsFor(title); if (!rows) return "";
+    return '<section class="stps" aria-label="Схема установки"><h4>Как устанавливать</h4>' + rows.map(function (r) {
+      return '<div class="stp-row"><div class="stp-t">' + r[0] + '</div><div class="stp-strip">' + r[1].map(function (k, i) {
+        return '<div class="stp-cell"><span class="stp-n">' + (i + 1) + "</span>" + S[k](r[2]) + "</div>";
+      }).join("") + "</div></div>";
+    }).join("") + "</section>";
+  }
+  window.Steps = { html: html, has: function (t) { return !!rowsFor(t); } };
+})();
+
 (function () {
   "use strict";
 
@@ -28224,6 +28402,7 @@ Object.assign(window.PHOTOS, {
     "Бетон, анкеры, долбление, штробы": "", "Резать металл, плитку, камень, шлифовать": "", "Освещение": "", "Розетки": "", "Электроплита (одна фаза)": "",
     "Белый цинк (гальванический)": "", "Жёлтый цинк": "", "Горячий цинк (ГЦ)": "", "Горячий цинк": "", "Без покрытия / чёрный": "", "Нержавеющая сталь A2/A4": "", "Нержавейка A2": "", "Нержавейка A4": "", "Латунь": "",
     "Телевизор 25 кг на кронштейне, бетонная стена": "", "Телевизор 25 кг на гипсокартон": "", "Кухонный навесной шкаф 30 кг, полнотелый кирпич": "", "Зеркало 5 кг на гипсокартон": "",
+    "Антисептики и огнебиозащита": "p:wd_antiseptic", "Водные краски": "p:pt_water", "Грунт-эмаль Dali «Рогнеда»": "p:pt_rust", "Праймер, олифа": "p:ms_primer", "Краска аэрозоль (Kudo)": "p:pt_aerosol",
     "Бетон": "", "Кирпич полнотелый": "", "Кирпич пустотелый, керамоблок": "", "Газобетон, пеноблок": "", "Дерево": "", "Гипсокартон": "", "Металл": "", "Строительный": "Гвоздь строительный"
   };
   function pickBest(q, need) {
@@ -28240,6 +28419,7 @@ Object.assign(window.PHOTOS, {
   function findPic(text, mid) {
     if (Object.prototype.hasOwnProperty.call(ROW_PIC, text)) {
       var o = ROW_PIC[text]; if (!o) return null;
+      if (o.indexOf("p:") === 0) { var pk = o.slice(2); return PHOTOS[pk] ? { t: text, img: PHOTOS[pk].src, href: ENC[pk] ? "#/p/" + pk : "" } : null; }
       return pickBest(stems(o), stems(o)) || null;
     }
     var q = stems(String(text).replace(/\([^)]*\)/g, " ")); if (!q.length) q = stems(text); if (!q.length) return null;
@@ -28286,20 +28466,79 @@ Object.assign(window.PHOTOS, {
     }
   }
   // урок делится на разделы по заголовкам; каждый раздел — отдельная плитка
-  var CUR_MID = "";
-  function lessonHtml(m) {
-    CUR_MID = m.id;
-    var secs = [], cur = { t: "", items: [] };
+  var CUR_MID = "", CUR_MOD = null;
+  // «Что бывает»: краткая сводка всех видов сверху урока; нажатие — подробности в нижней шторке
+  var CUR_SUM = [];
+  function lsumHtml(items) {
+    CUR_SUM = items;
+    return '<section class="lsum"><h2 class="lsec-h">Что бывает</h2><p class="lc-note">Нажмите — откроются подробности.</p><div class="lsum-grid">' +
+      items.map(function (it, i) {
+        var img = it.img ? '<div class="lsum-img"><img src="' + esc(it.img) + '" alt="" loading="lazy"></div>' : '<div class="lsum-img lsum-noimg"><span>' + esc(it.t) + "</span></div>";
+        return '<button class="lsum-t" data-lsum="' + i + '">' + img + (it.img ? "<b>" + esc(it.t) + "</b>" : "") + (it.n ? "<span>" + esc(it.n) + "</span>" : "") + "</button>";
+      }).join("") + "</div></section>";
+  }
+  // сводка урока: виды с картинками; если их нет — строки таблиц урока
+  function sumItems(m, pics) {
+    if (pics.length) return pics.map(function (k) { var p = PIC[k]; return { k: k, t: p.t, n: p.n, img: PHOTOS[k] ? PHOTOS[k].src : "" }; });
+    var out = [];
     m.lesson.forEach(function (b) {
+      if (b.t !== "table" || b.rows.length < 2 || b.rows.length > 14) return;
+      b.rows.forEach(function (r) {
+        if (!/[а-яa-z]{3}/i.test(r[0])) return; // строки-цифры (М8, 5.8) — не виды товара
+        var pic = findPic(r[0], m.id);
+        out.push({ t: r[0], n: r[1] || "", img: pic ? pic.img : "", row: { head: b.head, row: r }, pic: pic });
+      });
+    });
+    return out.length >= 2 ? out : [];
+  }
+  function rowFor(m, title) {
+    var want = stems(String(title).replace(/\([^)]*\)/g, " ")), ctx = MOD_CTX[m.id] ? stems(MOD_CTX[m.id])[0] : "";
+    want = want.filter(function (w) { return w !== ctx; });
+    var best = null, bs = 0;
+    m.lesson.forEach(function (b) {
+      if (b.t !== "table") return;
+      b.rows.forEach(function (r) {
+        var rs = stems(r[0]), sc = 0;
+        want.forEach(function (w) { if (rs.indexOf(w) >= 0) sc++; });
+        if (sc > bs) { bs = sc; best = { head: b.head, row: r }; }
+      });
+    });
+    return best;
+  }
+  function openSheet(i) {
+    var it = CUR_SUM[+i], m = CUR_MOD; if (!it || !m) return;
+    var r = it.row || rowFor(m, it.t), pic = it.pic || findPic(it.t, m.id), prod = it.k && ENC[it.k] ? "#/p/" + it.k : (pic ? pic.href : "");
+    var steps = window.Steps ? (pic && Steps.html(pic.t)) || Steps.html(it.t) : "";
+    var body = (it.img ? '<div class="sh-img"><img src="' + esc(it.img) + '" alt=""></div>' : '<div class="sh-pad"></div>') +
+      '<div class="sh-body"><h3>' + esc(it.t) + "</h3>" + (it.k && it.n ? "<p>" + esc(it.n) + "</p>" : "") +
+      (r ? r.row.slice(1).map(function (c, j) { return c ? '<div class="lc-row"><span>' + esc(r.head[j + 1] || "") + "</span><p>" + esc(c) + "</p></div>" : ""; }).join("") : "") +
+      steps + (prod ? '<button class="btn btn-primary btn-block" data-go="' + prod + '">Подробнее о товаре</button>' : "") + "</div>";
+    closeSheet();
+    var el = document.createElement("div"); el.className = "sheet"; el.id = "lsheet";
+    el.innerHTML = '<div class="sheet-bg" data-close></div><div class="sheet-card" role="dialog" aria-label="' + esc(it.t) + '"><button class="sheet-x" data-close aria-label="Закрыть">×</button>' + body + "</div>";
+    document.body.appendChild(el); packImgs(el);
+    requestAnimationFrame(function () { el.classList.add("on"); });
+    el.addEventListener("click", function (e) { if (e.target.closest("[data-close]") || e.target.closest("[data-go]")) closeSheet(); });
+  }
+  function closeSheet() { var o = document.getElementById("lsheet"); if (o) o.remove(); }
+  window.addEventListener("hashchange", closeSheet);
+  document.addEventListener("click", function (e) { var t = e.target.closest && e.target.closest("[data-lsum]"); if (t) { e.preventDefault(); e.stopPropagation(); openSheet(t.getAttribute("data-lsum")); } }, true);
+  // урок делится на разделы по заголовкам; каждый раздел — отдельная плитка
+  function lessonHtml(m) {
+    CUR_MID = m.id; CUR_MOD = m;
+    var sum = [], secs = [], cur = { t: "", items: [] };
+    m.lesson.forEach(function (b) {
+      if (b.t === "pics") { sum = sum.concat(b.x); return; }
       if (b.t === "h") { if (cur.items.length || cur.t) secs.push(cur); cur = { t: b.x, items: [] }; }
       else cur.items.push(b);
     });
     if (cur.items.length || cur.t) secs.push(cur);
-    return secs.map(function (sc, i) {
+    var items = sumItems(m, sum);
+    return (items.length ? lsumHtml(items) : "") + secs.map(function (sc, i) {
       return '<section class="lsec">' + (sc.t ? '<h2 class="lsec-h"><i>' + (i + (secs[0].t ? 1 : 0)) + "</i>" + esc(sc.t) + "</h2>" : "") +
         sc.items.map(function (b) {
           var h = blockHtml(b);
-          return b.t === "table" || b.t === "boltload" || b.t === "pics" || b.t === "tip" || b.t === "warn" ? h : '<div class="lpanel">' + h + "</div>";
+          return b.t === "table" || b.t === "boltload" || b.t === "tip" || b.t === "warn" ? h : '<div class="lpanel">' + h + "</div>";
         }).join("") + "</section>";
     }).join("");
   }
@@ -29472,6 +29711,7 @@ Object.assign(window.PHOTOS, {
       (o.no ? '<p class="ios-no">Не подходит: ' + esc(o.no) + "</p>" : "") +
       (nRules && nRules <= 2 ? '<section class="ios-sec ios-pick">' + rulesHtml + "</section>" : "") +
       (o.sizes || "") + (o.load || "") + (o.calc || "") +
+      (window.Steps ? Steps.html(o.title) : "") +
       (folds ? '<p class="folds-h">Подробнее — нажмите, чтобы открыть</p>' + folds : "") +
       (o.extra ? '<div class="fc-extra">' + o.extra + "</div>" : "") +
       (o.brands && o.brands.length ? '<p class="ios-foot">Бренды в магазине: ' + esc(o.brands.join(", ")) + "</p>" : "") +
