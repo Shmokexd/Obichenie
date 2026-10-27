@@ -1081,7 +1081,7 @@ a.xl { color: var(--zinc-ink); text-decoration: underline; text-decoration-thick
 .rg-tray.tighter .rg-seg { padding: 6px 16px 6px 6px; }
 @keyframes rgPop { from { transform: scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
 
-.rg-stage { flex: 1; min-height: 0; position: relative; perspective: 760px; perspective-origin: 50% 0%; overflow: hidden; margin-block: 16px 10px; margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); touch-action: none; }
+.rg-stage { flex: 1; min-height: 0; position: relative; perspective: 760px; perspective-origin: 50% 20%; overflow: hidden; margin-block: 16px 10px; margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); touch-action: none; }
 .rg-stage.out { animation: rgOut .25s ease forwards; }
 .rg-stage.in { animation: rgIn .35s cubic-bezier(.2,.9,.3,1); }
 @keyframes rgOut { to { opacity: 0; transform: scale(.9); } }
@@ -29522,6 +29522,7 @@ Object.assign(window.TPM, {
     function vis() { var o = []; for (var i = 0; i < DATA.length; i++) if (picked.indexOf(i) < 0) o.push(i); return o; }
     function n() { return Math.max(vis().length, 1); }
     function step() { return 360 / n(); }
+    var TILT = +(window.RG_TILT != null ? window.RG_TILT : -2);
     function setSize() { box.style.setProperty("--cw", W + "px"); box.style.setProperty("--ch", Math.round(W * 1.9) + "px"); }
     function calcR() { var k = n(); R = k < 3 ? W * 0.9 : Math.round((W / 2 + W * 0.16) / Math.tan(Math.PI / k)); }
 
@@ -29549,7 +29550,7 @@ Object.assign(window.TPM, {
         c.classList.toggle("rear", cos < 0);
         c.classList.toggle("front", p === f);
       });
-      ring.style.transform = "translateZ(-" + R + "px) rotateX(-8deg)";
+      ring.style.transform = "translateZ(-" + R + "px) rotateX(" + TILT + "deg)";
     }
 
     // физика: инерция и трение, мягкая доводка, плавный наклон карточек «на подвесе»
