@@ -1240,6 +1240,16 @@ html.sheet-open, html.sheet-open body { overflow: hidden; overscroll-behavior: n
 
 .sheet-card::before { content: ""; position: absolute; top: 8px; left: 50%; width: 40px; height: 5px; margin-left: -20px; border-radius: 3px; background: rgba(120,120,120,.55); z-index: 3; }
 
+/* вырыв / срез */
+.lk-grid { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 6px -16px 14px; padding: 2px 16px 6px; scrollbar-width: none; }
+.lk-grid::-webkit-scrollbar { display: none; }
+.lk-card { flex: 0 0 78%; max-width: 320px; scroll-snap-align: start; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column; }
+.lk-img { background: #fff; }
+.lk-img svg { display: block; width: 100%; height: auto; }
+.lk-card b { font-size: 18px; padding: 12px 14px 2px; }
+.lk-card p { margin: 0; padding: 4px 14px; line-height: 1.4; }
+.lk-card small { padding: 4px 14px 14px; color: var(--muted); font-size: 13px; }
+
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
@@ -1329,8 +1339,18 @@ window.MODULES.push({
       "Белая лёгкая пыль, сверлится очень легко → газобетон или пеноблок (или гипс).",
       "Стена «звенит» при простукивании и под ней пустота → гипсокартон."
     ]},
-    { t: "h", x: "Нагрузка" },
-    { t: "p", x: "Различайте нагрузку на вырыв (люстра, подвес к потолку) и на срез (полка, кронштейн на стене). Динамическая нагрузка — качели, турники, ворота — требует запаса прочности: берите крепёж мощнее, чем кажется." },
+    { t: "h", x: "Нагрузка: на вырыв и на срез" },
+    { t: "p", x: "Смотрите, куда вес тянет крепёж. От этого зависит, что выбрать." },
+    { t: "loadkinds" },
+    { t: "h", x: "Как понять, какая нагрузка" },
+    { t: "ol", x: [
+      "Представьте крепёж в стене и то, что на нём висит.",
+      "Вес тянет крепёж наружу, вдоль него — из отверстия? Это вырыв. Пример: люстра, крюк в потолке, подвес.",
+      "Вес давит поперёк крепежа, вниз вдоль стены, как будто хочет его перерезать? Это срез. Пример: полка, картина, шкаф, прижатый к стене.",
+      "Вещь далеко выступает от стены (кронштейн телевизора, длинная полка)? Верхние крепления работают на вырыв — берите с запасом.",
+      "Есть рывки и раскачивание (качели, груша, турник, ворота)? Это динамика — берите крепёж в 2–3 раза мощнее."
+    ]},
+    { t: "tip", x: "На вырыв крепёж держит заметно меньше, чем на срез. Поэтому для потолка и всего, что тянет из стены, берут анкеры по бетону, а не обычные дюбели. На срез важна толщина шурупа или болта: толще — держит больше." },
     { t: "warn", x: "Потолок и всё, что висит над людьми, — только надёжные анкеры по бетону. Дюбели «на авось» здесь недопустимы." }
   ],
   cheat: [
@@ -1340,7 +1360,7 @@ window.MODULES.push({
     ["Газобетон", "Спец-дюбели для газобетона или химический анкер"],
     ["Гипсокартон", "«Бабочка», «Дрива», Molly; тяжёлое — в профиль или закладную"],
     ["Дерево, тяжело", "Глухарь DIN 571 или сквозной болт"],
-    ["Вырыв vs срез", "Потолок — вырыв; полка на стене — срез"],
+    ["Вырыв и срез", "Вырыв — тянет из отверстия (потолок, крюк); срез — давит поперёк (полка на стене)"],
     ["Динамика", "Качели, ворота, турники — запас прочности"]
   ],
   quiz: [
@@ -30645,6 +30665,31 @@ Object.assign(window.TPM, {
     return '<div class="lc-note">Сколько выдерживает болт на растяжение. «Рвётся» — предел, «нагружать до» — с запасом в 2 раза: рывки, вибрация и перекос снижают прочность.</div>' +
       lcardsHtml({ head: ["Болт"].concat(cls.map(function (c) { return "Класс " + c; })), rows: rows, nopic: true });
   }
+  // рисунки «вырыв / срез / рычаг»: стена штриховкой, крепёж, красная стрелка — куда тянет вес
+  function loadKindsHtml() {
+    var H = '<defs><pattern id="lkh" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#b9bdc2" stroke-width="2"/></pattern></defs>';
+    var A = function (x1, y1, x2, y2) { var a = Math.atan2(y2 - y1, x2 - x1), h = 7; return '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="#d8312b" stroke-width="3.5"/><path d="M' + x2 + " " + y2 + " L" + (x2 - h * Math.cos(a - .5)) + " " + (y2 - h * Math.sin(a - .5)) + " L" + (x2 - h * Math.cos(a + .5)) + " " + (y2 - h * Math.sin(a + .5)) + 'Z" fill="#d8312b"/>'; };
+    var scrV = function (x, y1, y2) { var s = '<rect x="' + (x - 2) + '" y="' + y1 + '" width="4" height="' + (y2 - y1) + '" fill="#555"/>'; for (var y = y1 + 3; y < y2; y += 4) s += '<line x1="' + (x - 4) + '" y1="' + y + '" x2="' + (x + 4) + '" y2="' + (y + 2) + '" stroke="#555"/>'; return s; };
+    var scrH = function (y, x1, x2) { var s = '<rect x="' + x1 + '" y="' + (y - 2) + '" width="' + (x2 - x1) + '" height="4" fill="#555"/>'; for (var x = x1 + 3; x < x2; x += 4) s += '<line x1="' + x + '" y1="' + (y - 4) + '" x2="' + (x + 2) + '" y2="' + (y + 4) + '" stroke="#555"/>'; return s; };
+    var pull = '<svg viewBox="0 0 160 130">' + H + '<rect width="160" height="34" fill="#e8e7e3"/><rect width="160" height="34" fill="url(#lkh)"/><line x1="0" y1="34" x2="160" y2="34" stroke="#555" stroke-width="1.5"/>' +
+      scrV(80, 8, 34) + '<rect x="76" y="34" width="8" height="5" fill="#555"/><path d="M80 39 v14 a8 8 0 1 0 8 8" fill="none" stroke="#555" stroke-width="3"/>' +
+      '<line x1="88" y1="61" x2="88" y2="76" stroke="#777" stroke-width="1.5"/><path d="M68 98 L76 78 H100 L108 98 Z" fill="#f2d27a" stroke="#555" stroke-width="1.5"/>' +
+      A(124, 44, 124, 112) + '<text x="132" y="80" font-size="11" fill="#d8312b" transform="rotate(90 132 80)" text-anchor="middle">тянет вниз</text></svg>';
+    var shear = '<svg viewBox="0 0 160 130">' + H + '<rect width="40" height="130" fill="#e8e7e3"/><rect width="40" height="130" fill="url(#lkh)"/><line x1="40" y1="0" x2="40" y2="130" stroke="#555" stroke-width="1.5"/>' +
+      '<path d="M40 40 h8 v40 l60 -40 h8 v8 h-60 l-8 6 z" fill="#c9cdd2" stroke="#555" stroke-width="1.2"/><rect x="48" y="34" width="100" height="6" rx="1" fill="#e3c79c" stroke="#8a6a3c"/>' +
+      scrH(52, 14, 48) + '<rect x="48" y="47" width="4" height="10" fill="#555"/>' + '<rect x="96" y="14" width="30" height="20" rx="2" fill="#dfe3e8" stroke="#555"/>' +
+      A(70, 62, 70, 118) + '<text x="78" y="104" font-size="11" fill="#d8312b">давит вниз</text></svg>';
+    var lever = '<svg viewBox="0 0 160 130">' + H + '<rect width="40" height="130" fill="#e8e7e3"/><rect width="40" height="130" fill="url(#lkh)"/><line x1="40" y1="0" x2="40" y2="130" stroke="#555" stroke-width="1.5"/>' +
+      '<rect x="40" y="26" width="7" height="70" fill="#c9cdd2" stroke="#555"/>' + scrH(34, 14, 47) + scrH(88, 14, 47) +
+      '<path d="M47 56 L120 56" stroke="#555" stroke-width="5"/><rect x="118" y="30" width="10" height="64" rx="2" fill="#2f3337"/>' +
+      A(30, 22, 62, 22) + A(123, 98, 123, 124) +
+      '<text x="66" y="19" font-size="10" fill="#d8312b">тянет из стены</text></svg>';
+    var card = function (svg, t, d, ex) { return '<div class="lk-card"><div class="lk-img">' + svg + '</div><b>' + t + '</b><p>' + d + '</p><small>' + ex + "</small></div>"; };
+    return '<div class="lk-grid">' +
+      card(pull, "На вырыв", "Вес тянет крепёж из отверстия — вдоль самого крепежа. Держит слабее всего.", "Люстра, крюк в потолке, подвес, качели") +
+      card(shear, "На срез", "Вес давит поперёк крепежа, вниз вдоль стены — как будто хочет его перерезать. Держит больше.", "Полка, картина, шкаф, прижатый к стене") +
+      card(lever, "Рычаг", "Вещь далеко выступает от стены: низ давит в стену, а верхние крепления тянет наружу — это тоже вырыв.", "Кронштейн телевизора, длинная полка, вешалка") + "</div>";
+  }
   function blockHtml(b) {
     switch (b.t) {
       case "h": return "<h3>" + esc(b.x) + "</h3>";
@@ -30656,6 +30701,7 @@ Object.assign(window.TPM, {
       case "pics": return '<div class="figs">' + b.x.map(function (k) { return figHtml(k, ""); }).join("") + "</div>";
       case "table": return lcardsHtml(Object.assign({ mid: CUR_MID }, b));
       case "boltload": return boltLoadHtml();
+      case "loadkinds": return loadKindsHtml();
       default: return "";
     }
   }
