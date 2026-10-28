@@ -30258,6 +30258,21 @@ Object.assign(window.TPM, {
     }
     Object.keys(GCARD).forEach(function (id) { if (GCARD[id].ph) add(GCARD[id].t, "#/g/" + id); });
     PRODUCTS.forEach(function (p) { add(p.t, "#/p/" + p.k); });
+    // как товары называют в тексте: «клиновой анкер», «бабочка», «химический»
+    var L = "[а-яё-]{0,5}", A = [
+      ["клинов" + L + " анкер" + L + "|анкер" + L + " клинов" + L, "an_wedge"], ["забивн" + L + "(?: анкер" + L + ")?", "an_dropin"],
+      ["рамн" + L + " анкер" + L, "an_frame"], ["латунн" + L + " анкер" + L, "an_brass"], ["анкер" + L + " с (?:кольцом|крюком)", "an_ring"],
+      ["химическ(?:ий|ого|ому|им)(?: анкер" + L + ")?|химанкер" + L, "chem_cart"], ["сетчат" + L + " гильз" + L, "chem_sleeve"],
+      ["универсальн" + L + " дюбел" + L, "dw_universal"], ["распорн" + L + " дюбел" + L + "|нейлонов" + L + " дюбел" + L, "dw_nylon"],
+      ["рамн" + L + " дюбел" + L, "dw_frame"], ["дюбел" + L + "-гвозд" + L, "dw_nail"], ["бабочк" + L, "dw_butterfly"], ["дрив" + L, "dw_driva"], ["molly|молли", "dw_molly"],
+      ["(?:спец-)?дюбел" + L + " для (?:газо|пено)бетона", "g:aedf73ad"], ["сквозн" + L + " болт" + L, "bolt_931"], ["глухар" + L, "scr_lag"],
+      ["конфирмат" + L, "scr_confirmat"], ["клоп" + L, "scr_klop"], ["кровельн" + L + " саморез" + L, "scr_roof"], ["саморез" + L + " по дереву", "scr_wood"],
+      ["шпильк" + L, "stud_975"], ["рым-болт" + L, "eyebolt"], ["гровер" + L + "(?: шайб" + L + ")?", "washer_127"], ["барашк" + L, "nut_315"],
+      ["заклёпк" + L + "|заклепк" + L, "rv_blind"], ["перфолент" + L, "pf_tape"], ["монтажн" + L + " пен" + L, "fm_home"]
+    ];
+    A.forEach(function (a) { var h = a[1].indexOf("g:") === 0 ? (GCARD[a[1].slice(2)] ? "#/g/" + a[1].slice(2) : "") : (ENC[a[1]] ? "#/p/" + a[1] : ""); if (h) items.push({ re: "(?:" + a[0] + ")", href: h, n: 9 }); });
+    // «Анкеры клиновые» ⇄ «клиновой анкер»: два слова в любом порядке
+    items.slice().forEach(function (it) { if (it.n === 2) { var parts = it.re.split("[\\s-]+"); if (parts.length === 2) items.push({ re: parts[1] + "[\\s-]+" + parts[0], href: it.href, n: 2 }); } });
     items.sort(function (a, b) { return b.n - a.n || b.re.length - a.re.length; });
     NAME_IDX = { items: items, re: new RegExp("(^|[^а-яёa-z0-9])(" + items.map(function (x) { return "(" + x.re + ")"; }).join("|") + ")(?![а-яёa-z0-9])", "gi") };
     return NAME_IDX;
