@@ -1267,6 +1267,68 @@ html.sheet-open, html.sheet-open body { overflow: hidden; overscroll-behavior: n
 .art-tile b { display: block; font-size: 15px; margin-bottom: 4px; } .art-tile small { color: var(--muted); font-size: 12px; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .art-more { margin: 24px 0; }
 
+/* главная: быстрые входы */
+.hx { margin: 14px 0 6px; }
+.hx-due { display: block; width: 100%; text-align: left; margin-bottom: 10px; padding: 14px 16px; border-radius: 18px; border: 1px solid var(--zinc); background: color-mix(in srgb, var(--zinc) 18%, var(--surface)); color: var(--ink); font: inherit; cursor: pointer; }
+.hx-due b { display: block; font-size: 16px; } .hx-due small { color: var(--muted); }
+.hx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.hx-t { text-align: left; padding: 14px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; min-height: 78px; }
+.hx-t b { display: block; font-size: 15px; } .hx-t small { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; }
+.chip { display: inline-block; margin: 4px 6px 0 0; padding: 7px 11px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-size: 13px; cursor: pointer; text-align: left; }
+/* карточки */
+.fc-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.fc-modes { display: flex; gap: 6px; } .fc-modes button { padding: 7px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: inherit; font-size: 12.5px; }
+.fc-modes button.on { color: var(--ink); border-color: var(--zinc); }
+.fc-bar { height: 5px; background: var(--surface); border-radius: 3px; margin: 10px 0; overflow: hidden; } .fc-bar i { display: block; height: 100%; background: var(--zinc); }
+.fc-stage { position: relative; perspective: 1200px; height: min(62vh, 520px); }
+.fc-card { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .45s cubic-bezier(.2,.8,.2,1); touch-action: pan-y; cursor: pointer; }
+.fc-card.flip { transform: rotateY(180deg); }
+.fc-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 24px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; }
+.fc-back { transform: rotateY(180deg); }
+.fc-ph { flex: 1; background: #fff; display: grid; place-items: center; min-height: 0; } .fc-ph img { max-width: 88%; max-height: 88%; object-fit: contain; }
+.fc-q { padding: 14px 16px 16px; font-size: 17px; font-weight: 600; } .fc-q small { display: block; color: var(--muted); font-weight: 400; font-size: 13px; margin-top: 3px; }
+.fc-name { flex: 1; display: flex; align-items: center; padding: 20px; font-size: 26px; font-weight: 700; line-height: 1.2; }
+.fc-mini { height: 110px; background: #fff; display: grid; place-items: center; flex: none; } .fc-mini img { max-height: 92px; max-width: 70%; object-fit: contain; }
+.fc-body { padding: 12px 16px; overflow: auto; } .fc-body h2 { font-size: 20px; margin: 0 0 6px; } .fc-body p { margin: 0 0 8px; line-height: 1.4; }
+.fc-lab { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; margin-top: 8px; }
+.fc-st { position: absolute; top: 18px; z-index: 5; padding: 5px 10px; border: 3px solid; border-radius: 10px; font-weight: 800; opacity: 0; pointer-events: none; }
+.fc-ok { right: 18px; color: #4caf6a; transform: rotate(-12deg); } .fc-no { left: 18px; color: #e0624a; transform: rotate(12deg); }
+.fc-hint { text-align: center; color: var(--muted); font-size: 13px; margin: 10px 0; }
+.fc-btns { display: flex; gap: 10px; } .fc-btns button { flex: 1; padding: 15px; border-radius: 16px; font: inherit; font-weight: 700; font-size: 16px; cursor: pointer; }
+.fc-b-no { background: transparent; color: #e0624a; border: 1px solid #e0624a55; } .fc-b-ok { background: var(--zinc); color: var(--on-acc, #fff); border: 0; }
+/* тренажёр */
+.tr-top { display: flex; justify-content: space-between; }
+.tr-chat { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0 14px; }
+.tr-av { flex: none; width: 42px; height: 42px; border-radius: 50%; background: var(--surface); display: grid; place-items: center; font-size: 22px; }
+.tr-bub { background: var(--surface); border: 1px solid var(--line); border-radius: 4px 18px 18px 18px; padding: 12px 14px; }
+.tr-bub b { display: block; font-size: 17px; } .tr-bub span { display: block; margin-top: 4px; line-height: 1.35; } .tr-bub small { display: block; color: var(--muted); margin-top: 6px; }
+.tr-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tr-opt { display: flex; flex-direction: column; gap: 6px; text-align: left; padding: 8px; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-size: 14px; cursor: pointer; }
+.tr-img { height: 84px; border-radius: 10px; background: #fff; display: grid; place-items: center; overflow: hidden; } .tr-img img { max-width: 90%; max-height: 80px; object-fit: contain; }
+.tr-opt.ok { border-color: #4caf6a; box-shadow: 0 0 0 2px #4caf6a55; } .tr-opt.bad { border-color: #e0624a; box-shadow: 0 0 0 2px #e0624a55; } .tr-opt.dim { opacity: .5; }
+.tr-exp { margin-top: 14px; padding: 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); } .tr-exp.ok b { color: #4caf6a; } .tr-exp.bad b { color: #e0624a; } .tr-exp p { margin: 6px 0; line-height: 1.4; }
+/* путь новичка */
+.path-day { margin: 14px 0; padding: 12px; border-radius: 18px; border: 1px solid var(--line); background: var(--surface); }
+.path-day.cur { border-color: var(--zinc); } .path-day.done { opacity: .7; }
+.path-h { display: flex; justify-content: space-between; margin-bottom: 6px; } .path-h span { color: var(--muted); font-size: 13px; }
+.path-m { display: flex; gap: 10px; align-items: center; width: 100%; text-align: left; padding: 10px 4px; border: 0; border-top: 1px solid var(--line); background: none; color: var(--ink); font: inherit; cursor: pointer; }
+.path-m span:nth-child(2) { flex: 1; }
+/* быстрый подбор */
+.qp-steps { display: flex; gap: 6px; margin: 4px 0 14px; } .qp-steps i { flex: 1; height: 5px; border-radius: 3px; background: var(--surface); } .qp-steps i.on { background: var(--zinc); }
+.qp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.qp-b { padding: 0; overflow: hidden; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.qp-img { display: block; height: 96px; background: #fff; } .qp-img img { width: 100%; height: 100%; object-fit: cover; } .qp-b b { display: block; padding: 10px 12px; font-size: 14px; }
+.qp-list { display: grid; gap: 10px; } .qp-l { text-align: left; padding: 14px 16px; border-radius: 16px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; cursor: pointer; }
+.qp-l b { display: block; font-size: 16px; } .qp-l small { color: var(--muted); }
+
+.home2-in .hx { margin: 0; } .home2-in .hx-t { min-height: 64px; padding: 11px 13px; }
+@media (max-height: 820px) {
+  .home2-in { gap: 10px; }
+  .home2-in .hbtn { height: auto; padding: 18px 20px; }
+  .home2-in .hbtn .hico, .home2-in .hbtn .hrow { display: none; }
+  .home2-in .hx-t small { display: none; } .home2-in .hx-t { min-height: 0; }
+}
+
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
@@ -29599,6 +29661,33 @@ Object.assign(window.ART, {
   }
 });
 
+/* Поиск по-народному: как говорят покупатели → что искать в каталоге */
+Object.assign(window.SYN = window.SYN || {}, {
+  "ерш": ["ерш", "ёрш", "щетк"], "ершик": ["ерш", "ёрш", "щетк"], "ёршик": ["ерш", "щетк"],
+  "барашек": ["барашек", "din 315"], "барашка": ["барашек"], "гровер": ["гровер", "пружинн", "din 127"], "гроверная": ["гровер", "din 127"],
+  "шайбочка": ["шайб"], "болтик": ["болт"], "гаечка": ["гайк"], "винтик": ["винт"], "гвоздик": ["гвозд"], "хомутик": ["хомут"],
+  "стяжка": ["хомут пластик", "стяжк"], "стяжки": ["хомут пластик", "стяжк"], "ремешок": ["хомут пластик"],
+  "анкерок": ["анкер"], "анкерки": ["анкер"], "распорник": ["дюбель распорн", "анкер"], "ершеный": ["ершен", "ершён"],
+  "лампочка": ["ламп"], "лампочки": ["ламп"], "переходник": ["переходник", "адаптер"], "тройник": ["тройник", "разветвител"],
+  "удлинитель": ["удлинител"], "переноска": ["удлинител", "переносн"], "автомат": ["автоматическ", "автомат"], "узо": ["узо"],
+  "момент": ["контактн", "клей"], "моментом": ["контактн"], "суперклей": ["цианоакрил", "супер"], "жидкие гвозди": ["жидкие гвозди"],
+  "монтажная": ["пена"], "пенка": ["пена"], "силиконка": ["силикон"], "герметос": ["герметик"],
+  "наждачка": ["шкурка", "наждач", "шлифовальн"], "шкурка": ["шкурк", "шлифовальн"],
+  "болгарка": ["ушм", "болгарк", "отрезной", "зачистной", "шлифмашин"], "болгаркой": ["ушм", "отрезной"],
+  "перфик": ["перфоратор"], "перф": ["перфоратор"], "шуруповерт": ["шуруповёрт"], "шурик": ["шуруповёрт"], "дрелька": ["дрел"],
+  "победитовое": ["по бетону"], "победитка": ["по бетону"], "сверлышко": ["сверл"], "буры": ["бур"], "пика": ["пика", "зубил"],
+  "крокодил": ["крокодил", "зажим"], "изолента": ["изолент"], "синяя изолента": ["изолент"], "вага": ["wago", "клемм"], "ваго": ["wago", "клемм"],
+  "уголок": ["уголок", "угол"], "уголки": ["уголок"], "кронштейн": ["кронштейн"], "перфоуголок": ["уголок"],
+  "рулетка": ["рулетк"], "метр": ["рулетк", "метр"], "уровень": ["уровен"], "отвес": ["отвес"],
+  "киянка": ["киянк"], "кувалда": ["кувалд"], "монтировка": ["лом", "гвоздодер"], "гвоздодер": ["гвоздодер", "гвоздодёр"],
+  "пассатижи": ["плоскогубц", "пассатиж"], "плоскогубцы": ["плоскогубц"], "кусачки": ["кусачк", "бокорез"], "бокорезы": ["бокорез", "кусачк"],
+  "разводной": ["разводн"], "разводяга": ["разводн"], "газовый ключ": ["трубн", "газов"], "головки": ["торцев", "головк"],
+  "клопики": ["прессшайб"], "клопы": ["прессшайб"], "жуки": ["прессшайб"], "кровельник": ["кровельн"], "кровельники": ["кровельн"],
+  "чопик": ["дюбель"], "пробка": ["дюбель"], "дюпель": ["дюбель"], "бабочка": ["бабочк"], "молли": ["molly", "молли"], "дрива": ["дрива", "driva"],
+  "химия": ["химическ", "химанкер"], "химанкер": ["химическ", "химанкер"],
+  "цепка": ["цеп"], "трос": ["трос"], "веревка": ["веревк", "верёвк", "шнур"], "шпагат": ["шпагат"], "карабинчик": ["карабин"], "талреп": ["талреп"]
+});
+
 </script>
 <script>
 /* Пошаговые 3D-инструкции в стиле «картинка без слов» (линейная графика, разрезы, стрелки).
@@ -30579,7 +30668,7 @@ Object.assign(window.ART, {
   var GROUP_ORDER = ["Основы", "Крепёж", "Химия", "Инструмент", "Электрика"];
 
   // ---------- storage ----------
-  function blankState() { return { name: "", studied: {}, best: {}, mistakes: {}, exams: [] }; }
+  function blankState() { return { name: "", studied: {}, best: {}, mistakes: {}, exams: [], cardMiss: {}, trainMiss: {} }; }
   var state = blankState();
   try {
     var raw = window.localStorage.getItem(STORE_KEY);
@@ -30939,7 +31028,7 @@ Object.assign(window.ART, {
       '<a class="hbtn acc" href="#/learn"><span class="hico">' + ICON.learn + "</span><span><b>Изучить материал</b><span class=\"hs\">" +
         "Выберите темы в кольце или изучайте всё по порядку</span></span></a>" +
       '<a class="hbtn" href="#/exam"><span class="hrow"><span class="hico">' + ICON.exam + '</span><span class="mono small muted">зачёт от ' + pct(PASS) + "%</span></span><span><b>Сдать экзамен</b><span class=\"hs\">" + EXAM_SIZE + " сложных вопросов из всех уроков</span></span></a>" +
-      "</div></div>" +
+      homeExtra() + "</div></div>" +
       '<div class="hpick"><button class="hpick-btn" data-go="#/pick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>Подбор товара под задачу</button></div>';
     render(html, { tab: "home", wide: true });
     document.getElementById("themeBtn").addEventListener("click", function () {
@@ -31373,7 +31462,9 @@ Object.assign(window.ART, {
       '<div class="sgrid2">' +
       stile("#/exam", "Итоговый экзамен", photoOf("bolt_933"), 350, 0, "", 0, null, { sub: EXAM_SIZE + " вопросов из всех уроков", nosplit: true }) +
       stile("#/photoquiz", "Угадай товар по фото", photoOf("an_ring"), 175, 0, "", 1, null, { sub: "15 случайных фото", nosplit: true }) +
-      (o.mistakes ? stile("#/mistakes", "Работа над ошибками", photoOf("sl_gasket") || photoOf("sv_wd40"), 0, 0, "", 2, null, { sub: o.mistakes + " " + plural(o.mistakes, "вопрос", "вопроса", "вопросов"), nosplit: true }) : "") +
+      stile("#/trainer", "Клиент спрашивает", photoOf("dw_molly"), 120, 0, "", 2, null, { sub: "тренажёр: что предложить покупателю", nosplit: true }) +
+      stile("#/cards", "Карточки", photoOf("an_wedge"), 30, 0, "", 3, null, { sub: "фото → что это и для чего", nosplit: true }) +
+      (o.mistakes ? stile("#/mistakes", "Работа над ошибками", photoOf("sl_gasket") || photoOf("sv_wd40"), 0, 0, "", 2, null, { sub: (dueMistakes().length ? "сегодня " + dueMistakes().length + " из " : "") + o.mistakes + " " + plural(o.mistakes, "вопрос", "вопроса", "вопросов"), nosplit: true }) : "") +
       "</div>" +
       '<section class="stack"><div class="group-head"><h2 class="h2">Тесты по разделам каталога</h2></div><div class="sgrid2">' +
       CATALOG.map(function (sec, i) { return stile("#/squiz/" + sec.id, sec.t, secImg(sec), sec.hue, 0, "", i, null, { sub: "15 вопросов: плюсы, ошибки, вопросы покупателей, нагрузки", nosplit: true }); }).join("") + "</div></section>" +
@@ -31424,7 +31515,7 @@ Object.assign(window.ART, {
     var it = quiz.items[quiz.i];
     var q = it.q;
     var ok = k === q.a;
-    if (ok) { quiz.right++; delete state.mistakes[q.key]; } else { state.mistakes[q.key] = 1; }
+    if (ok) { quiz.right++; delete state.mistakes[q.key]; } else { state.mistakes[q.key] = tomorrow(); }
     save();
     Array.prototype.forEach.call(document.querySelectorAll(".opt"), function (b) {
       var bk = parseInt(b.getAttribute("data-k"), 10);
@@ -31534,7 +31625,7 @@ Object.assign(window.ART, {
     startQuiz("exam", shuffle(picked), "Итоговый экзамен", "#/tests");
   }
   function startMistakes() {
-    var qs = Object.keys(state.mistakes).map(function (k) { return Q_BY_KEY[k]; }).filter(Boolean);
+    var dk = dueMistakes(), qs = (dk.length ? dk : Object.keys(state.mistakes)).map(function (k) { return Q_BY_KEY[k]; }).filter(Boolean);
     if (!qs.length) {
       render('<div class="panel empty"><div class="score-big" style="font-size:32px">0</div><p>Ошибок нет. Пройдите тесты модулей — неверные ответы попадут сюда.</p>' +
         '<button class="btn btn-primary" data-go="#/tests">К тестам</button></div>', { title: "Работа над ошибками", back: "#/tests", tab: "test" });
@@ -31592,16 +31683,9 @@ Object.assign(window.ART, {
       return;
     }
     if (cheatMode === "tasks") {
-      var ts = TASKS.filter(function (t) { return !q || (t.task + " " + t.main + " " + t.extra).toLowerCase().indexOf(q) >= 0; });
-      html = '<div class="tgrid2">' + ts.map(function (t) {
-        var m = byId[t.m], k = taskKey(t), ek = taskKey({ main: t.extra, m: "" }, k);
-        return '<div class="taskcard tc-pic" style="--h:' + Math.round(m ? modHue(m) : 50) + '">' +
-          '<div class="tc-imgs">' + (k ? '<div class="tc-img"><img src="' + esc(PHOTOS[k].src) + '" alt="' + esc(PIC[k] ? PIC[k].t : "") + '" loading="lazy"></div>' : "") +
-          (ek ? '<div class="tc-img tc-img-s"><span>+</span><img src="' + esc(PHOTOS[ek].src) + '" alt="" loading="lazy"></div>' : "") + "</div>" +
-          '<div class="tc-body"><b>' + highlight(t.task, q) + '</b><div class="kv"><span>Основное</span><span>' + highlight(t.main, q) +
-          "</span><span>Допродажа</span><span>" + highlight(t.extra, q) + "</span></div>" +
-          (m ? '<button class="linkish" data-go="#/m/' + m.id + '">' + m.code + " · " + esc(m.title) + "</button>" : "") + "</div></div>";
-      }).join("") + "</div>";
+      // задачи покупателей: «что взять» — основное по стенам и что предложить вместе
+      var ts = TASKS.filter(function (T) { return !q || (T.t + " " + T.tip + " " + T.items.map(function (it) { return it[0] + " " + it[1]; }).join(" ")).toLowerCase().indexOf(q) >= 0; });
+      html = '<div class="ios">' + ts.map(taskCard).join("") + "</div>";
       if (!ts.length) html = '<div class="empty">Ничего не нашлось. Попробуйте другое слово или откройте «Термины».</div>';
     } else if (cheatMode === "look") {
       var found = false;
@@ -31786,6 +31870,10 @@ Object.assign(window.ART, {
     if (w.length <= 4) return new RegExp("(^|[^а-яa-z0-9])" + w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).test(hay);
     return hay.indexOf(w) >= 0 || hay.indexOf(stem(w)) >= 0;
   }
+  function lev(a, b) { var m = a.length, n = b.length, d = [], i, j; for (i = 0; i <= m; i++) d[i] = [i]; for (j = 0; j <= n; j++) d[0][j] = j;
+    for (i = 1; i <= m; i++) for (j = 1; j <= n; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)); return d[m][n]; }
+  function fuzzyHit(hay, w) { var tol = w.length >= 8 ? 2 : 1, ws = hay.split(/[^а-яa-z0-9]+/);
+    for (var i = 0; i < ws.length; i++) { var x = ws[i]; if (x.length < 4) continue; if (lev(w, x.slice(0, w.length)) <= tol || lev(w, x) <= tol) return true; } return false; }
   function matchScore(hay, q, name) {
     hay = norm(hay); name = norm(name || ""); var sc = 0;
     var ok = q.split(/\s+/).filter(Boolean).every(function (w) {
@@ -31795,6 +31883,7 @@ Object.assign(window.ART, {
       if (name && syn.some(function (x) { return name.indexOf(norm(x)) >= 0; })) { sc += 3; return true; }
       if (hit(hay)) { sc += 1; return true; }
       if (syn.some(function (x) { return hay.indexOf(norm(x)) >= 0; })) { sc += 1; return true; }
+      if (w.length >= 5 && fuzzyHit(name + " " + hay, w)) { sc += 0.5; return true; }   // опечатки: «дюбил», «саморес», «герметк»
       return false;
     });
     return ok ? sc : 0;
@@ -32518,7 +32607,7 @@ Object.assign(window.ART, {
       fold("Частые ошибки", "что делают неправильно", (o.err || []).length, o.err && o.err.length ? '<div class="ios-card">' + rows(o.err, "err") + "</div>" : "") +
       fold("Что спрашивают покупатели", "готовые ответы", faq.length, faq.length ? '<div class="ios-card">' + faq.map(function (qa) { return '<div class="row qa"><i class="ri ri-q">?</i><span><b>' + esc(qa[0]) + "</b>" + esc(qa[1]) + "</span></div>"; }).join("") + "</div>" : "") +
       fold("Производители: в чём разница", "плюсы и минусы марок", 0, o.mk || "") +
-      fold("С чем берут", "что предложить вместе", 0, o.withHtml || "") +
+      fold("С чем берут", "что предложить вместе", 0, o.withHtml || withFromTasks(o.skeys)) +
       fold("Что лучше", "сравнения", 0, o.cmp || "") +
       fold("Какая резьба бывает", "шаг и сверло под резьбу", 0, o.thread || "") +
       fold("Энциклопедия", "как делают, плюсы и минусы", 0, encyHtml) +
@@ -32887,6 +32976,222 @@ Object.assign(window.ART, {
     if (rn) rn.addEventListener("click", function () { confirmReset = false; viewResults(); });
   }
 
+
+  // ===================== Новое: интервальное повторение, карточки, тренажёр, путь новичка, быстрый подбор =====================
+  function tomorrow() { var d = new Date(); d.setHours(0, 0, 0, 0); return d.getTime() + 86400000; }
+  function isDue(v) { return v === 1 || v === true || (typeof v === "number" && v <= Date.now()); }
+  function dueKeys(obj, valid) { return Object.keys(obj || {}).filter(function (k) { return (!valid || valid(k)) && isDue(obj[k]); }); }
+  function dueMistakes() { return dueKeys(state.mistakes, function (k) { return Q_BY_KEY[k]; }); }
+  function refName(r) { return r.indexOf("g:") === 0 ? r.slice(2) : ((PIC[r.slice(2)] || {}).t || r.slice(2)); }
+  function shortTitle(t) { return String(t).replace(/\s*\([^)]*\)\s*$/, ""); }
+
+  // ---------- карточки-флешки ----------
+  var cardRun = null;
+  function cardDeck(topic) {
+    var out = [], seen = {};
+    function addP(p) { if (seen["p" + p.k]) return; var img = photoOf(p.k); if (!img) return; seen["p" + p.k] = 1; var S = (window.SIMPLE || {})["p:" + p.k] || [];
+      out.push({ id: "p:" + p.k, t: p.t, img: img, s: S[0] || cleanDesc((ENC[p.k] || {}).d || ""), why: (S[1] || []).slice(0, 2), when: (S[2] || []).slice(0, 1), go: "#/p/" + p.k }); }
+    function addC(c) { if (seen["g" + c.id] || !c.ph) return; seen["g" + c.id] = 1; var S = (window.SIMPLE || {})["g:" + c.t] || [];
+      out.push({ id: "g:" + c.id, t: c.t, img: c.ph, s: S[0] || cleanDesc((c.info || {}).d || ""), why: (S[1] || []).slice(0, 2), when: (S[2] || []).slice(0, 1), go: "#/g/" + c.id }); }
+    CATALOG.forEach(function (sec) {
+      if (topic !== "all" && topic !== "miss" && sec.id !== topic) return;
+      sec.subs.forEach(function (s) { (s.types || []).forEach(addP); (s.cards || []).forEach(addC); });
+    });
+    if (topic === "miss") { var due = dueKeys(state.cardMiss); out = out.filter(function (x) { return due.indexOf(x.id) >= 0; }); }
+    return out;
+  }
+  function viewCardsHome() {
+    var miss = dueKeys(state.cardMiss).length;
+    var html = '<div class="eyebrow">Обучение</div><h1 class="h-display">Карточки</h1>' +
+      '<p class="muted">Фото → вспомните, что это и для чего. Переверните карточку и честно ответьте: «Знаю» или «Повторить». Ошибки вернутся завтра.</p>' +
+      (miss ? '<button class="artbtn" data-go="#/cards/miss"><span class="artbtn-i">' + miss + '</span><span><b>Повторить сегодня</b><small>карточки, в которых ошиблись</small></span></button>' : "") +
+      '<div class="sgrid2">' + stile("#/cards/all", "Все товары", photoOf("dw_universal"), 20, 0, "", 0, null, { sub: cardDeck("all").length + " карточек, по 20 за раз", nosplit: true }) +
+      CATALOG.map(function (sec, i) { var n = cardDeck(sec.id).length; return n ? stile("#/cards/" + sec.id, sec.t, secImg(sec), sec.hue, 0, "", i + 1, null, { sub: n + " " + plural(n, "карточка", "карточки", "карточек"), nosplit: true }) : ""; }).join("") + "</div>";
+    render(html, { title: "Карточки", back: "#/learn", tab: "learn", wide: true });
+  }
+  function startCards(topic) {
+    var deck = shuffle(cardDeck(topic)).slice(0, 20);
+    if (!deck.length) return viewCardsHome();
+    cardRun = { topic: topic, deck: deck, i: 0, ok: 0, bad: [], mode: cardRun && cardRun.mode || "photo" };
+    showCard();
+  }
+  function showCard() {
+    var R = cardRun; if (!R) return viewCardsHome();
+    if (R.i >= R.deck.length) {
+      save();
+      return render('<div class="eyebrow">Карточки</div><h1 class="h-display">' + R.ok + " из " + R.deck.length + "</h1>" +
+        (R.bad.length ? '<p class="muted">Повторить:</p><div class="fc-bad">' + R.bad.map(function (x) { return '<button class="chip" data-go="' + x.go + '">' + esc(shortTitle(x.t)) + "</button>"; }).join("") + "</div>" : '<p class="muted">Отлично — всё знаете!</p>') +
+        '<div class="stack" style="margin-top:18px"><button class="btn btn-primary btn-block" id="fcAgain">Ещё 20 карточек</button>' +
+        (R.bad.length ? '<button class="btn btn-block" data-go="#/cards/miss">Повторить ошибки</button>' : "") + '<button class="btn btn-ghost btn-block" data-go="#/cards">Выбрать тему</button></div>',
+        { title: "Карточки", back: "#/cards", tab: "learn" }) || (document.getElementById("fcAgain").onclick = function () { startCards(R.topic); });
+    }
+    var x = R.deck[R.i];
+    var front = R.mode === "photo" ? '<div class="fc-ph"><img src="' + esc(x.img) + '" alt=""></div><div class="fc-q">Что это?<small>Вспомните название и для чего</small></div>'
+      : '<div class="fc-name">' + esc(shortTitle(x.t)) + '</div><div class="fc-q">Для чего и где применяют?<small>Нажмите, чтобы проверить</small></div>';
+    var html = '<div class="fc-top"><span class="mono small muted">' + (R.i + 1) + " / " + R.deck.length + '</span><div class="fc-modes"><button data-m="photo"' + (R.mode === "photo" ? ' class="on"' : "") + '>Фото → что это</button><button data-m="name"' + (R.mode === "name" ? ' class="on"' : "") + ">Название → для чего</button></div></div>" +
+      '<div class="fc-bar"><i style="width:' + (R.i / R.deck.length * 100) + '%"></i></div>' +
+      '<div class="fc-stage"><div class="fc-card" id="fcCard"><span class="fc-st fc-ok">ЗНАЮ</span><span class="fc-st fc-no">ПОВТОРИТЬ</span>' +
+      '<div class="fc-face fc-front">' + front + '</div><div class="fc-face fc-back"><div class="fc-mini"><img src="' + esc(x.img) + '" alt=""></div><div class="fc-body"><h2>' + esc(x.t) + "</h2><p>" + esc(x.s) + "</p>" +
+      (x.why.length ? '<div class="fc-lab">Для чего</div><p>' + esc(x.why.join("; ")) + "</p>" : "") + (x.when.length ? '<div class="fc-lab">Когда брать</div><p>' + esc(x.when[0]) + "</p>" : "") + "</div></div></div></div>" +
+      '<p class="fc-hint">Нажмите на карточку — перевернётся. Вправо — «знаю», влево — «повторить».</p>' +
+      '<div class="fc-btns"><button class="fc-b-no" id="fcNo">Повторить</button><button class="fc-b-ok" id="fcOk">Знаю</button></div>';
+    render(html, { title: "Карточки", back: "#/cards", tab: "learn" });
+    packImgs(app);
+    var c = document.getElementById("fcCard"), x0 = null, dx = 0;
+    function answer(ok) {
+      if (ok) { R.ok++; delete state.cardMiss[x.id]; } else { R.bad.push(x); state.cardMiss[x.id] = tomorrow(); }
+      c.style.transition = "transform .3s, opacity .3s"; c.style.transform = "translateX(" + (ok ? 480 : -480) + "px) rotate(" + (ok ? 20 : -20) + "deg)"; c.style.opacity = 0;
+      R.i++; setTimeout(showCard, 240);
+    }
+    c.addEventListener("click", function () { if (Math.abs(dx) < 6) c.classList.toggle("flip"); });
+    c.addEventListener("pointerdown", function (e) { x0 = e.clientX; dx = 0; c.style.transition = "none"; });
+    c.addEventListener("pointermove", function (e) { if (x0 === null) return; dx = e.clientX - x0; c.style.transform = "translateX(" + dx + "px) rotate(" + dx / 18 + "deg)" + (c.classList.contains("flip") ? " rotateY(180deg)" : "");
+      c.querySelector(".fc-ok").style.opacity = Math.max(0, dx / 90); c.querySelector(".fc-no").style.opacity = Math.max(0, -dx / 90); });
+    function up() { if (x0 === null) return; x0 = null; c.style.transition = ""; if (dx > 90) answer(true); else if (dx < -90) answer(false); else { c.style.transform = ""; c.querySelectorAll(".fc-st").forEach(function (s) { s.style.opacity = 0; }); } setTimeout(function () { dx = 0; }, 0); }
+    c.addEventListener("pointerup", up); c.addEventListener("pointercancel", up);
+    document.getElementById("fcOk").onclick = function () { answer(true); };
+    document.getElementById("fcNo").onclick = function () { answer(false); };
+    app.querySelectorAll(".fc-modes [data-m]").forEach(function (b) { b.onclick = function () { R.mode = b.getAttribute("data-m"); showCard(); }; });
+  }
+
+  // ---------- тренажёр «Клиент спрашивает» ----------
+  var TRAIN = null;
+  function trainPool() {
+    if (TRAIN) return TRAIN;
+    var BASE = /бетон|кирпич|гипсокартон|гкл|блок|дерев|брус|металл|газобетон|пенобетон|плитк|потол|улиц|ванн|пустотел|полнотел|профил|стекл|пластик|сантехник|окн|двер|кровл|шланг|труб/i;
+    var TOOL = /бур|сверл|уровн|ключ|бит[аы]?\b|пистолет|рулетк|молот|отвёрт|отверт|ножниц|перчат|очки|скотч|лента|кист|валик|шпател/i;
+    var out = [];
+    (window.TASKS || []).forEach(function (T, ti) {
+      T.items.forEach(function (it, ii) {
+        if (!salesLink(it[0]) || TOOL.test(refName(it[0])) || !BASE.test(it[1])) return;
+        out.push({ id: "t" + ti + "_" + ii, q: T.t, cond: it[1], ans: it[0], tip: T.tip,
+          also: T.items.filter(function (y) { return y[0] !== it[0] && (TOOL.test(refName(y[0])) || !BASE.test(y[1])); }) });
+      });
+    });
+    (window.CASES || []).forEach(function (C) {
+      if (!C.give || !C.give.length || !C.give[0][2] || !salesLink(C.give[0][2])) return;
+      out.push({ id: "c" + C.id, q: C.t, cond: C.base, ans: C.give[0][2], tip: C.why, also: C.give.slice(1).filter(function (g) { return g[2]; }).map(function (g) { return [g[2], g[1]]; }) });
+    });
+    TRAIN = out; return out;
+  }
+  var trainRun = null;
+  function startTrainer() {
+    var pool = trainPool(), due = dueKeys(state.trainMiss);
+    var first = shuffle(pool.filter(function (d) { return due.indexOf(d.id) >= 0; })), rest = shuffle(pool.filter(function (d) { return due.indexOf(d.id) < 0; }));
+    trainRun = { items: first.concat(rest).slice(0, 10), i: 0, ok: 0, picked: null };
+    showTrain();
+  }
+  function showTrain() {
+    var R = trainRun; if (!R) return startTrainer();
+    if (R.i >= R.items.length) {
+      save();
+      var html0 = '<div class="eyebrow">Клиент спрашивает</div><h1 class="h-display">' + R.ok + " из " + R.items.length + "</h1>" +
+        '<p class="muted">' + (R.ok === R.items.length ? "Отлично — все клиенты ушли довольными!" : "Ошибки вернутся в следующих раундах.") + "</p>" +
+        '<div class="stack" style="margin-top:16px"><button class="btn btn-primary btn-block" id="trAgain">Ещё 10 клиентов</button><button class="btn btn-ghost btn-block" data-go="#/tests">К тестам</button></div>';
+      render(html0, { title: "Клиент спрашивает", back: "#/tests", tab: "test" });
+      document.getElementById("trAgain").onclick = startTrainer;
+      return;
+    }
+    var d = R.items[R.i];
+    if (!d.opts) {
+      var pool = trainPool(), names = {}; names[refName(d.ans)] = 1;
+      var wrong = shuffle(pool.filter(function (x) { var n = refName(x.ans); if (names[n]) return false; names[n] = 1; return true; })).slice(0, 3).map(function (x) { return x.ans; });
+      d.opts = shuffle([d.ans].concat(wrong));
+    }
+    var answered = R.picked !== null;
+    var html = '<div class="tr-top"><span class="mono small muted">Клиент ' + (R.i + 1) + " из " + R.items.length + '</span><span class="mono small muted">верно: ' + R.ok + "</span></div>" +
+      '<div class="tr-chat"><div class="tr-av">🧑</div><div class="tr-bub"><b>' + esc(d.q) + "</b><span>" + esc(d.cond.charAt(0).toUpperCase() + d.cond.slice(1)) + '</span><small>Что предложите?</small></div></div>' +
+      '<div class="tr-opts">' + d.opts.map(function (r, i) {
+        var cls = !answered ? "" : r === d.ans ? " ok" : i === R.picked ? " bad" : " dim", img = linkImg(r);
+        return '<button class="tr-opt' + cls + '" data-i="' + i + '"' + (answered ? " disabled" : "") + ">" + (img ? '<span class="tr-img"><img src="' + esc(img) + '" alt=""></span>' : '<span class="tr-img"></span>') + "<span>" + esc(shortTitle(refName(r))) + "</span></button>";
+      }).join("") + "</div>" +
+      (answered ? '<div class="tr-exp ' + (d.opts[R.picked] === d.ans ? "ok" : "bad") + '"><b>' + (d.opts[R.picked] === d.ans ? "Верно!" : "Лучше: " + esc(shortTitle(refName(d.ans)))) + "</b><p>" + esc(d.tip || "") + "</p>" +
+        (d.also && d.also.length ? '<div class="fc-lab">Ещё предложите</div>' + d.also.slice(0, 4).map(function (y) { var h = salesLink(y[0]); return h ? '<button class="chip" data-go="' + h + '">' + esc(shortTitle(refName(y[0]))) + " — " + esc(y[1]) + "</button>" : ""; }).join("") : "") +
+        '<button class="btn btn-primary btn-block" id="trNext" style="margin-top:12px">Следующий клиент</button></div>' : "");
+    render(html, { title: "Клиент спрашивает", back: "#/tests", tab: "test" });
+    packImgs(app);
+    app.querySelectorAll(".tr-opt").forEach(function (b) { b.onclick = function () { if (R.picked !== null) return; R.picked = +b.getAttribute("data-i");
+      if (d.opts[R.picked] === d.ans) { R.ok++; delete state.trainMiss[d.id]; } else state.trainMiss[d.id] = tomorrow(); showTrain(); }; });
+    var nx = document.getElementById("trNext"); if (nx) nx.onclick = function () { R.i++; R.picked = null; showTrain(); };
+  }
+
+  // ---------- путь новичка по дням ----------
+  function pathDays() {
+    var mods = []; GROUP_ORDER.forEach(function (g) { MODULES.forEach(function (m) { if (m.group === g) mods.push(m); }); });
+    MODULES.forEach(function (m) { if (mods.indexOf(m) < 0) mods.push(m); });
+    var days = [], per = 3;
+    for (var i = 0; i < mods.length; i += per) days.push(mods.slice(i, i + per));
+    return days;
+  }
+  function viewPath() {
+    var days = pathDays(), cur = -1;
+    var html = '<div class="eyebrow">Тестовая версия</div><h1 class="h-display">Путь новичка</h1><p class="muted">По 3 урока в день: прочитать урок и сдать тест на ' + pct(PASS) + '%. В конце — итоговый экзамен.</p>' +
+      days.map(function (ms, d) {
+        var done = ms.filter(function (m) { return state.best[m.id] != null && state.best[m.id] >= PASS; }).length, all = done === ms.length;
+        if (!all && cur < 0) cur = d;
+        return '<section class="path-day' + (all ? " done" : cur === d ? " cur" : "") + '"><div class="path-h"><b>День ' + (d + 1) + '</b><span>' + (all ? "пройден ✓" : done + " из " + ms.length) + "</span></div>" +
+          ms.map(function (m) { var st = moduleStatus(m); return '<button class="path-m" data-go="#/m/' + m.id + '"><span class="mono small muted">' + m.code + "</span><span>" + esc(m.title) + '</span><span class="pill ' + st.cls + '">' + st.text + "</span></button>"; }).join("") + "</section>";
+      }).join("") +
+      '<section class="path-day' + (cur < 0 ? " cur" : "") + '"><div class="path-h"><b>Финал</b><span>итоговый экзамен</span></div><button class="path-m" data-go="#/exam"><span></span><span>Итоговый экзамен по всем урокам</span><span class="pill pill-new">экзамен</span></button></section>';
+    render(html, { title: "Путь новичка", back: "#/", tab: "learn" });
+  }
+
+  // ---------- быстрый подбор: 3 вопроса ----------
+  var QP = { base: null, load: null };
+  var QP_BASE = [["concrete", "Бетон", "mat_concrete"], ["brick", "Кирпич полнотелый", "mat_brick"], ["hollow", "Кирпич пустотелый, блок", "mat_brick_hollow"], ["gas", "Газобетон, пеноблок", "mat_gasblock"], ["gkl", "Гипсокартон", "mat_gkl"], ["wood", "Дерево", "mat_wood"]];
+  var QP_LOAD = [["light", "Лёгкое до 5 кг", "картина, часы, зеркало"], ["mid", "Среднее 5–30 кг", "полка, шкафчик, карниз"], ["heavy", "Тяжёлое 30–100 кг", "бойлер, телевизор, кухонный шкаф"], ["ceil", "На потолок", "люстра, подвес, сушилка"], ["dyn", "Рывки и качание", "качели, груша, турник, ворота"]];
+  var QP_R = {
+    concrete: { light: [["p:dw_nylon", "6×40, сверло 6 мм"]], mid: [["p:dw_nylon", "8×50, сверло 8 мм"], ["p:dw_universal", "если стена под вопросом"]], heavy: [["p:an_sleeve", "10 мм, по 2–4 шт."], ["p:an_wedge", "10 мм, если крепим через кронштейн"]], ceil: [["p:an_ring", "анкер с кольцом или крюком"], ["p:an_dropin", "под шпильку"]], dyn: [["p:an_wedge", "12 мм, с запасом ×3"], ["p:an_ring", "12 мм для качелей"]] },
+    brick: { light: [["p:dw_nylon", "6×40"]], mid: [["p:dw_nylon", "8×50"], ["p:dw_frame", "для полок через брус"]], heavy: [["p:an_sleeve", "10 мм"], ["p:chem_cart", "надёжнее всего"]], ceil: [["p:an_sleeve", "с кольцом или крюком"], ["p:chem_cart", "шпилька на химии"]], dyn: [["p:chem_cart", "шпилька М12 на химии"]] },
+    hollow: { light: [["p:dw_universal", "6×36, сверлить без удара"]], mid: [["p:dw_universal", "8×65"], ["p:dw_frame", "длинный, через деталь"]], heavy: [["p:chem_cart", "химанкер"], ["p:chem_sleeve", "обязательно с сетчатой гильзой"]], ceil: [["p:chem_sleeve", "химанкер с гильзой"]], dyn: [["p:chem_sleeve", "химанкер с гильзой, М12"]] },
+    gas: { light: [["g:Дюбель для пенобетона", "спиральный или с крупными рёбрами"]], mid: [["g:Дюбель для пенобетона", "10 мм"], ["p:dw_universal", "длинный 10×80"]], heavy: [["p:chem_cart", "химанкер"], ["p:chem_sleeve", "с гильзой"]], ceil: [["p:chem_cart", "химанкер"]], dyn: [["p:chem_cart", "химанкер, большой запас"]] },
+    gkl: { light: [["p:dw_driva", "вкручивается в лист"], ["p:dw_butterfly", "раскрывается за листом"]], mid: [["p:dw_molly", "металлический, 4 точки"]], heavy: [["p:dw_molly", "только 4+ точки, лучше в профиль или закладную"]], ceil: [["p:an_ring", "крепить в перекрытие над ГКЛ"]], dyn: [["p:an_wedge", "только в бетон или кирпич за листом"]] },
+    wood: { light: [["p:scr_wood", "3,5–4 мм"]], mid: [["p:scr_wood", "5–6 мм, длиннее"]], heavy: [["p:scr_lag", "глухарь 8–10 мм с шайбой"]], ceil: [["g:Шуруп-кольцо", "или глухарь в балку"]], dyn: [["p:scr_lag", "глухарь 10–12 мм"], ["p:bolt_931", "или болт насквозь с шайбами"]] }
+  };
+  function viewQuick() {
+    var step = !QP.base ? 1 : !QP.load ? 2 : 3, html = '<div class="eyebrow">Быстрый подбор</div><h1 class="h-display">' + (step === 1 ? "Какая стена?" : step === 2 ? "Что вешаем?" : "Что взять") + "</h1>" +
+      '<div class="qp-steps"><i class="on"></i><i' + (step > 1 ? ' class="on"' : "") + "></i><i" + (step > 2 ? ' class="on"' : "") + "></i></div>";
+    if (step === 1) html += '<div class="qp-grid">' + QP_BASE.map(function (b) { return '<button class="qp-b" data-b="' + b[0] + '"><span class="qp-img"><img src="' + esc(photoOf(b[2])) + '" alt=""></span><b>' + b[1] + "</b></button>"; }).join("") + "</div>";
+    else if (step === 2) html += '<p class="muted">' + esc(QP_BASE.filter(function (b) { return b[0] === QP.base; })[0][1]) + '</p><div class="qp-list">' + QP_LOAD.map(function (l) { return '<button class="qp-l" data-l="' + l[0] + '"><b>' + l[1] + "</b><small>" + l[2] + "</small></button>"; }).join("") + "</div>";
+    else {
+      var res = QP_R[QP.base][QP.load];
+      html += '<p class="muted">' + esc(QP_BASE.filter(function (b) { return b[0] === QP.base; })[0][1]) + " · " + esc(QP_LOAD.filter(function (l) { return l[0] === QP.load; })[0][1]) + "</p>" +
+        '<section class="ios-sec taskc ios"><div class="ios-card">' + res.map(function (r) { var h = salesLink(r[0]), img = linkImg(r[0]); return '<button class="sale task-it" data-go="' + (h || "#/enc") + '">' + (img ? '<div class="sale-img"><img src="' + esc(img) + '" alt=""></div>' : '<div class="sale-img"></div>') + '<div class="sale-txt"><span class="sale-t">' + esc(shortTitle(refName(r[0]))) + '</span><span class="sale-a">' + esc(r[1]) + "</span></div></button>"; }).join("") + "</div></section>" +
+        (QP.load === "dyn" || QP.load === "ceil" ? '<div class="callout warn"><b>ВАЖНО</b><span>Над людьми и с рывками — только с большим запасом прочности. Вес × 3.</span></div>' : "") +
+        '<p class="small muted">Сверло — того же диаметра, что дюбель или анкер. Глубина — длина дюбеля + 5–10 мм.</p>';
+    }
+    html += '<div class="stack" style="margin-top:14px">' + (step > 1 ? '<button class="btn btn-ghost btn-block" id="qpBack">Назад</button>' : "") + (step === 3 ? '<button class="btn btn-block" id="qpReset">Подобрать заново</button><button class="btn btn-ghost btn-block" data-go="#/pick">Подробный подбор по задаче</button>' : "") + "</div>";
+    render(html, { title: "Быстрый подбор", back: "#/", tab: "home" });
+    packImgs(app);
+    app.querySelectorAll("[data-b]").forEach(function (b) { b.onclick = function () { QP.base = b.getAttribute("data-b"); viewQuick(); }; });
+    app.querySelectorAll("[data-l]").forEach(function (b) { b.onclick = function () { QP.load = b.getAttribute("data-l"); viewQuick(); }; });
+    var bk = document.getElementById("qpBack"); if (bk) bk.onclick = function () { if (QP.load) QP.load = null; else QP.base = null; viewQuick(); };
+    var rs = document.getElementById("qpReset"); if (rs) rs.onclick = function () { QP = { base: null, load: null }; viewQuick(); };
+  }
+
+  // ---------- «что продать вместе» из задач покупателей ----------
+  function withFromTasks(skeys) {
+    var ct = ""; (skeys || []).forEach(function (k) { if (!ct && k.indexOf("g:") === 0) ct = k.slice(2).split("|")[0]; if (!ct && k.indexOf("p:") === 0) ct = k; });
+    if (!ct) return "";
+    var ref = ct.indexOf("p:") === 0 ? ct : "g:" + ct, seen = {}, out = [];
+    (window.TASKS || []).forEach(function (T) {
+      if (!T.items.some(function (it) { return it[0] === ref; })) return;
+      T.items.forEach(function (it) { if (it[0] === ref || seen[it[0]] || !salesLink(it[0])) return; seen[it[0]] = 1; out.push(it); });
+    });
+    if (!out.length) return "";
+    return '<section class="taskc ios"><div class="ios-card">' + out.slice(0, 6).map(function (it) { var img = linkImg(it[0]); return '<button class="sale task-it" data-go="' + salesLink(it[0]) + '">' + (img ? '<div class="sale-img"><img src="' + esc(img) + '" alt="" loading="lazy"></div>' : '<div class="sale-img"></div>') +
+      '<div class="sale-txt"><span class="sale-t">' + esc(shortTitle(refName(it[0]))) + '</span><span class="sale-a">' + esc(it[1]) + "</span></div></button>"; }).join("") + "</div></section>";
+  }
+  function homeExtra() {
+    var due = dueMistakes().length + dueKeys(state.cardMiss).length + dueKeys(state.trainMiss).length;
+    return '<div class="hx">' + (due ? '<button class="hx-due" data-go="' + (dueMistakes().length ? "#/mistakes" : dueKeys(state.cardMiss).length ? "#/cards/miss" : "#/trainer") + '"><b>Повторить сегодня: ' + due + '</b><small>ошибки вернулись — закрепите</small></button>' : "") +
+      '<div class="hx-grid">' +
+      '<button class="hx-t" data-go="#/quick"><b>Быстрый подбор</b><small>3 вопроса — готовый ответ</small></button>' +
+      '<button class="hx-t" data-go="#/trainer"><b>Клиент спрашивает</b><small>тренажёр продавца</small></button>' +
+      '<button class="hx-t" data-go="#/cards"><b>Карточки</b><small>узнать товар по фото</small></button>' +
+      '<button class="hx-t" data-go="#/path"><b>Путь новичка</b><small>план по дням</small></button>' +
+      "</div></div>";
+  }
   // ---------- router ----------
   function go(hash) {
     if (location.hash === hash) route(); else location.hash = hash;
@@ -32924,6 +33229,10 @@ Object.assign(window.ART, {
       case "results": return viewResults();
       case "din": return viewDin();
       case "art": return parts[1] ? viewArt(parts[1]) : viewArtIndex();
+      case "cards": return parts[1] ? startCards(parts[1]) : viewCardsHome();
+      case "trainer": return startTrainer();
+      case "path": return viewPath();
+      case "quick": return viewQuick();
       default: return viewHome();
     }
   }
