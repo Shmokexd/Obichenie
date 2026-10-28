@@ -1322,12 +1322,15 @@ html.sheet-open, html.sheet-open body { overflow: hidden; overscroll-behavior: n
 .qp-l b { display: block; font-size: 16px; } .qp-l small { color: var(--muted); }
 
 .home2-in .hx { margin: 0; } .home2-in .hx-t { min-height: 64px; padding: 11px 13px; }
-@media (max-height: 820px) {
-  .home2-in { gap: 10px; }
-  .home2-in .hbtn { height: auto; padding: 18px 20px; }
-  .home2-in .hbtn .hico, .home2-in .hbtn .hrow { display: none; }
-  .home2-in .hx-t small { display: none; } .home2-in .hx-t { min-height: 0; }
-}
+
+
+/* главная — обычный поток сверху вниз: ничего не наезжает друг на друга на любом экране */
+.hhead, .home2, .hpick { position: static; transform: none; left: auto; right: auto; top: auto; bottom: auto; }
+.hhead { padding-top: calc(env(safe-area-inset-top, 0px) + 20px); }
+.home2 { margin-top: 18px; }
+.home2-in .hx { margin: 0; }
+.hpick { margin: 16px 0 calc(110px + env(safe-area-inset-bottom, 0px)); }
+.home2-in .hbtn { height: auto; min-height: 150px; }
 
 </style>
 <link rel="manifest" href="manifest.webmanifest">
