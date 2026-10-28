@@ -1238,6 +1238,8 @@ html.sheet-open, html.sheet-open body { overflow: hidden; overscroll-behavior: n
 .sheet { overscroll-behavior: contain; touch-action: none; }
 .sheet-card { overscroll-behavior: contain; touch-action: pan-y; }
 
+.sheet-card::before { content: ""; position: absolute; top: 8px; left: 50%; width: 40px; height: 5px; margin-left: -20px; border-radius: 3px; background: rgba(120,120,120,.55); z-index: 3; }
+
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
@@ -1312,12 +1314,12 @@ window.MODULES.push({
   lesson: [
     { t: "p", x: "Основание решает больше, чем вес. Один и тот же кронштейн в бетон, пустотелый кирпич и гипсокартон крепится тремя разными способами." },
     { t: "table", head: ["Основание", "Лёгкая и средняя нагрузка", "Тяжёлая нагрузка", "Чего избегать"], rows: [
-      ["Бетон", "Нейлоновый распорный дюбель, дюбель-гвоздь, латунный анкер", "Клиновой анкер, анкерный болт, забивной анкер, химический анкер", "—"],
-      ["Кирпич полнотелый", "Распорный дюбель, рамный дюбель", "Анкерный болт с гильзой, химический анкер", "Клиновой анкер (может расколоть)"],
+      ["Бетон", "Распорный нейлоновый дюбель, универсальный дюбель, металлический дюбель MUD (у печей и котлов), дюбель-гвоздь, рамный дюбель, шуруп по бетону, латунный анкер", "Клиновой анкер, анкерный болт, забивной анкер, анкер с кольцом или крюком (потолок), химический анкер", "—"],
+      ["Кирпич полнотелый", "Распорный дюбель, универсальный дюбель, металлический дюбель MUD, дюбель-гвоздь, рамный дюбель", "Анкерный болт с гильзой, химический анкер", "Клиновой анкер (может расколоть)"],
       ["Кирпич пустотелый, керамоблок", "Универсальный дюбель (завязывается узлом), длинный рамный дюбель", "Химический анкер с сетчатой гильзой", "Распорные анкеры — распор уходит в пустоту"],
-      ["Газобетон, пеноблок", "Специальные дюбели для газобетона (спиральные, с крупными рёбрами)", "Химический анкер", "Обычный короткий дюбель — вырывается"],
+      ["Газобетон, пеноблок", "Специальные дюбели для газобетона (спиральные, с крупными рёбрами); для лёгкого — универсальный дюбель", "Химический анкер", "Обычный короткий дюбель — вырывается"],
       ["Дерево", "Саморез по дереву, шуруп", "Глухарь (DIN 571), болт насквозь с шайбами", "Чёрные саморезы ГКЛ на нагрузку"],
-      ["Гипсокартон", "«Бабочка», «Дрива», металлический Molly", "Крепить к профилю или закладной в каркасе", "Обычный распорный дюбель"],
+      ["Гипсокартон", "«Бабочка», «Дрива», металлический Molly; для лёгкого — универсальный дюбель", "Крепить к профилю или закладной в каркасе", "Обычный распорный дюбель"],
       ["Металл", "Саморез со сверлом, саморез по металлу, заклёпка", "Болт с гайкой, резьбовая заклёпка", "Саморез по дереву в толстый металл"]
     ]},
     { t: "h", x: "Как понять основание, если клиент не знает" },
@@ -1332,6 +1334,7 @@ window.MODULES.push({
     { t: "warn", x: "Потолок и всё, что висит над людьми, — только надёжные анкеры по бетону. Дюбели «на авось» здесь недопустимы." }
   ],
   cheat: [
+    ["Бетон, лёгкое", "Распорный, универсальный, MUD, дюбель-гвоздь"],
     ["Бетон, тяжело", "Клиновой анкер, анкерный болт, забивной, химический"],
     ["Пустотелый кирпич", "Универсальный дюбель или химический анкер с сетчатой гильзой"],
     ["Газобетон", "Спец-дюбели для газобетона или химический анкер"],
@@ -27158,13 +27161,13 @@ window.FIT = [
 /* Фото для мест, где в уроках было «Фото не загружено»: снимки из каталога магазина и свои схемы */
 window.PHOTOS = window.PHOTOS || {};
 Object.assign(window.PHOTOS, {
-  mat_concrete: { src: "photos/mat_concrete.svg", author: "рисунок" },
-  mat_brick: { src: "photos/mat_brick.svg", author: "рисунок" },
-  mat_brick_hollow: { src: "photos/mat_brick_hollow.svg", author: "рисунок" },
-  mat_gasblock: { src: "photos/mat_gasblock.svg", author: "рисунок" },
-  mat_wood: { src: "photos/mat_wood.svg", author: "рисунок" },
-  mat_gkl: { src: "photos/mat_gkl.svg", author: "рисунок" },
-  mat_metal: { src: "photos/mat_metal.svg", author: "рисунок" },
+  mat_concrete: { src: "photos/mat_concrete.jpg", author: "фото" },
+  mat_brick: { src: "photos/mat_brick.jpg", author: "фото" },
+  mat_brick_hollow: { src: "photos/mat_brick_hollow.jpg", author: "фото" },
+  mat_gasblock: { src: "photos/mat_gasblock.jpg", author: "фото" },
+  mat_wood: { src: "photos/mat_wood.jpg", author: "фото" },
+  mat_gkl: { src: "photos/mat_gkl.jpg", author: "фото" },
+  mat_metal: { src: "photos/mat_metal.jpg", author: "фото" },
   mark_class: { src: "photos/mark_class.svg", author: "схема" },
   scr_nagel: { src: "photos/goods/e7568bff.jpg", author: "каталог" },
   an_dropin: { src: "photos/goods/38d3c41e.jpg", author: "каталог" },
@@ -30270,7 +30273,20 @@ Object.assign(window.TPM, {
       ["шпильк" + L, "stud_975"], ["рым-болт" + L, "eyebolt"], ["гровер" + L + "(?: шайб" + L + ")?", "washer_127"], ["барашк" + L, "nut_315"],
       ["заклёпк" + L + "|заклепк" + L, "rv_blind"], ["перфолент" + L, "pf_tape"], ["монтажн" + L + " пен" + L, "fm_home"]
     ];
-    A.forEach(function (a) { var h = a[1].indexOf("g:") === 0 ? (GCARD[a[1].slice(2)] ? "#/g/" + a[1].slice(2) : "") : (ENC[a[1]] ? "#/p/" + a[1] : ""); if (h) items.push({ re: "(?:" + a[0] + ")", href: h, n: 9 }); });
+    A.push(["металлическ" + L + " дюбел" + L + "(?: mud)?|дюбел" + L + " mud|mud", "t:Дюбель металлический (MUD)"], ["шуруп" + L + " по бетону|нагел" + L, "scr_nagel"]);
+    function hrefOf(r) {
+      if (r.indexOf("g:") === 0) return GCARD[r.slice(2)] ? "#/g/" + r.slice(2) : "";
+      if (r.indexOf("t:") === 0) { var t = r.slice(2), id = Object.keys(GCARD).filter(function (i) { return GCARD[i].t === t; })[0]; return id ? "#/g/" + id : ""; }
+      if (r.indexOf("#/") === 0) return r;
+      return ENC[r] ? "#/p/" + r : "";
+    }
+    A.forEach(function (a) { var h = hrefOf(a[1]); if (h) items.push({ re: "(?:" + a[0] + ")", href: h, n: 9 }); });
+    // просто «гайка», «болт», «герметик» — ссылка на раздел этих товаров (если точнее ничего не нашлось)
+    [["гайк" + L, "#/c/krepezh/gayki"], ["болт" + L, "#/c/krepezh/bolty"], ["винт" + L, "#/c/krepezh/vinty"], ["шайб" + L, "#/c/krepezh/shayba"],
+     ["саморез" + L, "#/c/krepezh/samorezy"], ["шуруп" + L, "#/c/krepezh/shurupy"], ["гвозд" + L, "#/c/krepezh/gvozdi"], ["дюбел" + L, "#/c/krepezh/dyubeli-i-dyubel-gvozdi"],
+     ["анкер" + L, "#/c/krepezh/ankery"], ["заклёпк" + L + "|заклепк" + L, "#/c/krepezh/zaklepki-"], ["хомут" + L, "#/c/krepezh/khomuty"], ["шплинт" + L, "#/c/krepezh/shplinty"],
+     ["монтажн" + L + " пен" + L + "|пен[аеуыо]", "#/m/foam"], ["герметик" + L, "#/m/sealant"], ["жидк" + L + " гвозд" + L + "|клей|клея|клеем|клею|клеи", "#/m/glue"]
+    ].forEach(function (a) { items.push({ re: "(?:" + a[0] + ")", href: a[1], n: 0 }); });
     // «Анкеры клиновые» ⇄ «клиновой анкер»: два слова в любом порядке
     items.slice().forEach(function (it) { if (it.n === 2) { var parts = it.re.split("[\\s-]+"); if (parts.length === 2) items.push({ re: parts[1] + "[\\s-]+" + parts[0], href: it.href, n: 2 }); } });
     items.sort(function (a, b) { return b.n - a.n || b.re.length - a.re.length; });
@@ -30714,6 +30730,15 @@ Object.assign(window.TPM, {
     var el = document.createElement("div"); el.className = "sheet"; el.id = "lsheet";
     el.innerHTML = '<div class="sheet-bg" data-close></div><div class="sheet-card" role="dialog" aria-label="' + esc(it.t) + '"><button class="sheet-x" data-close aria-label="Закрыть">×</button>' + body + "</div>";
     document.body.appendChild(el); packImgs(el);
+    try { stackLists(el); linkify(el); linkNames(el); } catch (e) {}
+    // закрыть свайпом вниз: тянем карточку за верх (или когда она прокручена в начало)
+    (function () {
+      var card = el.querySelector(".sheet-card"), y0 = null, dy = 0;
+      card.addEventListener("touchstart", function (e) { if (card.scrollTop > 0) { y0 = null; return; } y0 = e.touches[0].clientY; dy = 0; card.style.transition = "none"; }, { passive: true });
+      card.addEventListener("touchmove", function (e) { if (y0 === null) return; dy = e.touches[0].clientY - y0; if (dy > 0) { card.style.transform = "translateY(" + dy + "px)"; if (e.cancelable) e.preventDefault(); } }, { passive: false });
+      card.addEventListener("touchend", function () { if (y0 === null) return; card.style.transition = ""; if (dy > 90) { card.style.transform = "translateY(100%)"; setTimeout(closeSheet, 180); } else card.style.transform = ""; y0 = null; });
+    })();
+    try { stackLists(el); linkify(el); linkNames(el); } catch (e) {}
     requestAnimationFrame(function () { el.classList.add("on"); });
     el.addEventListener("click", function (e) { if (e.target.closest("[data-close]") || e.target.closest("[data-go]")) closeSheet(); });
   }
