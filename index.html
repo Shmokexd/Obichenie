@@ -27492,6 +27492,7 @@ Object.assign(window.PHOTOS, {
   bit_hex8: { src: "photos/goods/31f3f587.jpg", author: "каталог" },
   dc_thick: { src: "photos/dc_thick.jpg", author: "каталог" }
 });
+window.PHOTOS.basics = { src: "photos/basics.jpg", author: "фото" };
 
 /* Простыми словами: что это, для чего, когда брать. Для новичка, без химии и терминов.
    Технические подробности остаются в «Энциклопедии» карточки.
@@ -31342,7 +31343,7 @@ window.ART.roof = {
   }
   function viewLearn() {
     var items = learnSections().map(function (L) {
-      var img = L.sec ? secImg(L.sec) : (L.mods[0] && modImg(L.mods[0])) || photoOf("dw_universal");
+      var img = L.sec ? secImg(L.sec) : photoOf("basics") || (L.mods[0] && modImg(L.mods[0]));
       var nCards = L.sec ? L.sec.subs.reduce(function (a, x) { return a + (x.cards.length || x.types.length); }, 0) : 0;
       var sub = (L.mods.length ? L.mods.length + " " + plural(L.mods.length, "урок", "урока", "уроков") : "") + (L.mods.length && nCards ? " · " : "") + (nCards ? nCards + " " + plural(nCards, "товар", "товара", "товаров") : "");
       return { id: L.id, t: L.t, s: sub, img: img };
