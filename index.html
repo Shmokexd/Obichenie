@@ -1332,6 +1332,14 @@ html.sheet-open, html.sheet-open body { overflow: hidden; overscroll-behavior: n
 .hpick { margin: 16px 0 calc(110px + env(safe-area-inset-bottom, 0px)); }
 .home2-in .hbtn { height: auto; min-height: 150px; }
 
+/* ничего не вылезает за края */
+.chip { white-space: normal; max-width: 100%; overflow-wrap: anywhere; line-height: 1.3; }
+.tr-also { margin-top: 6px; } .tr-also .ios-card { margin: 0; }
+.tr-exp, .tr-bub, .tr-opt span, .fc-body, .qp-l, .hx-t, .art-k, .lk-card { overflow-wrap: anywhere; min-width: 0; }
+.tr-opt { min-width: 0; }
+.art-list, .hx-grid, .tr-opts, .qp-grid, .sgrid2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.art-tile, .art-tile b, .art-tile small { min-width: 0; overflow-wrap: anywhere; }
+
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
@@ -33323,7 +33331,10 @@ window.ART.roof = {
     var d = R.items[R.i];
     if (!d.opts) {
       var pool = trainPool(), names = {}; names[refName(d.ans)] = 1;
-      var wrong = shuffle(pool.filter(function (x) { var n = refName(x.ans); if (names[n]) return false; names[n] = 1; return true; })).slice(0, 3).map(function (x) { return x.ans; });
+      // неправильные варианты — из той же группы товаров, чтобы было над чем подумать
+      var FAST = /дюбел|анкер|шуруп|саморез|болт|химанкер|molly|driva|бабочк|duotec|гвозд|хомут/i, same = FAST.test(refName(d.ans));
+      var cand = shuffle(pool.filter(function (x) { return FAST.test(refName(x.ans)) === same; })).concat(shuffle(pool.slice()));
+      var wrong = cand.filter(function (x) { var n = refName(x.ans); if (names[n]) return false; names[n] = 1; return true; }).slice(0, 3).map(function (x) { return x.ans; });
       d.opts = shuffle([d.ans].concat(wrong));
     }
     var answered = R.picked !== null;
@@ -33334,7 +33345,7 @@ window.ART.roof = {
         return '<button class="tr-opt' + cls + '" data-i="' + i + '"' + (answered ? " disabled" : "") + ">" + (img ? '<span class="tr-img"><img src="' + esc(img) + '" alt=""></span>' : '<span class="tr-img"></span>') + "<span>" + esc(shortTitle(refName(r))) + "</span></button>";
       }).join("") + "</div>" +
       (answered ? '<div class="tr-exp ' + (d.opts[R.picked] === d.ans ? "ok" : "bad") + '"><b>' + (d.opts[R.picked] === d.ans ? "Верно!" : "Лучше: " + esc(shortTitle(refName(d.ans)))) + "</b><p>" + esc(d.tip || "") + "</p>" +
-        (d.also && d.also.length ? '<div class="fc-lab">Ещё предложите</div>' + d.also.slice(0, 4).map(function (y) { var h = salesLink(y[0]); return h ? '<button class="chip" data-go="' + h + '">' + esc(shortTitle(refName(y[0]))) + " — " + esc(y[1]) + "</button>" : ""; }).join("") : "") +
+        (d.also && d.also.length ? '<div class="fc-lab">Ещё предложите</div><section class="taskc ios tr-also"><div class="ios-card">' + d.also.slice(0, 4).map(function (y) { var h = salesLink(y[0]), img = linkImg(y[0]); return h ? '<button class="sale task-it" data-go="' + h + '">' + (img ? '<div class="sale-img"><img src="' + esc(img) + '" alt=""></div>' : '<div class="sale-img"></div>') + '<div class="sale-txt"><span class="sale-t">' + esc(shortTitle(refName(y[0]))) + '</span><span class="sale-a">' + esc(y[1]) + "</span></div></button>" : ""; }).join("") + "</div></section>" : "") +
         '<button class="btn btn-primary btn-block" id="trNext" style="margin-top:12px">Следующий клиент</button></div>' : "");
     render(html, { title: "Клиент спрашивает", back: "#/tests", tab: "test" });
     packImgs(app);
