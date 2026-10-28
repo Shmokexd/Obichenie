@@ -1414,6 +1414,18 @@ a.fx-a:active { background: var(--zinc-soft); }
 .lc-row ul.col-list { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
 .lc-row ul.col-list li { position: relative; padding-left: 18px; font-size: 16px; line-height: 1.4; margin: 0; }
 .lc-row ul.col-list li::before { content: ""; position: absolute; left: 4px; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--zinc-ink); }
+/* карточки со свайпом — по центру экрана, соседние видны с обеих сторон */
+.lcards, .cmpsw, .lk-grid { padding-inline: 0; scroll-padding: 0; }
+.lcard { flex: 0 0 min(84%, 360px); max-width: none; scroll-snap-align: center; }
+.lcards::before, .lcards::after { content: ""; flex: 0 0 calc(50% - min(42%, 180px) - 12px); }
+.cmpcard { flex: 0 0 min(86%, 380px); scroll-snap-align: center; }
+.cmpsw::before, .cmpsw::after { content: ""; flex: 0 0 calc(50% - min(43%, 190px) - 12px); }
+.lk-card { flex: 0 0 min(78%, 320px); max-width: none; scroll-snap-align: center; }
+.lk-grid::before, .lk-grid::after { content: ""; flex: 0 0 calc(50% - min(39%, 160px) - 10px); }
+
+/* без иконок: строка товара — название и стрелка */
+.fx-a { padding: 8px 12px 8px 14px; min-height: 44px; }
+.lc-row .fx-avoid .fx-t { color: #e88a76; }
 
 </style>
 <link rel="manifest" href="manifest.webmanifest">
@@ -1426,7 +1438,7 @@ a.fx-a:active { background: var(--zinc-soft); }
 </head>
 <body>
 <div id="app"><main id="main" class="wide "><div class="home3"><div class="hhead-in"><p class="h3-kicker">Курс изучения</p><div class="hprog"><div class="bar"><i style="width:0%"></i></div><span>0 из 26 уроков</span></div></div><div class="h3-btns"><a class="hbtn acc" href="#/learn"><span class="hico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span><b>Изучить материал</b><span class="hs">Уроки по порядку или темы на выбор</span></span></a><a class="hbtn" href="#/exam"><span class="hrow"><span class="hico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-1.5 7.5 5-3 5 3-1.5-7.5"/></svg></span><span class="mono small muted">зачёт от 80%</span></span><span><b>Сдать тест</b><span class="hs">Итоговый экзамен: 50 вопросов по всему ассортименту</span></span></a></div></div></main><nav class="tabbar" aria-label="Разделы"><a class="tab" href="#/learn"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span class="tab-label">Обучение</span></a><a class="tab" href="#/enc"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="tab-label">Ассортимент</span></a><a class="tab home acc" href="#/" aria-current="page" aria-label="Главная"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span><span class="tab-label">Главная</span></a><a class="tab" href="#/tests"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 12 2.5 2.5L16 9"/></svg></span><span class="tab-label">Практика</span></a><a class="tab" href="#/cheat"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><span class="tab-label">Шпаргалка</span></a></nav></div>
-<script>window.BUILD_ID="ceb403b3a7";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
+<script>window.BUILD_ID="7c150d6fe2";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
 <script type="text/x-prokrep">
 /* Реестр данных. Каждый товар справочника описан одной записью PRODUCT(...) в www/data/products/,
    каждая карточка каталога — одной записью CARD(...) в www/data/cards/, каждый урок — LESSON(...) в www/data/lessons/.
@@ -44630,7 +44642,7 @@ PRODUCT("sm_additive", {
   function fxListHtml(text, avoid) {
     var items = splitItems(text);
     return '<ul class="fx-list' + (avoid ? " fx-avoid" : "") + '">' + items.map(function (s) {
-      var href = itemHref(s), inner = '<span class="fx-i">' + fxIcon(s) + "</span><span class=\"fx-t\">" + esc(s) + "</span>" + (href ? '<span class="fx-go" aria-hidden="true">›</span>' : "");
+      var href = itemHref(s), inner = '<span class="fx-t">' + esc(s) + "</span>" + (href ? '<span class="fx-go" aria-hidden="true">›</span>' : "");
       return "<li>" + (href ? '<a class="fx-a nolink" href="' + href + '">' + inner + "</a>" : '<span class="fx-a nolink">' + inner + "</span>") + "</li>";
     }).join("") + "</ul>";
   }
