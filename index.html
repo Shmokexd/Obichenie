@@ -31096,6 +31096,12 @@ window.ART.roof = {
     if (p[0] === "cheat") return "Шпаргалка";
     if (p[0] === "c") return p[2] ? ((SUB[p[1] + "/" + p[2]] || {}).t || "Назад") : ((SEC[p[1]] || {}).t || "Ассортимент");
     if (p[0] === "g" && GCARD[p[1]]) return GCARD[p[1]].t;
+    if (p[0] === "gt" && GTYPE[p[1]]) return GTYPE[p[1]].card.t;
+    if (p[0] === "m" && byId[p[1]]) return byId[p[1]].title;
+    if (p[0] === "p" && PIC[p[1]]) return PIC[p[1]].t;
+    if (p[0] === "art" && ART[p[1]]) return ART[p[1]].t;
+    if (p[0] === "quick") return "Быстрый подбор";
+    if (p[0] === "trainer") return "Тренажёр";
     return "Назад";
   }
 
@@ -31231,10 +31237,28 @@ window.ART.roof = {
       el.classList.add("stk-box");
     });
   }
+  // «Назад» туда, откуда пришли по ссылке: стек переходов {from, y, to}
+  var NAV = [], NAV_PENDING = null;
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest && e.target.closest("a[href^='#/'], [data-go]");
+    if (!el || el.closest(".back-btn, .tabbar, .topbar")) return;
+    if (!el.closest("#main, .sheet")) return;
+    NAV_PENDING = { from: location.hash || "#/", y: window.scrollY };
+  }, true);
+  function navTrack() {
+    var h = location.hash || "#/", top = NAV[NAV.length - 1], restore = null;
+    if (NAV_PENDING && NAV_PENDING.from !== h) { NAV.push({ from: NAV_PENDING.from, y: NAV_PENDING.y, to: h }); if (NAV.length > 30) NAV.shift(); }
+    else if (!NAV_PENDING && top && h === top.from) { restore = top.y; NAV.pop(); }
+    else if (!NAV_PENDING && top && h !== top.to) NAV = [];
+    NAV_PENDING = null;
+    return restore;
+  }
   function render(html, opts) {
     if (window.Howto) Howto.unmount();
     if (window.Ring) Ring.unmount();
     opts = opts || {};
+    var navRestore = navTrack(), navTop = NAV[NAV.length - 1];
+    if (navTop && navTop.to === (location.hash || "#/") && opts.title) { opts.back = navTop.from; opts.backLabel = backLabelOf(navTop.from) || "Назад"; }
     if (opts.title && !opts.backLabel) opts.backLabel = backLabelOf(opts.back);
     app.innerHTML = topbar(opts.title, opts.back, opts.backLabel) + '<main id="main" class="' + (opts.wide ? "wide " : "") + (opts.cls || "") + '">' + html + "</main>" + tabbar(opts.tab);
     packImgs(app); initCalcs(app);
@@ -31243,6 +31267,7 @@ window.ART.roof = {
     if (app.querySelector(".sgrid2[data-fit]")) fitGrids();
     var swOn = app.querySelector(".tswitch .ttile.on"); if (swOn) swOn.parentNode.scrollLeft = swOn.offsetLeft - 16;
     window.scrollTo(0, 0);
+    if (navRestore != null) { var yy = navRestore; requestAnimationFrame(function () { window.scrollTo(0, yy); setTimeout(function () { window.scrollTo(0, yy); }, 120); }); }
   }
 
   // ---------- views ----------
