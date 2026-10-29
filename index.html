@@ -1069,6 +1069,9 @@ a.xl { color: var(--zinc-ink); text-decoration: underline; text-decoration-thick
   top: calc(env(safe-area-inset-top, 0px) + 12px); bottom: calc(env(safe-area-inset-bottom, 0px) + 12px + 64px + 12px);
   max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; -webkit-user-select: none; user-select: none; }
 .rg [hidden] { display: none !important; }
+.rg-abc { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px; margin-top: 4px; flex: none; touch-action: none; }
+.rg-abc button { min-width: 36px; height: 36px; padding: 0 6px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--muted); font: 700 16px var(--f-body); cursor: pointer; }
+.rg-abc button.on { background: var(--zinc); border-color: var(--zinc); color: var(--on-acc); }
 .rg-toprow { display: flex; gap: 8px; align-items: stretch; flex: none; }
 .rg-tray { flex: 1; min-width: 0; height: 78px; overflow: hidden; }
 .rg-tray.rg-none { visibility: hidden; }
@@ -1434,7 +1437,7 @@ a.fx-a:active { background: var(--zinc-soft); }
 </head>
 <body>
 <div id="app"><main id="main" class="wide "><div class="home3"><div class="hhead-in"><p class="h3-kicker">Курс изучения</p><div class="hprog"><div class="bar"><i style="width:0%"></i></div><span>0 из 26 уроков</span></div></div><div class="h3-btns"><a class="hbtn acc" href="#/learn"><span class="hico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span><b>Изучить материал</b><span class="hs">Уроки по порядку или темы на выбор</span></span></a></div></div></main><nav class="tabbar" aria-label="Разделы"><a class="tab" href="#/learn"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span class="tab-label">Изучить</span></a><a class="tab" href="#/enc"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="tab-label">Ассортимент</span></a><a class="tab home acc" href="#/" aria-current="page" aria-label="Главная"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span><span class="tab-label">Главная</span></a><a class="tab" href="#/tests"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 12 2.5 2.5L16 9"/></svg></span><span class="tab-label">Практика</span></a><a class="tab" href="#/cheat"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><span class="tab-label">Шпаргалка</span></a></nav></div>
-<script>window.BUILD_ID="b7d35cd50f";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
+<script>window.BUILD_ID="98d99df87f";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
 <script type="text/x-prokrep">
 /* Реестр данных. Каждый товар справочника описан одной записью PRODUCT(...) в www/data/products/,
    каждая карточка каталога — одной записью CARD(...) в www/data/cards/, каждый урок — LESSON(...) в www/data/lessons/.
@@ -42225,8 +42228,9 @@ PRODUCT("sm_additive", {
       ICO_GRID +
       "<span>Список</span></button></div>" +
       '<div class="rg-grid" hidden></div>' +
+      '<div class="rg-abc" role="toolbar" aria-label="Перейти по первой букве"></div>' +
       '<div class="rg-stage"><div class="rg-ring"></div><div class="rg-empty" hidden>Все темы в наборе</div></div>' +
-      '<div class="rg-bottom">' +
+      '<div class="rg-bottom"' + (H.noPick ? " hidden" : "") + ">" +
       '<button class="rg-luck" type="button" aria-label="Испытать удачу">' +
       ICO_LUCK +
       "<span>Удача</span></button>" +
@@ -42389,6 +42393,7 @@ PRODUCT("sm_additive", {
       if (fNow !== lastFront) {
         if (lastFront !== -1 && Math.abs(w) > 0.004 && !rolling) buzz(7);
         lastFront = fNow;
+        markAbc();
       }
       cards.forEach(function (c) {
         if (c._held) return;
@@ -42452,7 +42457,8 @@ PRODUCT("sm_additive", {
         t = performance.now();
       samples.push([t, e.clientX, e.clientY]);
       while (samples.length > 2 && t - samples[0][0] > 90) samples.shift();
-      if (!mode && (Math.abs(dx) >= 10 || Math.abs(dy) >= 10)) mode = Math.abs(dy) > Math.abs(dx) && dy < 0 ? "up" : "spin";
+      if (!mode && (Math.abs(dx) >= 10 || Math.abs(dy) >= 10))
+        mode = Math.abs(dy) > Math.abs(dx) ? (H.noPick ? "none" : dy < 0 ? "up" : "spin") : "spin";
       if (mode === "spin") {
         dragging = true;
         coasting = false;
@@ -42518,7 +42524,7 @@ PRODUCT("sm_additive", {
         coasting = false;
         target = Math.round(rot / step()) * step() - step();
       }
-      if (e.key === "ArrowUp" && vis().length) {
+      if (e.key === "ArrowUp" && vis().length && !H.noPick) {
         e.preventDefault();
         flyUp(frontIndex());
       }
@@ -42541,6 +42547,62 @@ PRODUCT("sm_additive", {
       c._fly = true;
       c._liftV = -0.9;
     }
+    // алфавит над карточками: буквы, с которых начинаются темы; нажать или провести пальцем — карточка сразу впереди
+    var abc = box.querySelector(".rg-abc");
+    function letterOf(i) {
+      return String(DATA[i].t).trim().charAt(0).toUpperCase();
+    }
+    function drawAbc() {
+      var seen = [];
+      vis().forEach(function (i) {
+        var L = letterOf(i);
+        if (seen.indexOf(L) < 0) seen.push(L);
+      });
+      seen.sort(function (a, b) { return a.localeCompare(b, "ru"); });
+      abc.innerHTML = seen
+        .map(function (L) {
+          return '<button type="button" data-l="' + esc(L) + '">' + esc(L) + "</button>";
+        })
+        .join("");
+      abc.hidden = seen.length < 2;
+      markAbc();
+    }
+    function markAbc() {
+      var f = vis().length ? letterOf(frontIndex()) : "";
+      Array.prototype.forEach.call(abc.children, function (b) {
+        b.classList.toggle("on", b.getAttribute("data-l") === f);
+      });
+    }
+    function goLetter(L) {
+      var V = vis(), st = step();
+      for (var p = 0; p < V.length; p++)
+        if (letterOf(V[p]) === L) {
+          var t = -p * st;
+          t += Math.round((rot - t) / 360) * 360; // ближайший путь по кольцу
+          if (target !== t) buzz(6);
+          target = t;
+          coasting = false;
+          return;
+        }
+    }
+    var abcDown = false;
+    function abcAt(e) {
+      var el = document.elementFromPoint(e.clientX, e.clientY),
+        b = el && el.closest && el.closest(".rg-abc button");
+      if (b) goLetter(b.getAttribute("data-l"));
+    }
+    abc.addEventListener("pointerdown", function (e) {
+      abcDown = true;
+      try { abc.setPointerCapture(e.pointerId); } catch (x) {}
+      abcAt(e);
+      e.preventDefault();
+    });
+    abc.addEventListener("pointermove", function (e) {
+      if (abcDown || e.pointerType === "mouse") abcAt(e); // мышью — достаточно навести
+    });
+    abc.addEventListener("pointerup", function () { abcDown = false; });
+    abc.addEventListener("pointercancel", function () { abcDown = false; });
+
     function reflow(keep) {
       calcR();
       var V = vis();
@@ -42560,12 +42622,14 @@ PRODUCT("sm_additive", {
       picked.push(i);
       reflow(next);
       drawTray();
+      drawAbc();
       save();
     }
     function removePick(i) {
       picked.splice(picked.indexOf(i), 1);
       reflow(i);
       drawTray();
+      drawAbc();
       save();
     }
     function save() {
@@ -42698,6 +42762,7 @@ PRODUCT("sm_additive", {
       picked.length = 0;
       reflow(vis()[0]);
       drawTray();
+      drawAbc();
       save();
       var howMany = 1 + Math.floor(Math.random() * 3),
         k = 0;
@@ -42783,8 +42848,12 @@ PRODUCT("sm_additive", {
       for (var i = 0; i < DATA.length; i++) if (DATA[i].id === id) picked.push(i);
     });
     if (H.images) H.images(box);
-    reflow(vis()[0]);
+    // с какой карточки начать (по умолчанию — первая)
+    var startI = -1;
+    for (var si = 0; si < DATA.length; si++) if (DATA[si].id === H.start && picked.indexOf(si) < 0) startI = si;
+    reflow(startI >= 0 ? startI : vis()[0]);
     drawTray();
+    drawAbc();
     autoFit();
     raf = requestAnimationFrame(animate);
 
@@ -45151,9 +45220,16 @@ PRODUCT("sm_additive", {
       // рисованная обложка (чайник) заполняет фото целиком, без белых полос по бокам
       return { id: L.id, t: L.t, s: sub, img: img, cover: !L.sec };
     });
+    // темы по алфавиту: алфавит над карточками ведёт к букве, дальше свайп идёт по порядку букв
+    items.sort(function (a, b) {
+      return a.t.localeCompare(b.t, "ru");
+    });
     render('<div id="rgRoot"></div>', { tab: "learn", wide: true, cls: "rgmain" });
     Ring.mount(document.getElementById("rgRoot"), items, {
-      picked: lsGet(PICK_KEY) || [],
+      // без кнопок «Удача», «Изучить всё», «Изучить выбранное»: свайп листает, нажатие открывает тему
+      noPick: true,
+      picked: [],
+      start: "basics", // кольцо открывается на «Основах работы»
       images: function (el) {
         packImgs(el);
       },
