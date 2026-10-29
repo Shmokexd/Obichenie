@@ -1382,11 +1382,7 @@ html.sheet-open, html.sheet-open body { overflow: hidden; overscroll-behavior: n
 /* схема установки: показ по шагам */
 .stp-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
 .stp-head .stp-t { min-width: 0; overflow-wrap: anywhere; }
-.stp-play { flex: none; border: 1px solid var(--line); background: var(--surface); color: var(--zinc-ink); border-radius: 10px; padding: 6px 10px; font: 600 13px var(--f-body); cursor: pointer; }
-.stp-play:disabled { opacity: .5; }
 .stp-cell { transition: opacity .3s, transform .3s; }
-.stp-strip.play .stp-cell { opacity: .28; }
-.stp-strip.play .stp-cell.on { opacity: 1; transform: scale(1.04); }
 /* главная ошибка покупателя — крупно, сразу под описанием */
 .mainerr { margin: 14px 0 4px; padding: 14px 16px; border-radius: 16px; background: color-mix(in srgb, #d6452f 14%, var(--surface)); border: 1px solid color-mix(in srgb, #d6452f 45%, transparent); }
 .mainerr b { display: block; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #e0664f; margin-bottom: 4px; font-family: var(--f-mono); }
@@ -1438,7 +1434,7 @@ a.fx-a:active { background: var(--zinc-soft); }
 </head>
 <body>
 <div id="app"><main id="main" class="wide "><div class="home3"><div class="hhead-in"><p class="h3-kicker">Курс изучения</p><div class="hprog"><div class="bar"><i style="width:0%"></i></div><span>0 из 26 уроков</span></div></div><div class="h3-btns"><a class="hbtn acc" href="#/learn"><span class="hico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span><b>Изучить материал</b><span class="hs">Уроки по порядку или темы на выбор</span></span></a></div></div></main><nav class="tabbar" aria-label="Разделы"><a class="tab" href="#/learn"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span class="tab-label">Изучить</span></a><a class="tab" href="#/enc"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="tab-label">Ассортимент</span></a><a class="tab home acc" href="#/" aria-current="page" aria-label="Главная"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span><span class="tab-label">Главная</span></a><a class="tab" href="#/tests"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 12 2.5 2.5L16 9"/></svg></span><span class="tab-label">Практика</span></a><a class="tab" href="#/cheat"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><span class="tab-label">Шпаргалка</span></a></nav></div>
-<script>window.BUILD_ID="1d2a5d6fa0";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
+<script>window.BUILD_ID="b7d35cd50f";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
 <script type="text/x-prokrep">
 /* Реестр данных. Каждый товар справочника описан одной записью PRODUCT(...) в www/data/products/,
    каждая карточка каталога — одной записью CARD(...) в www/data/cards/, каждый урок — LESSON(...) в www/data/lessons/.
@@ -42225,7 +42221,7 @@ PRODUCT("sm_additive", {
     root.innerHTML =
       '<div class="rg" lang="ru">' +
       '<div class="rg-toprow"><div class="rg-tray rg-none" aria-live="polite"></div>' +
-      '<button class="rg-viewbtn" type="button" aria-pressed="false">' +
+      '<button class="rg-viewbtn" type="button" aria-pressed="false" hidden>' +
       ICO_GRID +
       "<span>Список</span></button></div>" +
       '<div class="rg-grid" hidden></div>' +
@@ -42582,6 +42578,10 @@ PRODUCT("sm_additive", {
     }
     function drawTray() {
       tray.classList.toggle("rg-none", !picked.length);
+      // верхняя строка нужна только под выбранные темы; пусто — карточка занимает её место
+      var top = box.querySelector(".rg-toprow"), wasHidden = top.hidden;
+      top.hidden = !picked.length;
+      if (wasHidden !== top.hidden) requestAnimationFrame(autoFit);
       tray.classList.toggle("tight", picked.length > 1);
       tray.classList.toggle("tighter", picked.length > 3);
       tray.innerHTML =
@@ -43819,9 +43819,10 @@ PRODUCT("sm_additive", {
       rows
         .map(function (r) {
           return (
+            // шаги сразу видны все, слева направо — без кнопки проигрывания
             '<div class="stp-row"><div class="stp-head"><div class="stp-t">' +
             r[0] +
-            '</div><button type="button" class="stp-play">▶ По шагам</button></div><div class="stp-strip">' +
+            '</div></div><div class="stp-strip">' +
             r[1]
               .map(function (k, i) {
                 return '<div class="stp-cell"><span class="stp-n">' + (i + 1) + "</span>" + S[k](r[2]) + "</div>";
@@ -52088,38 +52089,13 @@ PRODUCT("sm_additive", {
     e.preventDefault();
     go(el.getAttribute("data-go"));
   });
-  // схема установки «по шагам»: подсвечиваем шаги по очереди
-  document.addEventListener("click", function (e) {
-    var b = e.target.closest && e.target.closest(".stp-play");
-    if (!b) return;
-    var row = b.closest(".stp-row"),
-      strip = row && row.querySelector(".stp-strip");
-    if (!strip) return;
-    var cells = strip.querySelectorAll(".stp-cell"),
-      i = 0;
-    clearInterval(strip._t);
-    strip.classList.add("play");
-    b.disabled = true;
-    function step() {
-      Array.prototype.forEach.call(cells, function (c, k) {
-        c.classList.toggle("on", k === i);
-      });
-      if (cells[i]) strip.scrollLeft = cells[i].offsetLeft - 8;
-      if (i++ >= cells.length) {
-        clearInterval(strip._t);
-        strip.classList.remove("play");
-        b.disabled = false;
-      }
-    }
-    step();
-    strip._t = setInterval(step, 1700);
-  });
+
   window.addEventListener("hashchange", route);
   route();
 })();
 
 </script>
 <script>(function(){function run(){var s=document.querySelectorAll('script[type="text/x-prokrep"]');for(var i=0;i<s.length;i++){var e=document.createElement('script');e.text=s[i].text;s[i].parentNode.removeChild(s[i]);document.body.appendChild(e);}}if(window.requestAnimationFrame)requestAnimationFrame(function(){setTimeout(run,0)});else setTimeout(run,0);})();</script>
-<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){var had=!!navigator.serviceWorker.controller;navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(function(r){r.update();document.addEventListener("visibilitychange",function(){if(!document.hidden)r.update()})}).catch(function(){});navigator.serviceWorker.addEventListener("controllerchange",function(){if(!had){had=true;return}if(performance.now()<15000||document.hidden){location.reload();return}if(document.getElementById("upd"))return;var d=document.createElement("div");d.id="upd";d.className="upd";d.innerHTML="<span>Доступна новая версия</span><button type=\"button\">Обновить</button>";d.querySelector("button").onclick=function(){location.reload()};document.body.appendChild(d);});});}</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){var had=!!navigator.serviceWorker.controller;navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(function(r){r.update();document.addEventListener("visibilitychange",function(){if(!document.hidden)r.update()})}).catch(function(){});function upd(){if(performance.now()<15000||document.hidden){location.reload();return}if(document.getElementById("upd"))return;var d=document.createElement("div");d.id="upd";d.className="upd";d.innerHTML="<span>Доступна новая версия</span><button type=\"button\">Обновить</button>";d.querySelector("button").onclick=function(){location.reload()};document.body.appendChild(d);}navigator.serviceWorker.addEventListener("controllerchange",function(){if(!had){had=true;return}upd()});navigator.serviceWorker.addEventListener("message",function(e){if(e.data==="upd")upd()});});}</script>
 </body>
 </html>
