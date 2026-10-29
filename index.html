@@ -1462,7 +1462,7 @@ a.fx-a:active { background: var(--zinc-soft); }
 </head>
 <body>
 <div id="app"><main id="main" class="wide "><div class="home3"><div class="hhead-in"><p class="h3-kicker">Курс изучения</p><div class="hprog"><div class="bar"><i style="width:0%"></i></div><span>0 из 26 уроков</span></div></div><div class="h3-btns"><a class="hbtn acc" href="#/learn"><span class="hico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span><b>Изучить материал</b><span class="hs">Уроки по порядку или темы на выбор</span></span></a></div></div></main><nav class="tabbar" aria-label="Разделы"><a class="tab" href="#/learn"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span class="tab-label">Изучить</span></a><a class="tab" href="#/enc"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="tab-label">Ассортимент</span></a><a class="tab home acc" href="#/" aria-current="page" aria-label="Главная"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span><span class="tab-label">Главная</span></a><a class="tab" href="#/tests"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 12 2.5 2.5L16 9"/></svg></span><span class="tab-label">Практика</span></a><a class="tab" href="#/cheat"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><span class="tab-label">Шпаргалка</span></a></nav></div>
-<script>window.BUILD_ID="20c2eb586c";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
+<script>window.BUILD_ID="bf40831c0e";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
 <script type="text/x-prokrep">
 /* Реестр данных. Каждый товар справочника описан одной записью PRODUCT(...) в www/data/products/,
    каждая карточка каталога — одной записью CARD(...) в www/data/cards/, каждый урок — LESSON(...) в www/data/lessons/.
@@ -33048,7 +33048,7 @@ LESSON({
   lesson: [
     {
       t: "p",
-      x: "Герметик подбирают по трём признакам: где шов (внутри, снаружи, во влаге), двигается ли он и нужно ли его красить."
+      x: "Главное при подборе герметика — адгезия: к каким материалам он прилипает. Сначала спросите, что с чем будут соединять, потом — где шов (внутри, снаружи, во влаге), двигается ли он и нужно ли его красить."
     },
     {
       t: "table",
@@ -33204,6 +33204,7 @@ LESSON({
     }
   ],
   cheat: [
+    ["Сначала адгезия", "Спросите, что с чем соединяют, и проверьте строку «Липнет к» у герметика"],
     ["Ванная", "Силиконовый санитарный"],
     ["Под покраску", "Акрил или MS-полимер"],
     ["Улица, подвижный шов", "Полиуретан или MS-полимер"],
@@ -38096,6 +38097,8 @@ PRODUCT("sl_sanit", {
   m: "sealant",
   t: "Герметик силиконовый санитарный",
   n: "С противогрибковыми добавками — ванные, кухни, душевые",
+  // адгезия — главное при подборе: к чему липнет и к чему нет
+  stick: ["Керамика, плитка, фаянс, эмаль и акрил ванн, стекло", "Бетон, камень и мрамор (пятна), металл (уксус вызывает ржавчину), полиэтилен, полипропилен, тефлон"],
   photo: { src: "photos/shop/5111ec14c4.jpg", author: "21vek.by", license: "фото товара из каталога" },
   enc: {
     d: "Силиконовый санитарный герметик с фунгицидами — шов не чернеет от плесени. На prokrep.ru: PHG Industrial санитарный (прозрачный, белый), KRASS, Soudal. Чаще кислотный — с запахом уксуса.",
@@ -38152,6 +38155,8 @@ PRODUCT("sl_neutral", {
   m: "sealant",
   t: "Герметик силиконовый нейтральный",
   n: "Без запаха уксуса — для металла, камня, зеркал, ПВХ",
+  // адгезия — главное при подборе: к чему липнет и к чему нет
+  stick: ["Стекло, керамика, металл, алюминий, оцинковка, камень, бетон, ПВХ, зеркала (специальный)", "Полиэтилен, полипропилен, тефлон, битум"],
   photo: { src: "photos/shop/5885cf4455.jpg", author: "21vek.by", license: "фото товара из каталога" },
   enc: {
     d: "Нейтральный силикон отверждается без выделения уксусной кислоты. Не вызывает коррозию, подходит для металла, камня, бетона, зеркал и ПВХ.",
@@ -38199,6 +38204,8 @@ PRODUCT("sl_aqua", {
   m: "sealant",
   t: "Герметик для аквариумов",
   n: "Чистый силикон без фунгицидов — безопасен для рыб, держит давление воды",
+  // адгезия — главное при подборе: к чему липнет и к чему нет
+  stick: ["Стекло (главное), керамика, металл", "Полиэтилен, полипропилен, тефлон, жирное или пыльное стекло"],
   photo: { src: "photos/shop/7672b24a7d.jpg", author: "prokrep.ru", license: "фото товара из каталога ProКрепёж", page: "" },
   enc: {
     d: "Аквариумный герметик — 100% силикон без противогрибковых добавок и растворителей, нетоксичен для рыб. Держит давление воды на клеевом шве стекла.",
@@ -38247,6 +38254,8 @@ PRODUCT("sl_hightemp", {
   m: "sealant",
   t: "Герметик высокотемпературный (печной)",
   n: "Держит жар печей, каминов, дымоходов: силиконовый до +300 °C, силикатный до +1500 °C",
+  // адгезия — главное при подборе: к чему липнет и к чему нет
+  stick: ["Металл, чугун, кирпич и бетон печей", "Пластик; силикатный — подвижные швы, треснет"],
   photo: { src: "photos/shop/9c6d76a8b5.jpg", author: "21vek.by", license: "фото товара из каталога" },
   enc: {
     d: "Высокотемпературный герметик для печей и каминов. Силиконовый (красный, чёрный) держит до +250…+300 °C и остаётся эластичным. Силикатный (печной, чёрный) держит до +1200…+1500 °C, твердеет как камень.",
@@ -38294,6 +38303,8 @@ PRODUCT("sl_roof", {
   m: "sealant",
   t: "Герметик кровельный",
   n: "Битумный или каучуковый — примыкания кровли, трубы, мансардные окна, ливнёвка",
+  // адгезия — главное при подборе: к чему липнет и к чему нет
+  stick: ["Битум, рубероид, металл кровли, бетон, шифер, кирпич", "Пластик, силикон, пыльная или мокрая поверхность"],
   photo: { src: "photos/shop/1f8be20862.jpg", author: "21vek.by", license: "фото товара из каталога" },
   enc: {
     d: "Кровельный герметик — битумный или битумно-каучуковый. Липнет даже к влажной поверхности, не боится ультрафиолета и мороза.",
@@ -38338,6 +38349,8 @@ PRODUCT("sl_acryl", {
   m: "sealant",
   t: "Герметик акриловый",
   n: "Красится, без запаха — плинтусы, откосы, паркет, внутренние швы",
+  // адгезия — главное при подборе: к чему липнет и к чему нет
+  stick: ["Пористое: бетон, штукатурка, кирпич, дерево, гипсокартон", "Стекло, гладкий металл, пластик, мокрые места"],
   photo: { src: "photos/shop/24b241f924.jpg", author: "21vek.by", license: "фото товара из каталога" },
   enc: {
     d: "Акриловый герметик на водной основе. Без запаха, красится и лакируется, легко заглаживается. Для неподвижных швов внутри помещений. На prokrep.ru: KRASS по дереву «сосна» 300 мл и др.",
@@ -38386,6 +38399,8 @@ PRODUCT("sl_pu", {
   m: "sealant",
   t: "Герметик полиуретановый",
   n: "Очень прочный и эластичный — фасады, кровля, швы панелей, металл",
+  // адгезия — главное при подборе: к чему липнет и к чему нет
+  stick: ["Бетон, кирпич, дерево, металл, камень, многие пластики", "Полиэтилен, полипропилен, тефлон, силикон"],
   photo: { src: "photos/shop/b7bc930fe2.jpg", author: "21vek.by", license: "фото товара из каталога" },
   enc: {
     d: "Полиуретановый клей-герметик — высокая адгезия ко всем стройматериалам, эластичный подвижный шов. На prokrep.ru: Soudal Flex FC40 600 мл, PHG PU 40.",
@@ -38433,6 +38448,8 @@ PRODUCT("sl_ms", {
   m: "sealant",
   t: "Клей-герметик MS-полимер",
   n: "Клеит и герметизирует почти всё, красится, работает во влаге",
+  // адгезия — главное при подборе: к чему липнет и к чему нет
+  stick: ["Почти всё, даже влажное: металл, дерево, бетон, камень, пластик, стекло", "Полиэтилен, полипропилен, тефлон, битум, силикон"],
   photo: { src: "photos/shop/114447b997.jpg", author: "21vek.by", license: "фото товара из каталога" },
   enc: {
     d: "MS-полимерный клей-герметик — гибрид: клеит и герметизирует дерево, камень, металл, стекло, ПВХ, работает во влаге и красится. На prokrep.ru: KRASS «Мульти Монтаж» 280 мл.",
@@ -38481,6 +38498,8 @@ PRODUCT("sl_anaerob", {
   m: "sealant",
   t: "Герметик анаэробный (резьбовой)",
   n: "Твердеет в резьбе без воздуха — трубы воды и газа, резьбовые соединения",
+  // адгезия — главное при подборе: к чему липнет и к чему нет
+  stick: ["Только металл: резьба стали, латуни, меди", "Пластик и пористые материалы — без плотного контакта металла не твердеет"],
   photo: { src: "photos/shop/3417d5e1e0.jpg", author: "21vek.by", license: "фото товара из каталога" },
   enc: {
     d: "Анаэробный герметик — твердеет только без воздуха в контакте с металлом, то есть внутри резьбы. Заменяет лён и ФУМ-ленту. Пример на prokrep.ru: Tangit Metalock.",
@@ -38529,6 +38548,8 @@ PRODUCT("sl_gasket", {
   m: "sealant",
   t: "Герметик-прокладка автомобильный",
   n: "Формирует прокладку на месте — крышки, поддоны, фланцы двигателя",
+  // адгезия — главное при подборе: к чему липнет и к чему нет
+  stick: ["Металл фланцев: алюминий, чугун, сталь", "Масляная поверхность без обезжиривания, большинство пластиков"],
   photo: { src: "photos/sl_gasket.jpg", author: "21vek.by", license: "фото товара из каталога" },
   enc: {
     d: "Герметик-прокладка — силиконовый состав, который заменяет вырезанную прокладку. Пример: Master Klein 180 г.",
@@ -38573,6 +38594,8 @@ PRODUCT("sl_silicone", {
   m: "sealant",
   t: "Герметик силиконовый универсальный",
   n: "Самый ходовой: окна, двери, стыки, швы внутри и снаружи",
+  // адгезия — главное при подборе: к чему липнет и к чему нет
+  stick: ["Стекло, керамика, плитка, эмаль, анодированный алюминий, ПВХ", "Бетон, камень и мрамор (пятна), металл (уксус вызывает ржавчину), полиэтилен, полипропилен, тефлон, битум. Универсальный обычно кислотный — смотрите упаковку"],
   photo: { src: "photos/shop/de3a884bbb.jpg", author: "prokrep.ru", license: "фото товара из каталога ProКрепёж", page: "" },
   enc: {
     d: "Универсальный силиконовый герметик — самый продаваемый. Эластичный, не боится воды, мороза и УФ. Бывает кислотный (пахнет уксусом, дешевле) и нейтральный. На prokrep.ru: KRASS, KOLT, Soudal, PHG Absolute, MASTERSIL; есть специальные «для металла», «для бетона и камня».",
@@ -44093,7 +44116,7 @@ PRODUCT("sm_additive", {
   // ---------- illustrations ----------
   var PICS = (window.PICS || []).concat(
     (window.EXTRA || []).map(function (x) {
-      return { k: x.k, fam: x.fam, m: x.m, t: x.t, n: x.n, svg: "" };
+      return { k: x.k, fam: x.fam, m: x.m, t: x.t, n: x.n, stick: x.stick, svg: "" };
     })
   );
   var PIC_MODULES = window.PIC_MODULES || {};
@@ -46241,6 +46264,11 @@ PRODUCT("sm_additive", {
     return (
       (it.n ? '<p class="lc-n">' + esc(it.n) + "</p>" : "") +
       (it.sign ? '<div class="lc-row"><span>Как узнать</span><p>' + esc(it.sign) + "</p></div>" : "") +
+      // адгезия (герметики, клеи): к чему липнет — сразу под описанием, это главное при подборе
+      (it.stick
+        ? '<div class="lc-row"><span>Липнет к</span><p>' + esc(it.stick[0]) + "</p></div>" +
+          '<div class="lc-row"><span>Не липнет к</span><p>' + esc(it.stick[1]) + "</p></div>"
+        : "") +
       (it.why && it.why.length
         ? '<div class="lc-row"><span>Для чего</span>' + cellHtml("Для чего", it.why.slice(0, 3)) + "</div>"
         : "") +
@@ -46376,7 +46404,8 @@ PRODUCT("sm_additive", {
           why: S[1] || [],
           pm: pm,
           img: PHOTOS[k] ? PHOTOS[k].src : "",
-          sign: rr && rr.row[1] && rr.head[1] === "Признаки" ? rr.row[1] : ""
+          sign: rr && rr.row[1] && rr.head[1] === "Признаки" ? rr.row[1] : "",
+          stick: p.stick || null
         };
       });
     var out = [];
