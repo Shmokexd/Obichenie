@@ -1104,6 +1104,7 @@ a.xl { color: var(--zinc-ink); text-decoration: underline; text-decoration-thick
   background-color: var(--surface); background-image: var(--lift-img); border: 1px solid var(--line); box-shadow: 0 18px 30px -14px rgba(0,0,0,.6); }
 .rg-ph { flex: 1; background: #fff; overflow: hidden; min-height: 0; }
 .rg-ph img { width: 100%; height: 100%; max-width: none; object-fit: contain; display: block; }
+.rg-ph.rg-cover img { object-fit: cover; }
 .rg-card b, .rg-card small { padding-inline: 16px; }
 .rg-card b { font-size: 20px; line-height: 1.2; font-weight: 700; }
 .rg-card small { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
@@ -1436,8 +1437,8 @@ a.fx-a:active { background: var(--zinc-soft); }
 <meta name="theme-color" content="#e7ae08">
 </head>
 <body>
-<div id="app"><main id="main" class="wide "><div class="home3"><div class="hhead-in"><p class="h3-kicker">Курс изучения</p><div class="hprog"><div class="bar"><i style="width:0%"></i></div><span>0 из 26 уроков</span></div></div><div class="h3-btns"><a class="hbtn acc" href="#/learn"><span class="hico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span><b>Изучить материал</b><span class="hs">Уроки по порядку или темы на выбор</span></span></a><a class="hbtn" href="#/exam"><span class="hrow"><span class="hico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="m8.5 13.5-1.5 7.5 5-3 5 3-1.5-7.5"/></svg></span><span class="mono small muted">зачёт от 80%</span></span><span><b>Сдать тест</b><span class="hs">Итоговый экзамен: 50 вопросов по всему ассортименту</span></span></a></div></div></main><nav class="tabbar" aria-label="Разделы"><a class="tab" href="#/learn"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span class="tab-label">Обучение</span></a><a class="tab" href="#/enc"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="tab-label">Ассортимент</span></a><a class="tab home acc" href="#/" aria-current="page" aria-label="Главная"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span><span class="tab-label">Главная</span></a><a class="tab" href="#/tests"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 12 2.5 2.5L16 9"/></svg></span><span class="tab-label">Практика</span></a><a class="tab" href="#/cheat"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><span class="tab-label">Шпаргалка</span></a></nav></div>
-<script>window.BUILD_ID="7abebc47fe";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
+<div id="app"><main id="main" class="wide "><div class="home3"><div class="hhead-in"><p class="h3-kicker">Курс изучения</p><div class="hprog"><div class="bar"><i style="width:0%"></i></div><span>0 из 26 уроков</span></div></div><div class="h3-btns"><a class="hbtn acc" href="#/learn"><span class="hico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span><b>Изучить материал</b><span class="hs">Уроки по порядку или темы на выбор</span></span></a></div></div></main><nav class="tabbar" aria-label="Разделы"><a class="tab" href="#/learn"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span class="tab-label">Обучение</span></a><a class="tab" href="#/enc"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="tab-label">Ассортимент</span></a><a class="tab home acc" href="#/" aria-current="page" aria-label="Главная"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span><span class="tab-label">Главная</span></a><a class="tab" href="#/tests"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 12 2.5 2.5L16 9"/></svg></span><span class="tab-label">Практика</span></a><a class="tab" href="#/cheat"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><span class="tab-label">Шпаргалка</span></a></nav></div>
+<script>window.BUILD_ID="43d6d99daf";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
 <script type="text/x-prokrep">
 /* Реестр данных. Каждый товар справочника описан одной записью PRODUCT(...) в www/data/products/,
    каждая карточка каталога — одной записью CARD(...) в www/data/cards/, каждый урок — LESSON(...) в www/data/lessons/.
@@ -42155,10 +42156,11 @@ PRODUCT("sm_additive", {
     function step() {
       return 360 / n();
     }
-    var TILT = +(window.RG_TILT != null ? window.RG_TILT : -2);
+    var TILT = +(window.RG_TILT != null ? window.RG_TILT : -2),
+      RATIO = 1.9;
     function setSize() {
       box.style.setProperty("--cw", W + "px");
-      box.style.setProperty("--ch", Math.round(W * 1.9) + "px");
+      box.style.setProperty("--ch", Math.round(W * RATIO) + "px");
     }
     function calcR() {
       var k = n();
@@ -42172,7 +42174,7 @@ PRODUCT("sm_additive", {
       c.setAttribute("role", "button");
       c.setAttribute("aria-label", d.t);
       c.innerHTML =
-        '<div class="rg-ph"><img alt="" src="' + esc(d.img) + '"></div><b>' + esc(d.t) + "</b><small>" + esc(d.s) + "</small>";
+        '<div class="rg-ph' + (d.cover ? " rg-cover" : "") + '"><img alt="" src="' + esc(d.img) + '"></div><b>' + esc(d.t) + "</b><small>" + esc(d.s) + "</small>";
       c.dataset.i = i;
       ring.appendChild(c);
       cards.push(c);
@@ -42213,8 +42215,11 @@ PRODUCT("sm_additive", {
           "px) rotateX(10deg) rotateZ(" +
           (swing + dx * 0.05).toFixed(2) +
           "deg)";
-        var base = cos < 0 ? 0.08 + 0.06 * (1 + cos) : 0.2 + 0.8 * Math.pow(cos, 2.4);
+        // видна только передняя карточка; соседние проявляются, пока их докручивают к центру
+        var cs = Math.cos((st * Math.PI) / 180),
+          base = V.length < 2 ? 1 : Math.max(0, Math.min(1, (cos - cs) / (1 - cs)));
         c.style.opacity = (base * Math.max(0, Math.min(1, 1 + lift / 650))).toFixed(3);
+        c.style.visibility = base * Math.max(0, Math.min(1, 1 + lift / 650)) < 0.01 ? "hidden" : "";
         c.style.zIndex = Math.round(cos * 100) + 100 + (c._held || c._fly ? 300 : 0);
         c.classList.toggle("rear", cos < 0);
         c.classList.toggle("front", p === f);
@@ -42616,7 +42621,10 @@ PRODUCT("sm_additive", {
       if (!stage.clientHeight) return;
       var sw = stage.clientWidth,
         sh = stage.clientHeight;
-      W = Math.round(Math.min(sw * 0.6, 270, (sh * 0.64) / 1.9));
+      // карточка во всю ширину экрана (по 16 px с боков), пропорции — под высоту сцены
+      var maxW = Math.min(sw - 32, 520);
+      RATIO = Math.max(1.15, Math.min(1.9, (sh - 40) / maxW));
+      W = Math.round(Math.min(maxW, (sh - 40) / RATIO));
       setSize();
       calcR();
       for (var it = 0; it < 4; it++) {
@@ -42627,7 +42635,7 @@ PRODUCT("sm_additive", {
         var r = c.getBoundingClientRect(),
           S = stage.getBoundingClientRect();
         if (!r.height) return;
-        var f = Math.min((S.height - 40) / r.height, (S.width * 0.76) / r.width);
+        var f = Math.min((S.height - 40) / r.height, Math.min(S.width - 32, 520) / r.width);
         W = Math.round(W * f);
         setSize();
         calcR();
@@ -43736,6 +43744,8 @@ PRODUCT("sm_additive", {
     m.content = dark ? "#0F1113" : "#F2F0EC";
   }
   applyTheme(getTheme());
+  // тесты пока выключены: работаем над обучением. Включить — поставить false
+  var TESTS_OFF = true;
   var EXAM_SIZE = 50;
   var PASS = 0.8;
   var GROUP_CODES = { Основы: "ОС", Крепёж: "КР", Химия: "ХМ", Инструмент: "ИН", Электрика: "ЭЛ", Кровля: "КВ" };
@@ -44770,13 +44780,13 @@ PRODUCT("sm_additive", {
       '<a class="hbtn acc" href="#/learn"><span class="hico">' +
       ICON.learn +
       '</span><span><b>Изучить материал</b><span class="hs">Уроки по порядку или темы на выбор</span></span></a>' +
-      '<a class="hbtn" href="#/exam"><span class="hrow"><span class="hico">' +
+      (TESTS_OFF ? "" : '<a class="hbtn" href="#/exam"><span class="hrow"><span class="hico">' +
       ICON.exam +
       '</span><span class="mono small muted">зачёт от ' +
       pct(PASS) +
       '%</span></span><span><b>Сдать тест</b><span class="hs">Итоговый экзамен: ' +
       EXAM_SIZE +
-      " вопросов по всему ассортименту</span></span></a>" +
+      " вопросов по всему ассортименту</span></span></a>") +
       "</div></div>";
     render(html, { tab: "home", wide: true });
     // запоминаем вид главной: при следующем запуске она появится мгновенно, ещё до загрузки данных
@@ -45001,7 +45011,8 @@ PRODUCT("sm_additive", {
         (L.mods.length ? L.mods.length + " " + plural(L.mods.length, "урок", "урока", "уроков") : "") +
         (L.mods.length && nCards ? " · " : "") +
         (nCards ? nCards + " " + plural(nCards, "товар", "товара", "товаров") : "");
-      return { id: L.id, t: L.t, s: sub, img: img };
+      // рисованная обложка (чайник) заполняет фото целиком, без белых полос по бокам
+      return { id: L.id, t: L.t, s: sub, img: img, cover: !L.sec };
     });
     render('<div id="rgRoot"></div>', { tab: "learn", wide: true, cls: "rgmain" });
     Ring.mount(document.getElementById("rgRoot"), items, {
@@ -45535,9 +45546,7 @@ PRODUCT("sm_additive", {
           '" alt="" loading="lazy" onerror="this.parentNode.classList.add(\'lc-noimg\');this.remove()"></div>'
         : '<div class="lc-img lc-noimg"><span>' + esc(r[0]) + "</span></div>";
       return (
-        '<article class="lcard"' +
-        (x && x.go && x.label !== "Открыть в ассортименте ›" ? ' data-go="' + x.go + '" style="cursor:pointer"' : "") +
-        ">" +
+        '<article class="lcard">' +
         img +
         '<div class="lc-body">' +
         (src ? "<h4>" + esc(r[0]) + "</h4>" : "") +
@@ -46178,7 +46187,11 @@ PRODUCT("sm_additive", {
       lessonHtml(m) +
       "</article>" +
       '<div class="stack lend">' +
-      (state.studied[m.id]
+      (TESTS_OFF
+        ? state.studied[m.id]
+          ? ""
+          : '<button class="btn btn-primary btn-block" id="markStudied">Изучено</button>'
+        : state.studied[m.id]
         ? '<button class="btn btn-primary btn-block" data-go="#/quiz/' +
           m.id +
           '">Пройти тест урока (' +
@@ -46195,6 +46208,7 @@ PRODUCT("sm_additive", {
       btn.addEventListener("click", function () {
         state.studied[m.id] = true;
         save();
+        if (TESTS_OFF) return next ? go("#/m/" + next.id) : go("#/learn");
         go("#/quiz/" + m.id);
       });
   }
@@ -46242,6 +46256,7 @@ PRODUCT("sm_additive", {
         nosplit: true
       }) +
       "</div></section>" +
+      (TESTS_OFF ? "" :
       '<section class="stack"><div class="group-head"><h2 class="h2">Проверка знаний</h2></div><p class="muted" style="margin:0">Зачёт — ' +
       pct(PASS) +
       '% правильных ответов. Варианты ответов перемешиваются при каждой попытке.</p><div class="sgrid2">' +
@@ -46292,7 +46307,7 @@ PRODUCT("sm_additive", {
             .join("") +
           "</div></section>"
         );
-      }).join("") +
+      }).join("")) +
       themeSection();
     render(html, { tab: "test", wide: true });
     Array.prototype.forEach.call(app.querySelectorAll("[data-theme-set]"), function (b) {
@@ -51838,6 +51853,7 @@ PRODUCT("sm_additive", {
     var parts = h.split("/").filter(Boolean);
     confirmReset = confirmReset && parts[0] === "results";
     if (!parts.length) return viewHome();
+    if (TESTS_OFF && /^(quiz|exam|squiz|mistakes)$/.test(parts[0])) return go("#/");
     switch (parts[0]) {
       case "learn":
         return parts[1] ? viewLearnSec(parts[1]) : viewLearn();
@@ -51917,6 +51933,9 @@ PRODUCT("sm_additive", {
   document.addEventListener("click", function (e) {
     var el = e.target.closest("[data-go]");
     if (!el) return;
+    // ссылка внутри карточки ведёт туда, куда написано, а не туда, куда ведёт вся карточка
+    var a = e.target.closest("a[href]");
+    if (a && a !== el && el.contains(a)) return;
     e.preventDefault();
     go(el.getAttribute("data-go"));
   });
@@ -51952,6 +51971,6 @@ PRODUCT("sm_additive", {
 
 </script>
 <script>(function(){function run(){var s=document.querySelectorAll('script[type="text/x-prokrep"]');for(var i=0;i<s.length;i++){var e=document.createElement('script');e.text=s[i].text;s[i].parentNode.removeChild(s[i]);document.body.appendChild(e);}}if(window.requestAnimationFrame)requestAnimationFrame(function(){setTimeout(run,0)});else setTimeout(run,0);})();</script>
-<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){var had=!!navigator.serviceWorker.controller;navigator.serviceWorker.register("sw.js").catch(function(){});navigator.serviceWorker.addEventListener("controllerchange",function(){if(!had){had=true;return}if(document.getElementById("upd"))return;var d=document.createElement("div");d.id="upd";d.className="upd";d.innerHTML="<span>Доступна новая версия</span><button type=\"button\">Обновить</button>";d.querySelector("button").onclick=function(){location.reload()};document.body.appendChild(d);});});}</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){var had=!!navigator.serviceWorker.controller;navigator.serviceWorker.register("sw.js",{updateViaCache:"none"}).then(function(r){r.update();document.addEventListener("visibilitychange",function(){if(!document.hidden)r.update()})}).catch(function(){});navigator.serviceWorker.addEventListener("controllerchange",function(){if(!had){had=true;return}if(performance.now()<15000||document.hidden){location.reload();return}if(document.getElementById("upd"))return;var d=document.createElement("div");d.id="upd";d.className="upd";d.innerHTML="<span>Доступна новая версия</span><button type=\"button\">Обновить</button>";d.querySelector("button").onclick=function(){location.reload()};document.body.appendChild(d);});});}</script>
 </body>
 </html>
