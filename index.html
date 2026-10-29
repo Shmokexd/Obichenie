@@ -1450,6 +1450,8 @@ a.fx-a:active { background: var(--zinc-soft); }
 .sh-part p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--muted); }
 .sh-part .sh-kid { margin-top: 2px; padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, var(--zinc) 12%, transparent); color: var(--ink); }
 .sh-part .sh-kid b { color: var(--zinc-ink); }
+.bolt-idx { height: 54px; flex: none; cursor: pointer; margin-block: -4px; }
+.bolt-idx svg { display: block; }
 
 </style>
 <link rel="manifest" href="manifest.webmanifest">
@@ -1462,7 +1464,7 @@ a.fx-a:active { background: var(--zinc-soft); }
 </head>
 <body>
 <div id="app"><main id="main" class="wide "><div class="home3"><div class="hhead-in"><p class="h3-kicker">Курс изучения</p><div class="hprog"><div class="bar"><i style="width:0%"></i></div><span>0 из 26 уроков</span></div></div><div class="h3-btns"><a class="hbtn acc" href="#/learn"><span class="hico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span><b>Изучить материал</b><span class="hs">Уроки по порядку или темы на выбор</span></span></a></div></div></main><nav class="tabbar" aria-label="Разделы"><a class="tab" href="#/learn"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span class="tab-label">Изучить</span></a><a class="tab" href="#/enc"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="tab-label">Ассортимент</span></a><a class="tab home acc" href="#/" aria-current="page" aria-label="Главная"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span><span class="tab-label">Главная</span></a><a class="tab" href="#/tests"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 12 2.5 2.5L16 9"/></svg></span><span class="tab-label">Практика</span></a><a class="tab" href="#/cheat"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><span class="tab-label">Шпаргалка</span></a></nav></div>
-<script>window.BUILD_ID="c7e3cdba48";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
+<script>window.BUILD_ID="20712c4e51";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
 <script type="text/x-prokrep">
 /* Реестр данных. Каждый товар справочника описан одной записью PRODUCT(...) в www/data/products/,
    каждая карточка каталога — одной записью CARD(...) в www/data/cards/, каждый урок — LESSON(...) в www/data/lessons/.
@@ -42188,6 +42190,77 @@ PRODUCT("sm_additive", {
    нажатие на переднюю — изучить только её, «Список» — плитки 2 в ряд, «Удача» — случайные темы. */
 (function () {
   // точки-индикатор (общие: кольцо «Изучить» и карусели в уроках). Текущая точка — капля, при смене перетекает к новой
+  // «Болт» вместо точек (уроки «Метрики»): гайка накручивается по резьбе к головке — к последней карточке.
+  // Под резьбой метки с номерами карточек, над головкой — размер болта: длина = 10 мм на карточку (8 карточек — М8×80).
+  var BOLT_PITCH = 5;
+  function nutSvg(x, cy, ang) {
+    var R = 11, W = 13, out = "";
+    for (var k = 0; k < 6; k++) {
+      var a1 = ang + (k * Math.PI) / 3, a2 = a1 + Math.PI / 3, nn = (a1 + a2) / 2;
+      if (Math.sin(nn) <= 0.02) continue; // грань смотрит от нас
+      var y1 = cy - R * Math.cos(a1), y2 = cy - R * Math.cos(a2),
+        l = 0.45 + 0.55 * Math.max(0, Math.sin(nn) * 0.8 - Math.cos(nn) * 0.35);
+      out +=
+        '<rect x="' + (x - W / 2) + '" y="' + Math.min(y1, y2) + '" width="' + W + '" height="' + Math.abs(y2 - y1) +
+        '" fill="rgb(' + Math.round(120 + 110 * l) + "," + Math.round(52 + 50 * l) + "," + Math.round(20 + 24 * l) + ')"/>' +
+        '<line x1="' + (x - W / 2) + '" y1="' + y1 + '" x2="' + (x + W / 2) + '" y2="' + y1 + '" stroke="#7a3412" stroke-width=".6" opacity=".7"/>';
+    }
+    return out + '<rect x="' + (x - W / 2) + '" y="' + (cy - R) + '" width="' + W + '" height="' + 2 * R + '" fill="none" stroke="#6e2f10" stroke-width=".8" rx="1.5"/>';
+  }
+  window.BoltIdx = {
+    draw: function (el, n, onPick) {
+      var W = Math.max(240, el.clientWidth || 358), cy = 24, x0 = 22, x1 = W - 34, s = "";
+      el._g = { W: W, cy: cy, xs: [] };
+      for (var i = 0; i < n; i++) el._g.xs.push(n < 2 ? x0 : x0 + (i * (x1 - x0)) / (n - 1));
+      s +=
+        '<svg viewBox="0 0 ' + W + ' 54" width="100%" height="54" aria-hidden="true">' +
+        '<defs><linearGradient id="bxr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9dde1"/><stop offset=".45" stop-color="#aab1b8"/><stop offset="1" stop-color="#6d757d"/></linearGradient></defs>' +
+        '<path d="M' + (x0 - 12) + " " + (cy - 5) + " l5 -1 v12 l-5 -1z" + '" fill="#aab1b8"/>' + // фаска на кончике
+        '<rect x="' + (x0 - 7) + '" y="' + (cy - 6) + '" width="' + (x1 + 10 - x0) + '" height="12" fill="url(#bxr)"/>';
+      for (var t = x0 - 6; t < x1 + 2; t += BOLT_PITCH)
+        s += '<line x1="' + t + '" y1="' + (cy - 6) + '" x2="' + (t + 3) + '" y2="' + (cy + 6) + '" stroke="#6b737a" stroke-width="1.1"/>';
+      s += '<rect x="' + (x1 + 3) + '" y="' + (cy - 13) + '" width="16" height="26" rx="2" fill="#7d858d"/>'; // головка
+      // метки карточек и номера
+      var every = n <= 12 ? 1 : n <= 24 ? 2 : 5;
+      el._g.xs.forEach(function (x, i) {
+        s += '<line x1="' + x + '" y1="' + (cy + 9) + '" x2="' + x + '" y2="' + (cy + 14) + '" stroke="var(--muted)" stroke-width="1.2"/>';
+        var last = el._g.xs[n - 1];
+        if ((i % every === 0 && (i === n - 1 || last - x > 22)) || i === n - 1) // номер не налезает на последний
+          s += '<text x="' + x + '" y="' + (cy + 26) + '" text-anchor="middle" font-size="10" font-family="var(--f-mono, monospace)" fill="var(--muted)">' + (i + 1) + "</text>";
+      });
+      // размер болта — над головкой, справа (длина = 10 мм на карточку)
+      s += '<text x="' + (x1 + 19) + '" y="8" text-anchor="end" font-size="10" font-family="var(--f-mono, monospace)" fill="var(--muted)">М8×' + n * 10 + "</text>";
+      s += '<g class="bx-nut"></g></svg>';
+      el.innerHTML = s;
+      el.hidden = n < 2;
+      el._cur = -1;
+      el._x = el._g.xs[0];
+      el._a = 0;
+      el.onclick = function (e) {
+        var r = el.getBoundingClientRect(), px = ((e.clientX - r.left) / r.width) * el._g.W, best = 0;
+        el._g.xs.forEach(function (x, i) {
+          if (Math.abs(x - px) < Math.abs(el._g.xs[best] - px)) best = i;
+        });
+        if (onPick) onPick(best);
+      };
+      el.querySelector(".bx-nut").innerHTML = nutSvg(el._x, cy, 0);
+    },
+    set: function (el, k) {
+      if (!el._g || el._cur === k || k < 0 || k >= el._g.xs.length) return;
+      var g = el.querySelector(".bx-nut"), xFrom = el._x, xTo = el._g.xs[k], aFrom = el._a, t0 = performance.now(),
+        dur = el._cur < 0 ? 0 : 250 + Math.abs(xTo - xFrom) * 4;
+      el._cur = k;
+      cancelAnimationFrame(el._raf);
+      (function f(t) {
+        var p = dur ? Math.min(1, (t - t0) / dur) : 1;
+        p = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        el._x = xFrom + (xTo - xFrom) * p;
+        el._a = aFrom + ((el._x - xFrom) / BOLT_PITCH) * 2 * Math.PI; // оборот гайки = один шаг резьбы
+        g.innerHTML = nutSvg(el._x, el._g.cy, el._a);
+        if (p < 1) el._raf = requestAnimationFrame(f);
+      })(t0);
+    }
+  };
   window.Dots = {
     draw: function (el, n, onPick) {
       var h = "";
@@ -42373,6 +42446,21 @@ PRODUCT("sm_additive", {
           cos = Math.cos((a * Math.PI) / 180),
           lift = c._lift || 0,
           dx = c._dx || 0;
+        if (flat()) {
+          // мало тем — плоская лента: соседняя карточка едет вплотную, с зазором 16 px, без пустого чёрного экрана
+          var k = V.length,
+            d = ((((a / st) % k) + k + k / 2) % k) - k / 2,
+            x = d * (W + GAP);
+          c.style.transform =
+            "translateX(" + (x + dx).toFixed(1) + "px) translateY(" + lift.toFixed(1) + "px) rotateZ(" + (swing * 0.3 + dx * 0.05).toFixed(2) + "deg)";
+          var vis1 = Math.abs(d) < 1.05 ? 1 : 0;
+          c.style.opacity = (vis1 * Math.max(0, Math.min(1, 1 + lift / 650))).toFixed(3);
+          c.style.visibility = vis1 ? "" : "hidden";
+          c.style.zIndex = 200 - Math.round(Math.abs(d) * 10) + (c._held || c._fly ? 300 : 0);
+          c.classList.toggle("rear", false);
+          c.classList.toggle("front", p === f);
+          return;
+        }
         c.style.transform =
           "rotateY(" +
           a +
@@ -42394,7 +42482,11 @@ PRODUCT("sm_additive", {
         c.classList.toggle("rear", cos < 0);
         c.classList.toggle("front", p === f);
       });
-      ring.style.transform = "translateZ(-" + R + "px) rotateX(" + TILT + "deg)";
+      ring.style.transform = flat() ? "none" : "translateZ(-" + R + "px) rotateX(" + TILT + "deg)";
+    }
+    var GAP = 16;
+    function flat() {
+      return vis().length <= 6;
     }
 
     // физика: инерция и трение, мягкая доводка, плавный наклон карточек «на подвесе»
@@ -42502,7 +42594,8 @@ PRODUCT("sm_additive", {
         dragging = true;
         coasting = false;
         // чувствительность от шага: полэкрана пальцем = одна карточка (при 3 темах раньше нужно было тянуть ~600 px)
-        rot = startRot + dx * Math.max(0.2, step() / Math.max(160, stage.clientWidth * 0.5));
+        // плоская лента — карточка идёт ровно за пальцем; кольцо — полэкрана пальцем = одна карточка
+        rot = startRot + dx * (flat() ? step() / (W + GAP) : Math.max(0.2, step() / Math.max(160, stage.clientWidth * 0.5)));
         vel = 0;
       }
       if (mode === "up") {
@@ -44882,13 +44975,14 @@ PRODUCT("sm_additive", {
     // точки под каруселью: рисуем один раз, дальше только двигаем каплю
     var d = el.previousElementSibling; // точки стоят над каруселью
     if (d && d.classList.contains("lc-dots") && window.Dots) {
+      var IX = d.classList.contains("bolt-idx") && window.BoltIdx ? window.BoltIdx : window.Dots;
       if (d._n !== cs.length) {
         d._n = cs.length;
-        window.Dots.draw(d, cs.length, function (k) {
+        IX.draw(d, cs.length, function (k) {
           el.scrollTo({ left: cs[k].offsetLeft - el.offsetLeft - pl, behavior: "smooth" });
         });
       }
-      window.Dots.set(d, Array.prototype.indexOf.call(cs, best));
+      IX.set(d, Array.prototype.indexOf.call(cs, best));
     }
   }
   function fitAllLc(root) {
@@ -45397,10 +45491,12 @@ PRODUCT("sm_additive", {
         .indexOf(mid);
       if (k >= 0) return mods[k + 1] || null;
     }
-    var idx = MODULES.map(function (m) {
-      return m.id;
-    }).indexOf(mid);
-    return MODULES[idx + 1] || null;
+    // иначе — следующий урок той же темы (после урока «Метрики» — следующий урок «Метрики», а не другой темы)
+    var cur = byId[mid];
+    var same = MODULES.filter(function (m) {
+      return cur && m.group === cur.group;
+    });
+    return same[same.indexOf(cur) + 1] || null;
   }
   function viewLearn() {
     var items = learnSections().map(function (L) {
@@ -45417,19 +45513,23 @@ PRODUCT("sm_additive", {
       // рисованная обложка (чайник) заполняет фото целиком, без белых полос по бокам
       return { id: L.id, t: L.t, s: sub, img: img, cover: !L.sec };
     });
-    // пока три темы: «Основы работы» в центре, справа «Метрика», слева «Химия» (по кругу: основы → метрика → химия)
-    var ONLY = ["basics", "metric", "stroitelnaya-khimiya"];
-    items = ONLY.map(function (id) {
+    // раздела «Основы работы» больше нет: его уроки — отдельные карточки кольца (id «m:урок» открывает урок сразу).
+    // По кругу: первый урок основ (впереди) → «Метрика» (справа) → «Химия» → остальные уроки основ (слева)
+    var basics = (learnSections()[0] || { mods: [] }).mods.map(function (m) {
+      return { id: "m:" + m.id, t: m.title, s: m.minutes + " мин · урок", img: modImg(m) };
+    });
+    var pick = function (id) {
       return items.filter(function (x) {
         return x.id === id;
       })[0];
-    }).filter(Boolean);
+    };
+    items = basics.slice(0, 1).concat([pick("metric"), pick("stroitelnaya-khimiya")], basics.slice(1)).filter(Boolean);
     render('<div id="rgRoot"></div>', { tab: "learn", wide: true, cls: "rgmain" });
     Ring.mount(document.getElementById("rgRoot"), items, {
       // без кнопок «Удача», «Изучить всё», «Изучить выбранное»: свайп листает, нажатие открывает тему
       noPick: true,
       picked: [],
-      start: "basics", // кольцо открывается на «Основах работы»
+      start: items[0] && items[0].id, // кольцо открывается на первом уроке основ
       images: function (el) {
         packImgs(el);
       },
@@ -45437,6 +45537,7 @@ PRODUCT("sm_additive", {
         lsSet(PICK_KEY, ids);
       },
       one: function (id) {
+        if (id.indexOf("m:") === 0) return go("#/m/" + id.slice(2)); // карточка-урок — сразу в урок
         lsSet(SET_KEY, [id]);
         go("#/learn/" + id);
       },
@@ -45996,7 +46097,7 @@ PRODUCT("sm_additive", {
     });
     // точки — над каруселью
     return (
-      (b.rows.length > 1 ? '<div class="dots lc-dots"></div>' : "") +
+      (b.rows.length > 1 ? idxHtml() : "") +
       '<div class="lcards" role="group" aria-label="Карточки: листайте вбок">' +
       cards.join("") +
       "</div>"
@@ -46278,7 +46379,7 @@ PRODUCT("sm_additive", {
       '<section class="lsum"><h2 class="lsec-h">' +
       esc(title || "Что бывает") +
       "</h2>" +
-      '<div class="dots lc-dots"></div>' +
+      idxHtml() +
       '<div class="lcards lsum-cards" role="group" aria-label="Виды: листайте вбок, нажмите для подробностей">' +
       items
         .map(function (it, i) {
@@ -46311,6 +46412,10 @@ PRODUCT("sm_additive", {
       "</div>" +
       "</section>"
     );
+  }
+  // индикатор над каруселью: в уроках «Метрики» — болт с гайкой, в остальных — точки
+  function idxHtml() {
+    return CUR_MOD && CUR_MOD.group === "Метрика" ? '<div class="bolt-idx lc-dots"></div>' : '<div class="dots lc-dots"></div>';
   }
   // сводка урока: виды с картинками; если их нет — строки таблиц урока
   function sumItems(m, pics) {
@@ -46675,7 +46780,7 @@ PRODUCT("sm_additive", {
           ")</button>"
         : '<button class="btn btn-primary btn-block" id="markStudied">Изучено — перейти к тесту</button>') +
       "</div>";
-    render(html, { title: m.code + " · " + m.title, back: "#/learn/" + (GROUP_SEC[m.group] || "basics"), tab: "learn" });
+    render(html, { title: m.code + " · " + m.title, back: GROUP_SEC[m.group] ? "#/learn/" + GROUP_SEC[m.group] : "#/learn", tab: "learn" });
     var btn = document.getElementById("markStudied");
     if (btn)
       btn.addEventListener("click", function () {
