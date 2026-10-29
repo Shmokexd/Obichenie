@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" width="480" height="360">
+<rect width="480" height="360" fill="#fff"/>
+<defs><radialGradient id="g" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#eef1f4"/><stop offset=".6" stop-color="#b9c1c9"/><stop offset="1" stop-color="#8a949e"/></radialGradient>
+<linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9dee3"/><stop offset=".5" stop-color="#a7b0b9"/><stop offset="1" stop-color="#7c8690"/></linearGradient></defs>
+<!-- вид сверху -->
+<circle cx="150" cy="160" r="96" fill="url(#g)" stroke="#6f7983" stroke-width="2"/>
+<circle cx="150" cy="160" r="40" fill="#fff" stroke="#6f7983" stroke-width="2"/>
+<!-- вид сбоку: обычная и усиленная -->
+<rect x="300" y="96" width="140" height="12" rx="2" fill="url(#s)" stroke="#6f7983" stroke-width="1.5"/>
+<rect x="300" y="176" width="140" height="30" rx="3" fill="url(#s)" stroke="#6f7983" stroke-width="1.5"/>
+<g font-family="Arial, sans-serif" font-size="17" fill="#3f444a" text-anchor="middle">
+<text x="370" y="132">обычная</text>
+<text x="370" y="230">усиленная — толще</text>
+<text x="150" y="292">вид сверху</text>
+</g>
+</svg>

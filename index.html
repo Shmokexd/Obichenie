@@ -1426,6 +1426,17 @@ a.fx-a:active { background: var(--zinc-soft); }
 
 /* определение предмета урока под фото */
 .lhero .ldef { margin: 10px 0 0; font-size: 16px; line-height: 1.45; color: var(--ink); }
+/* инструкция: шаг, который сейчас показывается, — с цветной рамкой */
+.stp-cell.on .stp { border-color: var(--zinc); }
+/* все шаги одной высоты: подпись занимает оставшееся место и выравнивается по центру */
+.stp-cell { display: flex; }
+.stp-cell .stp { flex: 1; display: flex; flex-direction: column; }
+.stp-cell .stp figcaption { flex: 1; display: flex; align-items: center; justify-content: center; }
+/* карусели: высота подстраивается под текущую карточку (fitLc), остальные не растягивают ряд */
+.lcards, .cmpsw, .lk-grid { overflow-y: hidden; transition: height .25s ease; }
+/* единый ритм урока: заголовок раздела → содержимое 12px, подсказка под каруселью 8px, между разделами — шаг .lesson */
+.lsum, .lrules { display: flex; flex-direction: column; gap: 12px; }
+.lrules .lcheat { margin: 0; }
 
 </style>
 <link rel="manifest" href="manifest.webmanifest">
@@ -1438,7 +1449,7 @@ a.fx-a:active { background: var(--zinc-soft); }
 </head>
 <body>
 <div id="app"><main id="main" class="wide "><div class="home3"><div class="hhead-in"><p class="h3-kicker">Курс изучения</p><div class="hprog"><div class="bar"><i style="width:0%"></i></div><span>0 из 26 уроков</span></div></div><div class="h3-btns"><a class="hbtn acc" href="#/learn"><span class="hico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span><b>Изучить материал</b><span class="hs">Уроки по порядку или темы на выбор</span></span></a></div></div></main><nav class="tabbar" aria-label="Разделы"><a class="tab" href="#/learn"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span class="tab-label">Изучить</span></a><a class="tab" href="#/enc"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="tab-label">Ассортимент</span></a><a class="tab home acc" href="#/" aria-current="page" aria-label="Главная"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span><span class="tab-label">Главная</span></a><a class="tab" href="#/tests"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 12 2.5 2.5L16 9"/></svg></span><span class="tab-label">Практика</span></a><a class="tab" href="#/cheat"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><span class="tab-label">Шпаргалка</span></a></nav></div>
-<script>window.BUILD_ID="a2cd3f5c98";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
+<script>window.BUILD_ID="887c6721c0";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
 <script type="text/x-prokrep">
 /* Реестр данных. Каждый товар справочника описан одной записью PRODUCT(...) в www/data/products/,
    каждая карточка каталога — одной записью CARD(...) в www/data/cards/, каждый урок — LESSON(...) в www/data/lessons/.
@@ -3246,7 +3257,7 @@ window.ART = {
   },
   metric: {
     t: "Болты, винты, шпильки",
-    lead: "Метрический крепёж — с резьбой под гайку или под резьбовое отверстие. Размер пишут как М8×40: резьба 8 мм, длина 40 мм.",
+    lead: "Метрический крепёж — с резьбой под гайку или под резьбовое отверстие. Размер пишут как М8×40: диаметр резьбы 8 мм, длина 40 мм.",
     from: [
       "Сталь разной прочности: класс 4.8 и 5.8 — обычная, 8.8 — прочная, 10.9 и 12.9 — высокопрочная.",
       "Нержавейка А2 (обычная) и А4 (морская).",
@@ -6538,6 +6549,70 @@ window.KIND_EXTRA = {
     n: "Кровельный саморез со сверлом — сам сверлит металлический прогон и закручивается.",
     why: ["Профлист на металлический каркас, трубу, прогоны"],
     pm: [["Сверлить заранее не нужно"], ["Сверло рассчитано на толщину металла — смотрите номер"]]
+  },
+  // урок «Метрический крепёж от А до Я»: виды, которых нет среди товаров-эталонов. Фото и ссылка — из карточки каталога (go)
+  m_nut_917: {
+    t: "Гайка колпачковая низкая DIN 917",
+    go: "g:Гайка глухая колпачковая низкая (DIN 917)",
+    n: "Низкий закрытый колпачок: закрывает короткий конец болта.",
+    why: ["Короткий болт, торец которого надо закрыть"],
+    pm: [["Закрывает торец — не поцарапаться", "Ниже обычной колпачковой"], ["Длинный болт упрётся в купол — длину подбирают точно"]]
+  },
+  m_nut_439: {
+    t: "Гайка низкая DIN 439",
+    go: "g:Гайка низкая (DIN 439)",
+    n: "Тонкая гайка: ставят, где мало места, или как контргайку поверх обычной.",
+    why: ["Мало места по высоте", "Контргайка поверх обычной"],
+    pm: [["Влезет туда, где обычная не помещается", "Поверх обычной гайки стопорит её"], ["Витков меньше — держит меньше обычной гайки"]]
+  },
+  m_nut_467: {
+    t: "Гайка нажимная DIN 467",
+    go: "g:Гайка нажимная (DIN 467)",
+    n: "Низкая круглая гайка с рифлёной накаткой — крутится пальцами.",
+    why: ["Приборы, крышки, регулировки"],
+    pm: [["Крутится рукой, ключ не нужен", "Аккуратно выглядит"], ["Сильно не затянуть — не для нагрузки и тряски"]]
+  },
+  m_nut_466: {
+    t: "Гайка нажимная высокая DIN 466",
+    go: "g:Гайка нажимная высокая (DIN 466)",
+    n: "Высокая круглая гайка с накаткой: удобно взять пальцами, больше витков.",
+    why: ["Частые регулировки рукой"],
+    pm: [["Удобно крутить рукой", "Витков больше, чем у низкой"], ["Сильно не затянуть", "Дороже обычной гайки"]]
+  },
+  m_nut_929: {
+    t: "Гайка приварная DIN 929",
+    go: "g:Гайка приварная (DIN 929)",
+    n: "Гайку с выступами приваривают к тонкому листу — получается крепкая резьба.",
+    why: ["Резьба в тонком металле: кузова, корпуса, щиты"],
+    pm: [["Резьба там, где её не нарезать", "Не потеряется и не провернётся"], ["Нужна сварка", "Снять можно только срезав"]]
+  },
+  m_nut_vandal: {
+    t: "Гайка антивандальная срывная",
+    go: "g:Гайка антивандальная срывная",
+    n: "После затяжки верхняя часть срывается — остаётся гладкий конус, обычным ключом не открутить.",
+    why: ["Таблички, ограждения, остановки, уличная мебель"],
+    pm: [["Не открутить обычным ключом — защита от воров и вандалов"], ["Одноразовая: снимают, только срезав"]]
+  },
+  m_bush_9070: {
+    t: "Втулка резьбовая ART 9070",
+    go: "g:Втулка резьбовая ART 9070",
+    n: "Вкручивается в дерево или ДСП и даёт крепкую металлическую резьбу под болт или винт.",
+    why: ["Разборная мебель, ножки, конструкции из дерева"],
+    pm: [["Металлическая резьба в дереве — собирать и разбирать можно много раз"], ["Сверлить точно под тело втулки и вкручивать ровно"]]
+  },
+  m_washer_strong: {
+    t: "Шайба усиленная DIN 7349",
+    img: "washer_strong",
+    n: "Толстая шайба: не гнётся под сильной затяжкой. Увеличенная — шире, усиленная — толще.",
+    why: ["Нагруженные узлы, болты 8.8 и 10.9"],
+    pm: [["Толще обычной — не гнётся и не продавливается", "Держит сильную затяжку"], ["Тяжелее и дороже обычной"]]
+  },
+  m_washer_93: {
+    t: "Шайба стопорная с лапкой DIN 93",
+    go: "g:Шайба стопорная с лапкой (DIN 93)",
+    n: "После затяжки лапку загибают на грань гайки — гайка не открутится.",
+    why: ["Узлы с тряской, где гайка не должна уйти"],
+    pm: [["Надёжно держит гайку", "Сразу видно, что узел застопорен"], ["Одноразовая — второй раз лапку не загнуть"]]
   }
 };
 
@@ -12534,6 +12609,8 @@ window.LOADS = [
 
 /* Виды товаров в уроках */
 window.MOD_KINDS = {
+  // «Что бывает» в уроке метрики: болты → винты → гайки → втулка → шайбы
+  metric: ["bolt_933", "bolt_931", "bolt_603", "eyebolt", "stud_975", "bolt_912", "nut_934", "nut_985", "nut_6923", "nut_1587", "m_nut_917", "nut_315", "m_nut_439", "m_nut_467", "m_nut_466", "m_nut_929", "m_nut_vandal", "m_bush_9070", "washer_125", "washer_9021", "m_washer_strong", "washer_127", "m_washer_93"],
   base: [
     "dw_nylon",
     "dw_universal",
@@ -12591,6 +12668,7 @@ window.MOD_KINDS = {
 Object.assign(window.PHOTOS = window.PHOTOS || {}, {
   basics_cover: { src: "photos/basics_kettle.svg", author: "рисунок" },
   foam_number: { src: "photos/foam_number.jpg", author: "фото товара, увеличено" },
+  washer_strong: { src: "photos/washer_strong.svg", author: "рисунок" },
   mat_concrete: { src: "photos/mat_concrete.jpg", author: "фото" },
   mat_brick: { src: "photos/mat_brick.jpg", author: "фото" },
   mat_brick_hollow: { src: "photos/mat_brick_hollow.jpg", author: "фото" },
@@ -19913,26 +19991,27 @@ CARD("Болт мебельный (DIN 603)", {
     d: "Болт с полукруглой головкой и квадратным подголовником: квадрат врезается в дерево и не даёт болту проворачиваться. Деревянные конструкции, мебель, заборы."
   },
   x: {
-    top: "Гладкая круглая головка не цепляет и не прокручивается в дереве",
+    top: "Гладкая полукруглая головка снаружи, а квадрат под ней врезается в дерево и держит болт от проворота",
     hack: ["Подбивают молотком — квадрат под головкой встаёт в дерево"],
     faq: [
-      ["Зачем квадратный подголовок?", "Врезается в дерево и не даёт болту проворачиваться."],
+      ["Зачем квадратный подголовок?", "Когда затягиваете гайку, болт тянет головку к дереву, и квадрат врезается в древесину. Дальше он держит болт — тот не крутится вместе с гайкой, головку держать не надо."],
+      ["Какое сверло?", "Ровно по диаметру резьбы: под М8 — 8 мм. Шире нельзя — квадрату будет не во что врезаться."],
       ["Какой длины брать?", "Толщина пакета + шайбы + гайка + 2–3 витка."],
       ["Какой класс прочности нужен?", "Бытовые соединения — 4.8–5.8; нагруженные узлы (авто, металлоконструкции) — 8.8 и выше."],
       ["Какой ключ под болт?", "М6 — 10, М8 — 13, М10 — 17 (по ISO — 16), М12 — 19 (по ISO — 18), М16 — 24."],
       ["Можно на улицу?", "Оцинкованный — да, на сырость и у воды — нержавейка."]
     ],
     how: [
-      "Подобрать диаметр и длину: болт выходит из гайки на 2–3 витка",
-      "Под гайку — шайба, против самоотвинчивания — гровер или гайка с кольцом",
-      "Затянуть ключом, не удлиняя рычаг трубой"
+      "Сверлить отверстие по диаметру резьбы: под М8 — 8 мм",
+      "Вставить болт, слегка подбить головку — квадрат наметится в дереве",
+      "С обратной стороны — увеличенная шайба и гайка",
+      "Затянуть гайку: квадрат врежется в дерево и не даст болту провернуться"
     ],
-    err: ["Болт короче — гайка держится на 1–2 витках и срывается", "Класс 4.8 туда, где нужен 8.8"],
+    err: ["Отверстие шире резьбы — квадрат не врезается, болт крутится вместе с гайкой", "Болт короче — гайка держится на 1–2 витках и срывается"],
     make: "Высаживают головку из стальной проволоки на прессе, накатывают резьбу, для 8.8 и выше — закалка. Покрытие: цинк, оксидирование (чёрный), или нержавейка.",
-    plus: ["Разборное прочное соединение", "Много размеров и классов"],
-    minus: ["Нужна гайка и доступ с двух сторон"],
-    where: "Металлоконструкции, мебель, техника, авто.",
-    kinds: ["Класс 4.8, 5.8 — быт", "8.8, 10.9 — нагрузки", "А2, А4 — нержавейка"]
+    plus: ["Гладкая головка снаружи — не цепляет и смотрится аккуратно", "Затягивается одним ключом: квадрат держит болт сам"],
+    minus: ["Только в дерево — в металле квадрату не во что врезаться"],
+    where: "Деревянная мебель, качели, заборы, перила, деревянные конструкции."
   },
   sales: ["nuts", "washer_big", "drill_wood"]
 });
@@ -20253,7 +20332,7 @@ CARD("Болт мебельный с усом (DIN 607)", {
     ]
   },
   simple: [
-    "Болт с круглой головкой и маленьким усиком. Ус не даёт болту крутиться.",
+    "Болт с полукруглой головкой и маленьким усиком. Ус не даёт болту крутиться.",
     ["Мебель, деревянные конструкции"],
     ["Как мебельный, но для тонких деталей"]
   ]
@@ -20338,7 +20417,7 @@ CARD("Винт полусферический под шестигранник (I
     ]
   },
   simple: [
-    "Винт с низкой круглой головкой под шестигранник. Аккуратно выглядит.",
+    "Винт с низкой полукруглой головкой под шестигранник. Аккуратно выглядит.",
     ["Мебель, оборудование, велосипеды"],
     ["Головка на виду — этот"]
   ]
@@ -20479,7 +20558,7 @@ CARD("Винт с широкой полукруглой головой (ART 9056
       ["Нержавейка А2 или А4?", "А2 — улица и влажность, А4 — морская вода, бассейн, химия."]
     ]
   },
-  simple: ["Винт с широкой круглой головкой. Прижимает мягкое без шайбы.", ["Пластик, тонкий металл, ткань"], ["Материал мягкий — этот"]]
+  simple: ["Винт с широкой полукруглой головкой. Прижимает мягкое без шайбы.", ["Пластик, тонкий металл, ткань"], ["Материал мягкий — этот"]]
 });
 
 CARD("Винт с полукруглой головой и буртиком (DIN 967)", {
@@ -30971,7 +31050,7 @@ LESSON({
   lesson: [
     {
       t: "p",
-      x: "Метрический крепёж — болты, винты, гайки, шайбы и шпильки с метрической резьбой. Размер пишут так: М8×40 — резьба 8 мм, длина 40 мм. Метрику всегда собирают в пару: болт с гайкой или винт в готовую резьбу. В дерево и бетон она сама не вкручивается — для этого саморезы, шурупы и анкеры."
+      x: "Метрический крепёж — болты, винты, гайки, шайбы и шпильки с метрической резьбой. Размер пишут так: М8×40 — диаметр резьбы 8 мм, длина 40 мм. Метрику всегда собирают в пару: болт с гайкой или винт в готовую резьбу. В дерево и бетон она сама не вкручивается — для этого саморезы, шурупы и анкеры."
     },
     { t: "h", x: "Как читать размер" },
     {
@@ -31048,7 +31127,7 @@ LESSON({
         ["Болт DIN 6921", "Шестигранная головка со встроенной шайбой-фланцем", "Авто, техника, металлоконструкции: шайба не нужна, насечка мешает откручиванию", "М5–М16, длина 10–80 мм; чёрный 10.9, цинк 8.8, нержавейка A2"],
         ["Болт DIN 961", "Резьба на всю длину, мелкий шаг", "Авто и техника: точная затяжка, лучше держит при тряске. Гайка — тоже с мелким шагом (DIN 936)", "М8–М20, длина 16–150 мм; чёрный 10.9"],
         ["Болт DIN 960", "Неполная резьба, мелкий шаг", "То же, что DIN 961, но с гладкой шейкой — под нагрузку вбок", "М10–М24, длина 40–160 мм; чёрный 10.9"],
-        ["Болт мебельный DIN 603", "Гладкая полукруглая головка и квадратный подголовник", "Дерево: садовая мебель, качели, заборы. Квадрат врезается в дерево — крутят только гайку", "М5–М12, длина 16–140 мм; цинк, нержавейка, латунь"],
+        ["Болт мебельный DIN 603", "Гладкая полукруглая головка и квадратный подголовник", "Дерево: садовая мебель, качели, заборы. При затяжке гайки квадрат врезается в дерево и не даёт болту провернуться. Отверстие сверлят по диаметру резьбы", "М5–М12, длина 16–140 мм; цинк, нержавейка, латунь"],
         ["Болт мебельный с усом DIN 607", "Полукруглая головка с шипом-усом под ней", "Дерево: ус врезается и не даёт болту провернуться, крутят только гайку", "М8×40, цинк"],
         ["Болт откидной DIN 444", "Стержень с проушиной-кольцом на конце", "Быстросъёмные зажимы, люки, крышки, тенты: надели на ось, откинули, затянули барашком", "М6–М12, длина 30–120 мм; нержавейка, латунь"],
         ["Болт лемешный ГОСТ 7786", "Потайная головка с квадратным подголовником", "Лемеха плугов, ножи сельхозтехники, транспортёры — головка не мешает работе", "М10–М12, длина 30–70 мм, класс 8.8"],
@@ -31122,6 +31201,7 @@ LESSON({
       rows: [
         ["Шайба плоская DIN 125", "Обычная шайба", "Под гайку и под головку: не царапает деталь и распределяет нажим", "Под резьбу М2–М36; цинк, нержавейка, латунь, чёрная, пластик"],
         ["Шайба увеличенная DIN 9021", "Шайба с широким полем", "Дерево, пластик, тонкий металл, широкое отверстие — не продавливает", "Под резьбу М3–М36; цинк, чёрная, нержавейка A2, латунь, пластик"],
+        ["Шайба усиленная DIN 7349", "Толстая шайба. Увеличенная — шире, усиленная — толще", "Нагруженные узлы с болтами 8.8 и 10.9 — не гнётся под сильной затяжкой", "Уточняйте наличие"],
         ["Шайба широкая DIN 440", "Очень широкая толстая шайба", "Деревянные конструкции: брус, балки, стропила", "Под резьбу М4–М20; чёрная, нержавейка A2"],
         ["Шайба гроверная DIN 127", "Разрезное пружинное кольцо", "Под гайку против откручивания; надёжнее — гайка с нейлоновым кольцом", "Под резьбу М3–М30; цинк, чёрная, нержавейка A2"],
         ["Шайба стопорная с лапкой DIN 93", "Шайба с отгибаемой лапкой", "Лапку загибают на грань гайки — гайка не открутится", "Под резьбу М4–М10; нержавейка"],
@@ -31187,7 +31267,7 @@ LESSON({
     }
   ],
   cheat: [
-    ["М8×40", "Резьба 8 мм, длина 40 мм"],
+    ["М8×40", "Диаметр резьбы 8 мм, длина 40 мм"],
     ["Пара", "Болт и гайка одного размера, шага и материала"],
     ["Длина болта", "Детали + шайбы + гайка + 2–3 витка"],
     ["Шайбы", "Под головку и под гайку; к дереву — увеличенные DIN 9021"],
@@ -34316,7 +34396,7 @@ LESSON({
     },
     {
       t: "p",
-      x: "У забиваемого анкера в названии две цифры: М8×10 — резьба М8, наружный диаметр 10 мм. Бурят по второй цифре, болт берут по первой."
+      x: "У забиваемого анкера в названии две цифры: М8×10 — резьба М8, наружный диаметр анкера 10 мм. Бурят по второй цифре, болт берут по первой."
     },
     { t: "h", x: "Болт → ключ, гайка, шайба" },
     {
@@ -35558,7 +35638,7 @@ PRODUCT("bolt_912", {
     aka: "винт din 912 внутренний шестигранник имбус цилиндрическая головка"
   },
   simple: [
-    "Винт с круглой головкой под шестигранный ключ (имбус).",
+    "Винт с цилиндрической головкой под шестигранный ключ (имбус).",
     ["Механизмы, станки, мебель, где головку надо утопить"],
     ["Мало места для ключа — этот"]
   ],
@@ -35582,17 +35662,20 @@ PRODUCT("bolt_603", {
     use: ["Мебель, скамейки, детские площадки", "Деревянные конструкции, заборы, перила", "Соединения дерева с металлом"],
     spec: [["Резьба", "М5–М16"], ["Длина", "16–300 мм"], ["Подголовник", "квадратный"], ["Покрытие", "белый цинк, горячий цинк, нержавейка"]],
     how: [
-      "Просверлите отверстие по диаметру резьбы.",
-      "Вставьте болт и забейте головку молотком — квадрат войдёт в дерево.",
-      "С обратной стороны поставьте увеличенную шайбу и гайку.",
-      "Затяните гайку ключом, болт держать не нужно."
+      "Сверлите отверстие ровно по диаметру резьбы: под М8 — сверло 8 мм. Квадрат шире отверстия — так и задумано.",
+      "Вставьте болт и слегка подбейте головку молотком, чтобы квадрат наметился в дереве.",
+      "С обратной стороны наденьте увеличенную шайбу и накрутите гайку.",
+      "Затягивайте гайку ключом: болт тянет головку к дереву, квадрат врезается в древесину и дальше держит болт от проворота. Головку держать не нужно."
     ],
-    err: ["Отверстие слишком большое — квадрат прокручивается.", "На металл без квадратного отверстия болт будет крутиться."],
+    err: [
+      "Сверлить шире резьбы — квадрату не во что врезаться, болт крутится вместе с гайкой.",
+      "В металл без квадратного отверстия — квадрат не врежется, болт будет крутиться."
+    ],
     x: ["Шайбы DIN 9021", "Гайки DIN 934 или колпачковые DIN 1587", "Сверло по дереву"],
     aka: "мебельный болт din 603 полукруглая головка квадратный подголовник"
   },
   simple: [
-    "Болт с гладкой круглой головкой и квадратом под ней. Квадрат не даёт болту крутиться в дереве.",
+    "Болт с гладкой полукруглой головкой и квадратом под ней. При затяжке гайки квадрат врезается в дерево — и болт не прокручивается.",
     ["Мебель, качели, заборы, деревянные конструкции"],
     ["Дерево и красивая головка снаружи — этот", "Гайку затягивают с одной стороны, головку держать не надо"]
   ],
@@ -35805,7 +35888,7 @@ PRODUCT("vint_7985", {
     aka: "винт 7985 полукруглая головка крест метрический"
   },
   simple: [
-    "Винт с круглой головкой под крестовую отвёртку и гайку.",
+    "Винт с полукруглой головкой под крестовую отвёртку и гайку.",
     ["Электрика, приборы, лёгкие соединения"],
     ["Мелкое соединение отвёрткой — этот"]
   ],
@@ -43199,7 +43282,11 @@ PRODUCT("sm_additive", {
   function mv(inner, dx, dy) {
     dy = dy || 0;
     return (
-      '<g><animateTransform attributeName="transform" type="translate" values="' +
+      '<g transform="translate(' +
+      dx +
+      " " +
+      dy +
+      ')"><animateTransform attributeName="transform" type="translate" values="' +
       dx +
       " " +
       dy +
@@ -43381,6 +43468,22 @@ PRODUCT("sm_additive", {
       INK +
       '"/></g>'
     );
+  }
+  // две доски с отверстием ровно по диаметру резьбы
+  function woodJoint() {
+    var s = R(42, 12, 17, 66, WOOD, 'stroke="' + MID + '"') + R(59, 12, 17, 66, "#e4cda6", 'stroke="' + MID + '"');
+    for (var i = 0; i < 4; i++) s += '<path d="M42 ' + (20 + i * 16) + ' q17 -3 34 0" fill="none" stroke="' + WOOD2 + '" stroke-width="1.1"/>';
+    return s + R(42, 42, 34, 6, "#fff");
+  }
+  // мебельный болт: полукруглая головка, квадратный подголовник, резьба
+  function carriage(x, len) {
+    var s =
+      '<path d="M' + x + " 33 A12 12 0 0 0 " + x + ' 57 Z" fill="' + ACC + '" stroke="' + INK + '" stroke-width=".8"/>' +
+      R(x, 39, 7, 12, "#9aa1a8", 'stroke="' + INK + '" stroke-width=".7"') +
+      R(x + 7, 42, len, 6, MID, 'stroke="' + INK + '" stroke-width=".8"');
+    for (var i = x + len - 18; i < x + len + 5; i += 3)
+      s += '<line x1="' + i + '" y1="42" x2="' + (i + 2) + '" y2="48" stroke="' + INK + '" stroke-width=".7"/>';
+    return s;
   }
   function sheets() {
     return (
@@ -43680,6 +43783,30 @@ PRODUCT("sm_additive", {
     jTight: function () {
       return frame(joint() + boltH(40, 48) + nutW(76) + wrench(83, 45), "Затянуть ключом");
     },
+    // ── мебельный болт DIN 603: полукруглая головка, квадрат под ней врезается в дерево
+    mDrill: function () {
+      return frame(woodJoint() + mv(drillBit(X + 16, 50), -36), "Сверло = ⌀ резьбы");
+    },
+    mBolt: function () {
+      return frame(woodJoint() + mv(carriage(34, 50), -26), "Вставить болт");
+    },
+    mNut: function () {
+      return frame(woodJoint() + carriage(34, 50) + mv(nutW(78), 24), "Шайба и гайка");
+    },
+    mBite: function () {
+      // крупный план: при затяжке гайки болт тянет головку к дереву, квадрат входит в древесину
+      var w = R(60, 0, 60, 90, WOOD) + R(60, 39, 60, 12, "#fff");
+      for (var i = 0; i < 6; i++)
+        if (i !== 3) w += '<path d="M60 ' + (6 + i * 15) + ' q15 -4 30 0 t30 0" fill="none" stroke="' + WOOD2 + '" stroke-width="1.4"/>';
+      w += '<line x1="60" y1="0" x2="60" y2="90" stroke="' + MID + '" stroke-width="1.4"/>';
+      var bolt =
+        R(58, 41, 62, 8, MID, 'stroke="' + INK + '" stroke-width=".8"') +
+        R(46, 31, 14, 28, "#9aa1a8", 'stroke="' + INK + '" stroke-width="1"') +
+        '<path d="M46 17 A28 28 0 0 0 46 73 Z" fill="' + ACC + '" stroke="' + INK + '" stroke-width="1"/>';
+      var crush =
+        '<path d="M70 31 l5 -4 M70 59 l5 4 M66 33 l4 -6 M66 57 l4 6" stroke="' + INK + '" stroke-width="1.4" stroke-linecap="round"/>';
+      return frame(w + back(bolt, 12) + appear(crush, 0) + spin(104, 18), "Квадрат врезается");
+    },
     vThread: function () {
       var t = R(44, 12, 34, 66, STEEL, 'stroke="' + MID + '"') + R(56, 41, 22, 8, "#fff");
       for (var i = 58; i < 78; i += 3) t += '<line x1="' + i + '" y1="41" x2="' + (i + 2) + '" y2="49" stroke="' + MID + '"/>';
@@ -43876,6 +44003,7 @@ PRODUCT("sm_additive", {
     ],
     [/шпилька \(din|шпилька сантех/i, [["Шпилька с гайками", ["jDrill", "jStud", "jNut", "jTight"], "solid"]]],
     [/^винт(?! установ)/i, BOLT.concat([["В резьбовое отверстие", ["vThread"], "solid"]])],
+    [/мебельн\S* болт|болт мебельн/i, [["Мебельный болт в дерево", ["mDrill", "mBolt", "mNut", "mBite"], "solid"]]],
     [/^болт|^гайка|^шайба/i, BOLT]
   ];
   function rowsFor(title) {
@@ -43884,6 +44012,46 @@ PRODUCT("sm_additive", {
     for (var i = 0; i < SETS.length; i++) if (SETS[i][0].test(title)) return SETS[i][1];
     return null;
   }
+  // анимации не крутятся сами: шаг запускается, доходит до конца и замирает, затем следующий; в конце ряда — заново
+  function seq(h) {
+    return h
+      .replace(/dur="3s" repeatCount="indefinite"/g, 'dur="3s" begin="indefinite" fill="freeze"')
+      .replace(/repeatCount="indefinite"/g, 'begin="indefinite" repeatDur="2.4s"');
+  }
+  var STEP_MS = 2600;
+  function runStrip(strip) {
+    strip.setAttribute("data-run", "1");
+    var orig = strip.innerHTML,
+      i = 0;
+    function next() {
+      if (!strip.isConnected) return;
+      var cells = strip.querySelectorAll(".stp-cell");
+      if (i >= cells.length) {
+        setTimeout(function () {
+          if (!strip.isConnected) return;
+          strip.innerHTML = orig; // все шаги — в исходное положение
+          i = 0;
+          next();
+        }, 1400);
+        return;
+      }
+      Array.prototype.forEach.call(cells, function (c, k) {
+        c.classList.toggle("on", k === i);
+      });
+      Array.prototype.forEach.call(cells[i].querySelectorAll("animate, animateTransform"), function (a) {
+        try {
+          a.beginElement();
+        } catch (e) {}
+      });
+      i++;
+      setTimeout(next, STEP_MS);
+    }
+    next();
+  }
+  setInterval(function () {
+    var list = document.querySelectorAll(".stp-strip:not([data-run])");
+    for (var k = 0; k < list.length; k++) runStrip(list[k]);
+  }, 500);
   function html(title) {
     var rows = rowsFor(title);
     if (!rows) return "";
@@ -43898,7 +44066,7 @@ PRODUCT("sm_additive", {
             '</div></div><div class="stp-strip">' +
             r[1]
               .map(function (k, i) {
-                return '<div class="stp-cell"><span class="stp-n">' + (i + 1) + "</span>" + S[k](r[2]) + "</div>";
+                return '<div class="stp-cell"><span class="stp-n">' + (i + 1) + "</span>" + seq(S[k](r[2])) + "</div>";
               })
               .join("") +
             "</div></div>"
@@ -44659,6 +44827,18 @@ PRODUCT("sm_additive", {
     STYLE: 1,
     SVG: 1
   };
+  // значок диаметра перед словом «диаметр»: «⌀ диаметр резьбы 8 мм» — во всех текстах экрана
+  function diamMark(root) {
+    if (!root) return;
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, list = [];
+    while ((n = w.nextNode())) if (/иаметр|\d |\s[—–]\s|(DIN|ISO|ГОСТ|ART) \d/.test(n.nodeValue) && !(n.parentNode && /^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(n.parentNode.nodeName))) list.push(n);
+    list.forEach(function (t) {
+      var v = t.nodeValue.replace(/⌀\s*(?=[Дд]иаметр)/g, "").replace(/(^|[^а-яёА-ЯЁ])([Дд]иаметр)(?![а-яё])/g, "$1⌀\u00a0$2");
+      // типографика: число не отрывается от единицы, тире не начинает строку
+      v = v.replace(/(\d) (мм|см|м|кг|г|л|мл|шт|°C|°С|%|мин|ч|с|Н·м|МПа|м²)(?![а-яёa-z])/g, "$1\u00a0$2").replace(/ (—|–) /g, "\u00a0$1 ").replace(/(DIN|ISO|ГОСТ|ART) (?=\d)/g, "$1\u00a0");
+      if (v !== t.nodeValue) t.nodeValue = v;
+    });
+  }
   function linkify(root) {
     if (!root || location.hash === "#/din") return;
     var din = dinIndex(),
@@ -44757,6 +44937,57 @@ PRODUCT("sm_additive", {
       }
     });
   }
+  // карусели: высота — по карточке, которая сейчас на экране (короткая карточка не оставляет пустоты снизу)
+  var LC_SEL = ".lcards, .cmpsw, .lk-grid";
+  function fitLc(el) {
+    var cs = el.children;
+    if (!cs.length || !el.clientWidth) return;
+    var best = cs[0],
+      bd = 1e9,
+      pl = parseFloat(getComputedStyle(el).paddingLeft) || 0;
+    for (var i = 0; i < cs.length; i++) {
+      var d = Math.abs(cs[i].offsetLeft - el.offsetLeft - pl - el.scrollLeft);
+      if (cs[i].offsetLeft !== undefined && d < bd) {
+        bd = d;
+        best = cs[i];
+      }
+    }
+    var st = getComputedStyle(el),
+      h = best.offsetHeight + (parseFloat(st.paddingTop) || 0) + (parseFloat(st.paddingBottom) || 0);
+    if (h > 0) el.style.height = Math.ceil(h) + "px";
+  }
+  function fitAllLc(root) {
+    Array.prototype.forEach.call((root || document).querySelectorAll(LC_SEL), fitLc);
+  }
+  var lcT = 0;
+  document.addEventListener(
+    "scroll",
+    function (e) {
+      var el = e.target;
+      if (!el || !el.matches || !el.matches(LC_SEL)) return;
+      clearTimeout(el._lcT);
+      el._lcT = setTimeout(function () {
+        fitLc(el);
+      }, 60);
+    },
+    true
+  );
+  document.addEventListener(
+    "load",
+    function (e) {
+      var c = e.target && e.target.closest && e.target.closest(LC_SEL);
+      if (c) {
+        clearTimeout(lcT);
+        lcT = setTimeout(function () {
+          fitAllLc();
+        }, 50);
+      }
+    },
+    true
+  );
+  window.addEventListener("resize", function () {
+    fitAllLc();
+  });
   // перечни «6 → 4–5; 8 → 5–6» и «а; б; в» — в столбик, по строке на пункт
   function stackLists(root) {
     if (!root) return;
@@ -44782,7 +45013,8 @@ PRODUCT("sm_additive", {
           return;
         el.innerHTML = parts
           .map(function (x) {
-            return '<span class="stk">' + esc(x.replace(/[;.]$/, "")) + "</span>";
+            x = x.trim().replace(/[;.]$/, "");
+            return '<span class="stk">' + esc(x.charAt(0).toUpperCase() + x.slice(1)) + "</span>"; // каждая строка — с заглавной
           })
           .join("");
         el.classList.add("stk-box");
@@ -44842,10 +45074,14 @@ PRODUCT("sm_additive", {
       stackLists(document.getElementById("main"));
     } catch (e) {}
     try {
+      diamMark(document.getElementById("main"));
       linkify(document.getElementById("main"));
       linkNames(document.getElementById("main"));
     } catch (e) {}
     if (app.querySelector(".sgrid2[data-fit]")) fitGrids();
+    try {
+      fitAllLc(app);
+    } catch (e) {}
     var swOn = app.querySelector(".tswitch .ttile.on");
     if (swOn) swOn.parentNode.scrollLeft = swOn.offsetLeft - 16;
     window.scrollTo(0, 0);
@@ -45734,6 +45970,7 @@ PRODUCT("sm_additive", {
     "Винт ISO 7380-2": ["", "g:Винт полусферический с фланцем (ISO 7380-2)"],
     "Болт дюймовый DIN 931, UNC": ["", "g:Болт дюймовый (DIN 931, UNC)"],
     "Гайка дюймовая DIN 934, UNC": ["", "g:Гайка дюймовая (DIN 934, UNC)"],
+    "Шайба усиленная DIN 7349": ["washer_strong", ""],
     // урок про пену: увеличенная цифра выхода с баллона и сезоны — фото баллонов из ассортимента
     "Цифра в названии (20, 60, 65, 70)": ["foam_number", "p:fm_pro"],
     "Летняя пена": ["photos/shop/80005b9343.jpg", "p:fm_pro"],
@@ -46131,7 +46368,7 @@ PRODUCT("sm_additive", {
             n: x.n,
             why: x.why || [],
             pm: x.pm || [],
-            img: PHOTOS[x.img] ? PHOTOS[x.img].src : "",
+            img: PHOTOS[x.img] ? PHOTOS[x.img].src : x.go ? linkImg(x.go) : "",
             href: salesLink(x.go) || "",
             sign: x.sign || ""
           };
@@ -46226,6 +46463,7 @@ PRODUCT("sm_additive", {
       strip = tile && tile.parentElement;
     if (strip && strip.scrollWidth > strip.clientWidth)
       strip.scrollTo({ left: tile.offsetLeft - (strip.clientWidth - tile.offsetWidth) / 2, behavior: "smooth" });
+    SHEET_Y = window.scrollY; // куда вернуть страницу, когда карточку закроют
     document.documentElement.classList.add("sheet-open");
     var el = document.createElement("div");
     el.className = "sheet";
@@ -46240,6 +46478,7 @@ PRODUCT("sm_additive", {
     packImgs(el);
     try {
       stackLists(el);
+      diamMark(el);
       linkify(el);
       linkNames(el);
     } catch (e) {}
@@ -46285,8 +46524,10 @@ PRODUCT("sm_additive", {
     })();
     try {
       stackLists(el);
+      diamMark(el);
       linkify(el);
       linkNames(el);
+      fitAllLc(el);
     } catch (e) {}
     requestAnimationFrame(function () {
       el.classList.add("on");
@@ -46295,10 +46536,19 @@ PRODUCT("sm_additive", {
       if (e.target.closest("[data-close]") || e.target.closest("[data-go]")) closeSheet();
     });
   }
-  function closeSheet() {
+  var SHEET_Y = 0;
+  function closeSheet(e) {
     var o = document.getElementById("lsheet");
     if (o) o.remove();
+    var was = document.documentElement.classList.contains("sheet-open");
     document.documentElement.classList.remove("sheet-open");
+    // закрыли карточку (свайп, крестик) — страница остаётся там, откуда её открыли; переход на другой экран — не трогаем
+    if (was && !(e && e.type === "hashchange")) {
+      window.scrollTo(0, SHEET_Y);
+      requestAnimationFrame(function () {
+        window.scrollTo(0, SHEET_Y);
+      });
+    }
   }
   window.addEventListener("hashchange", closeSheet);
   document.addEventListener(
