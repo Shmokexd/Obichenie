@@ -1462,7 +1462,7 @@ a.fx-a:active { background: var(--zinc-soft); }
 </head>
 <body>
 <div id="app"><main id="main" class="wide "><div class="home3"><div class="hhead-in"><p class="h3-kicker">Курс изучения</p><div class="hprog"><div class="bar"><i style="width:0%"></i></div><span>0 из 26 уроков</span></div></div><div class="h3-btns"><a class="hbtn acc" href="#/learn"><span class="hico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span><b>Изучить материал</b><span class="hs">Уроки по порядку или темы на выбор</span></span></a></div></div></main><nav class="tabbar" aria-label="Разделы"><a class="tab" href="#/learn"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg></span><span class="tab-label">Изучить</span></a><a class="tab" href="#/enc"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span class="tab-label">Ассортимент</span></a><a class="tab home acc" href="#/" aria-current="page" aria-label="Главная"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg></span><span class="tab-label">Главная</span></a><a class="tab" href="#/tests"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="m8 12 2.5 2.5L16 9"/></svg></span><span class="tab-label">Практика</span></a><a class="tab" href="#/cheat"><span class="tab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><span class="tab-label">Шпаргалка</span></a></nav></div>
-<script>window.BUILD_ID="bf40831c0e";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
+<script>window.BUILD_ID="34eaef4f34";(function(){var r=document.documentElement,t='dark';try{t=localStorage.getItem('prokrep_theme')||'dark'}catch(e){}if(t!=='auto')r.setAttribute('data-theme',t);var a=document.getElementById('app'),h=location.hash;if(h&&h!=='#/'&&h!=='#'){a.innerHTML='';return}try{var c=JSON.parse(localStorage.getItem('prokrep_home')||'null');if(c&&c.v===window.BUILD_ID)a.innerHTML=c.html}catch(e){}})();</script>
 <script type="text/x-prokrep">
 /* Реестр данных. Каждый товар справочника описан одной записью PRODUCT(...) в www/data/products/,
    каждая карточка каталога — одной записью CARD(...) в www/data/cards/, каждый урок — LESSON(...) в www/data/lessons/.
@@ -6542,6 +6542,14 @@ window.FIT = [
     src: "DIN / каталоги производителей"
   }
 ];
+
+/* Неверные фото с сайта: тип товара (id) → правильная картинка. Применяется при сборке каталога (60_catalog.js) */
+window.GOODS_PHOTO_FIX = {
+  // «Анкеры с внутренней резьбой → Забиваемый»: на сайте фото винтового анкера с головкой под шпильку
+  "38d3c41e": "photos/an_dropin.svg",
+  // «Гайка глухая колпачковая низкая DIN 917 → Нержавейка А2»: на сайте фото обычной тонкой шестигранной гайки — ставим колпачковую низкую
+  "ce373d21": "photos/goods/e5953427.jpg"
+};
 
 /* Всплывающие пояснения к словам в уроках: в тексте урока пишется [[слово|ключ]], по нажатию открывается карточка.
    simple — простыми словами (первым абзацем), parts — подробно: заголовок и текст. */
@@ -36423,7 +36431,7 @@ PRODUCT("an_dropin", {
   t: "Анкер забивной + забойник",
   n: "Короткая гильза с внутренней резьбой; расклинивается забойником",
   svg: "<svg viewBox=\"0 0 200 80\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\"><rect class=\"f-white\" x=\"30\" y=\"28\" width=\"50\" height=\"24\" rx=\"2\"/><line class=\"th\" x1=\"34\" y1=\"34\" x2=\"34\" y2=\"46\"/><line class=\"th\" x1=\"39\" y1=\"34\" x2=\"39\" y2=\"46\"/><line class=\"th\" x1=\"44\" y1=\"34\" x2=\"44\" y2=\"46\"/><line class=\"th\" x1=\"49\" y1=\"34\" x2=\"49\" y2=\"46\"/><line class=\"th\" x1=\"54\" y1=\"34\" x2=\"54\" y2=\"46\"/><line class=\"th\" x1=\"59\" y1=\"34\" x2=\"59\" y2=\"46\"/><line class=\"th\" x1=\"62\" y1=\"28\" x2=\"80\" y2=\"34\"/><line class=\"th\" x1=\"62\" y1=\"52\" x2=\"80\" y2=\"46\"/><polygon class=\"f-steel\" points=\"66,36 80,34 80,46 66,44\"/><rect class=\"f-steel\" x=\"110\" y=\"31\" width=\"56\" height=\"18\" rx=\"2\"/><rect class=\"f-steel\" x=\"166\" y=\"35\" width=\"18\" height=\"10\" rx=\"1\"/><text class=\"tm\" x=\"140\" y=\"70\" font-size=\"9\" text-anchor=\"middle\">забойник</text></svg>",
-  photo: { src: "photos/goods/38d3c41e.jpg", author: "каталог" },
+  photo: { src: "photos/an_dropin.svg", author: "рисунок" }, // на сайте у «Забиваемого» стоит фото винтового анкера — не то
   enc: {
     d: "Забивной анкер — короткая стальная гильза с внутренней резьбой и конусом внутри. Конус вбивается забойником, гильза распирается. В анкер вкручивают шпильку или болт.",
     use: ["Подвес вентиляции, кабельных лотков, труб", "Подвесные потолки", "Резьбовые точки в бетонном потолке"],
@@ -46260,9 +46268,10 @@ PRODUCT("sm_additive", {
     CUR_MOD = null;
   // «Что бывает»: краткая сводка всех видов сверху урока; нажатие — подробности в нижней шторке
   var CUR_SUM = [];
-  function kindBody(it) {
+  function kindBody(it, afterN) {
     return (
       (it.n ? '<p class="lc-n">' + esc(it.n) + "</p>" : "") +
+      (afterN || "") + // инструкция (схема по шагам) — сразу после определения
       (it.sign ? '<div class="lc-row"><span>Как узнать</span><p>' + esc(it.sign) + "</p></div>" : "") +
       // адгезия (герметики, клеи): к чему липнет — сразу под описанием, это главное при подборе
       (it.stick
@@ -46457,8 +46466,9 @@ PRODUCT("sm_additive", {
       '<div class="sh-body"><h3>' +
       esc(it.t) +
       "</h3>" +
+      (it.k ? "" : steps) + // без описания вида — схема сразу под заголовком
       (it.k
-        ? kindBody(it) +
+        ? kindBody(it, steps) +
           (((window.SIMPLE || {})["p:" + it.k] || [])[2] || [])
             .map(function (x) {
               return '<div class="lc-row"><span>Когда брать</span><p>' + esc(x) + "</p></div>";
@@ -46475,7 +46485,6 @@ PRODUCT("sm_additive", {
             })
             .join("")
         : "") +
-      steps +
       (prod ? '<button class="btn btn-primary btn-block" data-go="' + prod + '">Подробнее о товаре</button>' : "") +
       "</div>";
     closeSheet();
@@ -47618,8 +47627,15 @@ PRODUCT("sm_additive", {
       SUB[sec.id + "/" + sub.id] = sub;
       // в видимости только товары с фото: остальные остаются в данных, но не показываются
       sub.cards = (sub.cards || []).filter(function (c) {
+        var FIX = window.GOODS_PHOTO_FIX || {};
+        c.types.forEach(function (t) {
+          if (FIX[t.id]) t.ph = FIX[t.id]; // неверное фото с сайта — своё
+        });
         c.types = c.types.filter(function (t) {
           return t.ph;
+        });
+        Object.keys(FIX).forEach(function (id) {
+          if (c.ph && c.ph.indexOf(id) >= 0) c.ph = FIX[id];
         });
         if (c.types.length && !c.ph) c.ph = c.types[0].ph;
         return c.types.length;
@@ -50057,12 +50073,6 @@ PRODUCT("sm_additive", {
       ) +
       (nRules > 2 ? fold("Как подобрать", "правила выбора", nRules, rulesHtml) : "") +
       fold(
-        "Как использовать",
-        "шаги монтажа",
-        (o.how || []).length,
-        o.how && o.how.length ? '<div class="ios-card">' + rows(o.how, "num") + "</div>" : ""
-      ) +
-      fold(
         "Частые ошибки",
         "что делают неправильно",
         (o.err || []).length,
@@ -50106,6 +50116,9 @@ PRODUCT("sm_additive", {
       (o.sub ? '<p class="ios-sub">' + esc(o.sub) + "</p>" : "") +
       (o.top ? '<p class="ios-top"><i class="ri ri-ok">✓</i>' + esc(o.top) + "</p>" : "") +
       (o.what ? '<p class="ios-what">' + esc(o.what) + "</p>" : "") +
+      // инструкция — сразу после определения
+      (window.Steps ? Steps.html(o.title) : "") +
+      (o.how && o.how.length ? '<section class="ios-sec"><h4>Как использовать</h4><div class="ios-card">' + rows(o.how, "num") + "</div></section>" : "") +
       (S && (S[1] || S[2])
         ? '<div class="simple">' +
           (S[1] && S[1].length
@@ -50155,7 +50168,6 @@ PRODUCT("sm_additive", {
       (o.sizes || "") +
       (o.load || "") +
       (o.calc || "") +
-      (window.Steps ? Steps.html(o.title) : "") +
       (folds ? '<p class="folds-h">Подробнее — нажмите, чтобы открыть</p>' + folds : "") +
       (o.extra ? '<div class="fc-extra">' + o.extra + "</div>" : "") +
       (o.brands && o.brands.length ? '<p class="ios-foot">Бренды в магазине: ' + esc(o.brands.join(", ")) + "</p>" : "") +
@@ -51152,7 +51164,6 @@ PRODUCT("sm_additive", {
             .join("") +
           "</tbody></table></div>"
         : "") +
-      (e.how && e.how.length ? "<h3>Инструкция</h3>" + list(e.how, "ol") : "") +
       (e.err && e.err.length
         ? '<div class="callout warn"><b>ОШИБКИ</b><ul class="clist">' +
           e.err
@@ -51185,6 +51196,9 @@ PRODUCT("sm_additive", {
       '<p class="lead">' +
       esc(cleanDesc(e.d)) +
       "</p>" +
+      // инструкция — сразу после определения: схема по шагам и текст шагов
+      (window.Steps ? Steps.html(p.t) : "") +
+      (e.how && e.how.length ? '<article class="lesson lhow"><h3>Инструкция</h3>' + list(e.how, "ol") + "</article>" : "") +
       howtoBtn(k) +
       artBtn(artFor({ skeys: ["p:" + k], title: p.t })) +
       (ls.length
